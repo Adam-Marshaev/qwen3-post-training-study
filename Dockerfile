@@ -26,6 +26,9 @@ RUN python3 -m pip install \
 # Install NumPy for numerical processing and PyTorch interoperability
 RUN python3 -m pip install numpy==1.26.4
 
+# Hugging Face Transformers for Qwen3 model loading and inference
+RUN python3 -m pip install transformers==4.57.6
+
 # Set the working directory
 WORKDIR /workspace
 
