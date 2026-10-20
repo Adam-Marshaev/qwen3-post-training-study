@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Generated datasets
+/data/
+/datasets/
+
+# Model checkpoints and weights
+/checkpoints/
+/artifacts/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+
+# Experiment outputs
+/outputs/
+/runs/
+/mlruns/
+/wandb/
+
+# Local caches
+/cache/
+/hf_cache/
+/.huggingface/
+
+# Development files
+.DS_Store
+.vscode/
+.idea/
