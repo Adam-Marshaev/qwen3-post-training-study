@@ -1,9 +1,13 @@
 """Generate a mathematical reasoning response using Qwen3-0.6B-Base."""
 
+from decimal import Decimal
+
 import torch
 import torch.backends.python_native as python_native
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
+
+from llm_post_training.evaluation.answer_extraction import extract_final_answer
 
 
 MODEL_ID = "Qwen/Qwen3-0.6B-Base"
@@ -86,6 +90,23 @@ def main() -> None:
 
     print("\nGenerated response:")
     print(response)
+
+    print("\n=== ANSWER EVALUATION ===")
+
+    expected_answer = Decimal("204")
+
+    extraction = extract_final_answer(response)
+
+    is_correct = (
+        extraction.status == "valid"
+        and extraction.answer == expected_answer
+    )
+
+    print("Expected answer:", expected_answer)
+    print("Extracted answer:", extraction.answer)
+    print("Extraction status:", extraction.status)
+    print("Mathematically correct:", is_correct)
+    print("Unwanted continuation:", extraction.unwanted_continuation)
 
     print("\n=== GENERATION STATISTICS ===")
 
