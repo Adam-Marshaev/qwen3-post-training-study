@@ -337,3 +337,66 @@ Inspect GSM8K and establish reproducible dataset splits
 before the first pretrained baseline experiment.
 
 ---
+
+## 2026-10-21 - GSM8K Reference Validation
+
+### Completed
+
+Downloaded the official GSM8K training split.
+
+Implemented and tested a strict parser for GSM8K reference
+answers using the #### final-answer marker.
+
+Validated all training examples.
+
+### Dataset Provenance
+
+Dataset: openai/grade-school-math
+Source commit:
+3101c7d5072418e28b9008a6636bde82a006892c
+
+Training file SHA-256:
+17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465
+
+Training examples: 7473
+
+The raw dataset is excluded from Git.
+
+### Validation Results
+
+- Successfully parsed: 7473
+- Parsing failures: 0
+- Non-integral final answers: 0
+- Negative final answers: 3
+- Comma-formatted final answers: 79
+- Automated tests: 21 passed
+
+### Engineering Decisions
+
+Keep the GSM8K reference-answer parser separate from the
+model-generated answer extractor.
+
+Require exactly one valid final-answer declaration in each
+GSM8K reference solution.
+
+Reject malformed references rather than silently dropping
+or modifying examples.
+
+Continue using Decimal for numerical representation.
+
+### Limitations
+
+Only the official training split has been downloaded.
+
+No training/validation split has been created.
+
+No full-dataset model evaluation has been conducted.
+
+The official test split remains untouched.
+
+### Next Step
+
+Audit duplicate questions and create a deterministic,
+leakage-aware training/validation split.
+
+---
