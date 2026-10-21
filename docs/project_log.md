@@ -243,3 +243,56 @@ Then prepare mathematical reasoning datasets and establish
 a reproducible pretrained baseline evaluation.
 
 ---
+
+## 2026-10-21 - Mathematical Evaluation Metrics
+
+### Completed
+
+Implemented reusable dataset-level evaluation metrics.
+
+Added:
+- Per-problem evaluation records
+- Numerical correctness calculation
+- Accuracy aggregation
+- Valid extraction rate
+- Missing and ambiguous answer rates
+- Unwanted continuation rate
+- Mean generated token count
+
+### Engineering Decisions
+
+Primary mathematical accuracy uses all evaluated problems
+as the denominator, including extraction failures.
+
+Numerical answers are compared using Decimal.
+
+Model correctness is kept separate from response-format
+and continuation behavior.
+
+Empty evaluation sets raise an error rather than returning
+misleading metrics.
+
+### Validation
+
+Verified metrics using synthetic examples with known results.
+
+Expected synthetic accuracy: 40%
+Expected synthetic extraction rate: 60%
+Expected mean generated tokens: 30
+
+Four new unit tests were added.
+
+### Limitations
+
+No real dataset-level model evaluation has been run yet.
+
+The metrics currently operate on in-memory records.
+
+Results are not yet automatically saved to JSON or JSONL.
+
+### Next Step
+
+Implement dataset loading and begin preparing GSM8K
+and procedurally generated mathematical problems.
+
+---
