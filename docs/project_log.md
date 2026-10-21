@@ -153,3 +153,93 @@ Then implement reusable evaluation metrics and begin preparing
 the mathematical reasoning datasets.
 
 ---
+
+## 2026-10-21 - Integrated Mathematical Answer Evaluation
+
+### Completed
+
+Integrated the reusable numerical answer extractor into
+the Qwen3 baseline generation script.
+
+The end-to-end pipeline now performs:
+
+1. Prompt tokenization
+2. Pretrained Qwen3 inference
+3. Greedy autoregressive generation
+4. Numerical answer extraction
+5. Comparison against independently defined ground truth
+6. Reporting of correctness and unwanted continuation
+
+### Configuration
+
+Model: Qwen/Qwen3-0.6B-Base
+Model revision: 57ca99e94acb83175495aa2c6b6b0cc498170924
+
+Precision: FP16
+Attention implementation: eager
+Decoding: greedy
+KV cache: disabled
+Maximum new tokens: 96
+Stop string: newline followed by "Question:"
+
+### Verified Results
+
+Test problem:
+A warehouse starts with 240 components, ships 35%,
+and receives 48 more.
+
+Expected answer: 204
+Extracted answer: 204
+Extraction status: valid
+Mathematically correct: True
+Unwanted continuation: True
+
+Input tokens: 34
+Generated tokens: 58
+Total tokens: 92
+Peak PyTorch-allocated GPU memory: 1150.63 MiB
+
+The integrated generation smoke test passed.
+
+The existing 10 unit tests also passed.
+
+### Observations
+
+The pretrained model generated a mathematically correct
+multi-step solution without task-specific fine-tuning.
+
+The model continued into another question, but the custom
+stopping condition terminated generation at the new
+question marker.
+
+The answer extractor correctly detected both the numerical
+answer and the unwanted continuation.
+
+### Limitations
+
+These results represent one engineering smoke test,
+not a statistical model evaluation.
+
+The reference answer is currently hardcoded.
+
+The answer extractor requires an explicit final-answer
+declaration.
+
+The script does not yet evaluate a dataset or aggregate
+metrics across multiple examples.
+
+### Decision
+
+Keep mathematical correctness separate from format and
+stopping-behavior metrics.
+
+Do not record this smoke test as formal experiment E001.
+
+### Next Step
+
+Implement reusable evaluation metrics and unit tests.
+
+Then prepare mathematical reasoning datasets and establish
+a reproducible pretrained baseline evaluation.
+
+---
