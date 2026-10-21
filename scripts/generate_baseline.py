@@ -69,6 +69,8 @@ def main() -> None:
             max_new_tokens=96,
             do_sample=False,
             use_cache=False,
+            stop_strings=["\nQuestion:"],
+            tokenizer=tokenizer,
             pad_token_id=tokenizer.eos_token_id,
         )
 
