@@ -296,3 +296,44 @@ Implement dataset loading and begin preparing GSM8K
 and procedurally generated mathematical problems.
 
 ---
+
+## 2026-10-21 - Evaluation Metrics Verified
+
+### Completed
+
+Implemented per-problem evaluation records and dataset-level
+metrics aggregation.
+
+Metrics:
+- Mathematical accuracy
+- Valid answer extraction rate
+- Missing answer rate
+- Ambiguous answer rate
+- Unwanted continuation rate
+- Mean generated token count
+
+### Verification
+
+All 14 automated tests passed.
+
+A five-example synthetic evaluation produced:
+- Accuracy: 40%
+- Extraction rate: 60%
+- Missing answer rate: 20%
+- Ambiguous answer rate: 20%
+- Mean generated tokens: 30
+
+These are synthetic software-test results, not Qwen3
+benchmark measurements.
+
+### Engineering Decision
+
+Primary accuracy includes every evaluated problem in its
+denominator, including missing or ambiguous answers.
+
+### Next Step
+
+Inspect GSM8K and establish reproducible dataset splits
+before the first pretrained baseline experiment.
+
+---
