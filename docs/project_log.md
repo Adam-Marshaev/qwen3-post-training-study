@@ -939,3 +939,48 @@ Test a 512-token generation budget on source index 166,
 then move toward freezing the baseline evaluation protocol.
 
 ---
+
+## 2026-10-22 - E001 Baseline Verified
+
+### Completed
+
+E001: Pretrained Qwen3-0.6B GSM8K development baseline.
+
+Code revision: 08c71acb4e36e465f3c1c66e2f232fcb1c96a15f
+
+### Verified Results
+
+- Validation examples: 747
+- Correct answers: 420
+- Exact-match accuracy: 56.2249%
+- Valid extractions: 704
+- Incorrect extracted answers: 284
+- Missing answers: 42
+- Ambiguous answers: 1
+- Token-cap count: 15
+- Mean generated tokens: 109.44
+
+All 747 validation source indices were present exactly once.
+
+### Artifact Integrity
+
+Predictions SHA-256:
+47c63293195a6fa729b5bd5af6532b9a9699dcbbb8170fd75ef44f53e9c1fbf3
+
+Summary SHA-256:
+93c709884b98b9f7aa3a427b9370df5062a08ff927b5ebb1a1ee09ed8a6f9469
+
+### Interpretation
+
+E001 establishes the pretrained reference point for future
+SFT, SFT+DPO, and SFT+GRPO comparisons.
+
+This result is measured on the frozen development-validation
+split, not the official GSM8K test set.
+
+### Next Step
+
+Begin the supervised fine-tuning data pipeline using only
+the 6726-example GSM8K development-training partition.
+
+---

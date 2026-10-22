@@ -113,3 +113,65 @@ Explain what the results support.
 Identify the next experiment or investigation.
 
 ---
+
+## E001 - Pretrained Qwen3 GSM8K Baseline
+
+**Status:** Completed and verified
+**Recorded:** 2026-10-22
+**Evaluation type:** Frozen development-validation baseline
+
+### Model and configuration
+
+- Model: Qwen/Qwen3-0.6B-Base
+- Model revision: 57ca99e94acb83175495aa2c6b6b0cc498170924
+- Code revision: 08c71acb4e36e465f3c1c66e2f232fcb1c96a15f
+- Dataset: GSM8K development validation
+- Validation examples: 747
+- Split manifest: configs/data/gsm8k_split_v1.json
+- Split manifest SHA-256: 31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719
+- Prompt version: gsm8k_qa_v1
+- Answer extraction version: explicit_numeric_v2
+- Precision: FP16
+- Attention: eager
+- Decoding: greedy
+- KV cache: disabled
+- Maximum new tokens: 512
+
+### Results
+
+- Correct: 420/747
+- Exact-match accuracy: 56.2249%
+- Valid extractions: 704
+- Incorrect extracted numerical answers: 284
+- Missing answers: 42
+- Ambiguous answers: 1
+- Extraction rate: 94.2436%
+- Unwanted continuation rate: 89.8260%
+- Responses reaching token cap: 15
+- Token-cap rate: 2.0080%
+- Mean generated tokens: 109.44
+
+### Artifacts
+
+- Predictions: data/eval_runs/e001_pretrained_val512_v1/predictions.jsonl
+- Summary: data/eval_runs/e001_pretrained_val512_v1/summary.json
+- Predictions SHA-256: 47c63293195a6fa729b5bd5af6532b9a9699dcbbb8170fd75ef44f53e9c1fbf3
+- Summary SHA-256: 93c709884b98b9f7aa3a427b9370df5062a08ff927b5ebb1a1ee09ed8a6f9469
+
+### Integrity verification
+
+- All 747 expected validation source indices evaluated exactly once.
+- No missing or unexpected validation examples.
+- Saved correctness and token-cap counts match the summary.
+- Model, code, prompt, extractor, and generation configuration verified.
+
+### Interpretation
+
+This is a development-validation result, not an independent
+official GSM8K test-set estimate.
+
+The official GSM8K test split remains untouched.
+
+The generation and grading configuration must remain identical
+for subsequent model comparisons unless a change is explicitly
+versioned and applied consistently across all variants.
