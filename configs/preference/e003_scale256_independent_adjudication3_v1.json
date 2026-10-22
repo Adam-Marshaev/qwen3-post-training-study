@@ -1,0 +1,231 @@
+{
+  "schema": "e003_scale256_independent_adjudication3_v1",
+  "kind": "append_only_human_adjudication_overlay",
+  "recorded_utc_date": "2026-10-22",
+  "decision_source": "explicit_user_adjudications_in_current_conversation",
+  "scope": "only_source_indices_744_2320_5436",
+  "provenance": {
+    "original_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+    "advisory_screen_manifest_path": "configs/preference/e003_scale256_reasoning_screen24_advisory_v1.json",
+    "advisory_screen_manifest_sha256": "90d832c8cfb01c9d7d29c7e7b44563fb0616184f22a48ba42bc42ead08a07f36",
+    "advisory_report_path": "docs/e003_scale256_reasoning_audit24_advisory_v1.md",
+    "advisory_report_sha256": "507d14c128f08e9292489f4c64c450693f90c1ac9708546616f6d325a93ac75c",
+    "selection_manifest_sha256": "0f94473f4081c2cf141528f01e51fac59a11043e48f123d500b077d82afbea71",
+    "review_report_sha256": "21f1ba9222a7d4b91f18286e0e5e01834a7dfdba41ff2ceb0235fda496c73add",
+    "generator_code_revision": "ab39e3bab29a9a3115e6ec754086187092dcf89e",
+    "advisory_sampled_group_count": 24,
+    "advisory_reviewed_candidate_count": 96
+  },
+  "policy": {
+    "original_artifacts_are_immutable": true,
+    "gsm8k_raw_source_and_frozen_split_must_remain_unchanged": true,
+    "source_reference_correction_policy": "Only a separately versioned, independently reviewed training-data erratum may alter derived grading. Never modify original raw GSM8K, frozen split, original generated candidates, or official test.",
+    "group_approval_is_not_pair_approval": true,
+    "user_review_covers_only_3_groups": true,
+    "other_21_groups_remain_assistant_advisory_not_independently_approved": true
+  },
+  "decisions": [
+    {
+      "source_index": 744,
+      "advisory_recommendation": "HOLD",
+      "user_adjudication": "HOLD",
+      "current_effective_status": "HOLD",
+      "chosen_sample_allowed_now": false,
+      "case_note": "Correct final answer in sample 3 but relative closing speed is not explained correctly. Retain HOLD.",
+      "resolved_for_pair_construction": false
+    },
+    {
+      "source_index": 2320,
+      "advisory_recommendation": "HOLD",
+      "user_adjudication": "APPROVE",
+      "current_effective_status": "PROVISIONAL_APPROVE_WITH_DOCUMENTED_EXCEPTION",
+      "chosen_sample_index_under_review": 1,
+      "chosen_sample_allowed_now": true,
+      "case_note": "Reviewer accepts isolated incorrect wording (two toppings per pizza) as a minor slip; the six-topping calculation and total of $50 are consistent with the question. This is a group-level reasoning decision only, not pair selection or training authorization.",
+      "exception_policy": "Permit an isolated wording slip when correct interpretation and all subsequent arithmetic are sound; explicitly document the exception.",
+      "resolved_for_pair_construction": true,
+      "rejected_sample_index_approved": null,
+      "pair_constructed": false
+    },
+    {
+      "source_index": 5436,
+      "advisory_recommendation": "EXCLUDE",
+      "user_adjudication": "HOLD_FOR_REFERENCE_CORRECTION_ELSE_EXCLUDE",
+      "current_effective_status": "HOLD_REFERENCE_CONFLICT",
+      "source_reference_answer": "55",
+      "suggested_reference_erratum_answer": "50",
+      "reference_erratum_approved": false,
+      "reference_correction_implemented": false,
+      "fallback_status_if_correction_unavailable": "EXCLUDE",
+      "conditional_release_requirements": [
+        "A reviewed and explicitly authorized, separately versioned training-only erratum mapping source 5436 to answer 50.",
+        "Canonical GSM8K source file, frozen split, prior generation artifacts, and official test remain unchanged.",
+        "Regrade all four original completions against the corrected reference in a derivative, hashed artifact.",
+        "Independently approve any eventual chosen/rejected pair under the corrected answer; no silent label inversions."
+      ],
+      "case_note": "Literal five products with waits BETWEEN products gives four 5-minute intervals, so 4*5+30=50. The published frozen reference is 55. Do not mutate it or use this group for preference training while unresolved.",
+      "chosen_sample_allowed_now": false,
+      "resolved_for_pair_construction": false,
+      "pair_constructed": false
+    }
+  ],
+  "current_effective_24_group_summary": {
+    "advisory_approve_before": 21,
+    "advisory_hold_before": 2,
+    "advisory_exclude_before": 1,
+    "provisionally_usable_now": 22,
+    "held_now": 2,
+    "excluded_now": 0,
+    "conditional_exclusion_count": 1,
+    "conditional_exclusion_source_indices": [
+      5436
+    ],
+    "approved_exception_source_indices": [
+      2320
+    ],
+    "held_source_indices": [
+      744,
+      5436
+    ],
+    "independently_adjudicated_source_indices": [
+      744,
+      2320,
+      5436
+    ],
+    "not_independently_adjudicated_group_count": 21,
+    "if_no_reference_erratum_then_excluded_count": 1,
+    "if_no_reference_erratum_then_held_count": 1,
+    "if_no_reference_erratum_then_provisionally_usable_count": 22
+  },
+  "effective_group_statuses": [
+    {
+      "source_index": 5,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 744,
+      "status": "HOLD",
+      "review_origin": "explicit_user_adjudication"
+    },
+    {
+      "source_index": 780,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 784,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 1035,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 1576,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 1767,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 1920,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 2320,
+      "status": "PROVISIONAL_APPROVE_WITH_DOCUMENTED_EXCEPTION",
+      "review_origin": "explicit_user_adjudication"
+    },
+    {
+      "source_index": 2738,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 2909,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3027,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3087,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3612,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3676,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3869,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 3912,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 4324,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 4457,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 4503,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 5436,
+      "status": "HOLD_REFERENCE_CONFLICT",
+      "review_origin": "explicit_user_adjudication"
+    },
+    {
+      "source_index": 6117,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 6771,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    },
+    {
+      "source_index": 7207,
+      "status": "PROVISIONAL_APPROVE",
+      "review_origin": "assistant_advisory_only"
+    }
+  ],
+  "flags": {
+    "three_group_adjudications_recorded": true,
+    "independent_signoff_for_full_24_group_review": false,
+    "independent_signoff_for_training_dataset": false,
+    "training_approved": false,
+    "pair_dataset_constructed": false,
+    "training_performed": false,
+    "official_test_used": false
+  }
+}
