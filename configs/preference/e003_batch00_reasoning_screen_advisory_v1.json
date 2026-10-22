@@ -1,0 +1,1252 @@
+{
+  "schema": "e003_remaining_review122_batch00_reasoning_screen_advisory_v1",
+  "review_basis": "Assistant mathematical and semantic review of all 80 original candidate response texts in uploaded Batch 00",
+  "original_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "batch_number": 0,
+  "batch_source_selection_schema": "e003_remaining_review122_v1_batch_selection",
+  "batch_selection_manifest_sha256": "31dc2ee5a1984655718074acacda72ab7ce2cb559f23a3f49290354918ee5d2f",
+  "batch_review_report_sha256": "c510bce0ff9a2b637a48dc4094c687495e684adc144fbb065f6225488f30a4f8",
+  "source_index_order": [
+    81,
+    144,
+    158,
+    303,
+    376,
+    434,
+    468,
+    485,
+    528,
+    552,
+    557,
+    755,
+    815,
+    853,
+    1150,
+    1219,
+    1293,
+    1357,
+    1429,
+    1438
+  ],
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "independent_human_signoff": false,
+  "human_signoff_required_before_training": true,
+  "training_approved": false,
+  "training_performed": false,
+  "official_test_used": false,
+  "input_labels_unmodified": true,
+  "original_candidates_modified": false,
+  "review_policy": "Strict mathematical/semantic validity; no automatic approval for answer-only match; ambiguity and explicit erroneous equations HOLD; no source reference edits.",
+  "summary": {
+    "group_count": 20,
+    "candidate_count": 80,
+    "provisional_approve_groups": 18,
+    "hold_groups": 2,
+    "exclude_groups": 0,
+    "candidate_reasoning_verdict_counts": {
+      "FLAWED": 36,
+      "SOUND": 38,
+      "BORDERLINE": 3,
+      "CONDITIONAL": 3
+    },
+    "answer_matches_reference_reasoning_counts": {
+      "SOUND": 38,
+      "BORDERLINE": 3,
+      "CONDITIONAL": 3
+    },
+    "answer_differs_from_reference_reasoning_counts": {
+      "FLAWED": 36
+    },
+    "proposed_pairs_count": 18,
+    "median_proposed_pair_abs_token_gap": 7.0,
+    "max_proposed_pair_abs_token_gap": 31,
+    "mathematical_reference_question_flags": [
+      303,
+      1293
+    ],
+    "answer_extraction_text_mismatch_flags": [
+      {
+        "source_index": 144,
+        "sample_index": 2,
+        "note": "reported extracted=10 but written answer=10 2/3"
+      },
+      {
+        "source_index": 815,
+        "sample_index": 3,
+        "note": "reported extracted=10 but written answer=10/3"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "source_index": 81,
+      "original_reference_answer": "14",
+      "question": "Sam and Jeff had a skipping competition at recess. The competition was split into four rounds. Sam completed 1 more skip than Jeff in the first round. Jeff skipped 3 fewer times than Sam in the second round. Jeff skipped 4 more times than Sam in the third round. Jeff got tired and only completed half the number of skips as Sam in the last round. If Sam skipped 16 times in each round, what is the average number of skips per round completed by Jeff?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sound explanation exists; proposed negative misreads the third-round relation.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 121,
+          "extracted_answer": "9.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Reverses the first-round relation (17 rather than 15) and gives an invalid total/average equation.",
+          "report_extracted_response_sha256": "ceffb5a2c39d58817521402f9b9e829c4cd0a296f27d4002f83d71e30b6415ba"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 129,
+          "extracted_answer": "11",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misreads the third round as half of Sam’s count instead of four more, giving 8 rather than 20.",
+          "report_extracted_response_sha256": "25351354956938506703b1881aef6ef4481efe0b6f445b8d83f10688acba0a89"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 157,
+          "extracted_answer": "14",
+          "reasoning_verdict": "SOUND",
+          "reason": "Jeff skips 15, 13, 20 and 8; sum 56 divided by four is 14.",
+          "report_extracted_response_sha256": "4d526072aad395091fa06d6228faae9a79d489d8558b2e06451112ba0cd88e05"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 185,
+          "extracted_answer": "3",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Obtains 56/4=14 correctly but then divides the average by four again; also invents Sam’s round counts.",
+          "report_extracted_response_sha256": "d38d146d8d28fe7589945a599e9774806a2eba14f8051aa59f5a627b928ae001"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 28,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 144,
+      "original_reference_answer": "8",
+      "question": "The owner of a Turkish restaurant wanted to prepare traditional dishes for an upcoming celebration. She ordered ground beef, in four-pound packages, from three different butchers. The following morning, the first butcher delivered 10 packages. A couple of hours later, 7 packages arrived from the second butcher. Finally, the third butcher’s delivery arrived at dusk. If all the ground beef delivered by the three butchers weighed 100 pounds, how many packages did the third butcher deliver?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Correctly converts each four-pound package to the remaining number of packages.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 66,
+          "extracted_answer": "83",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts a package count from a weight, overlooking four pounds per package.",
+          "report_extracted_response_sha256": "2a559bc41164203fbc00073ea296d48abe49152f7dc4021bf6e40db9b6f5816e"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "8",
+          "reasoning_verdict": "SOUND",
+          "reason": "17 packages weigh 68 lb, leaving 32 lb or eight packages.",
+          "report_extracted_response_sha256": "494f3a5f7c5b5b66a3ea941ff4c1d954a7b3f77033c3c5cf10035e97312c465e"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 133,
+          "extracted_answer": "10",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assumes three third-butcher packages without evidence and infers each weighed 10⅔ lb; report-extracted answer 10 differs from written 10⅔.",
+          "report_extracted_response_sha256": "7f87826efa0864dbd89a8b836cf9193f480f2dbf3c5b376f0fbf42cf4346d3cc"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "68",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misstates first-two-butcher count as 25+7 and subtracts package counts from total weight.",
+          "report_extracted_response_sha256": "89adc9eba31e9bbc60b448fb61fe8dde675e3c213d9471f6aa5b8ab2adc0ca5b"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 5,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 158,
+      "original_reference_answer": "6",
+      "question": "Jerome is taking a 150-mile bicycle trip. He wants to ride 12 miles for 12 days. How long will he ride on the 13th day to finish his goal?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sound positive correctly accounts for first 12 days; negative adds an extra 12 miles.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Twelve miles for 12 days totals 144 miles; six miles remain.",
+          "report_extracted_response_sha256": "3c143ded7d90846220afe427b4aa935c6bdcfc02029bb3c879f992ff3e3df265"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 80,
+          "extracted_answer": "18",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Finds six remaining miles but adds the original 12-mile daily target, obtaining 18.",
+          "report_extracted_response_sha256": "e8cd3e4ebf7e5dc3c565c2a9d21754f6aea15a617f21a818e87d0b918b48d65f"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 73,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Computes 12×12=144 and subtracts from 150 to get six.",
+          "report_extracted_response_sha256": "33a7e91b98b4d213a602f9cda86afbc73163c20b3e56ba41f22de4bc8821ec25"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 44,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Equivalent compact calculation 150−12×12=6.",
+          "report_extracted_response_sha256": "cde2b0205faa50ed1fbc75f37a515148ea4e8b9bcbd391936a5f078eedc0d1ac"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 7,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 303,
+      "original_reference_answer": "50",
+      "question": "Tommy is making 12 loaves of bread. He needs 4 pounds of flour per loaf. A 10-pound bag of flour costs $10 and a 12-pound bag costs $13. When he is done making his bread, he has no use for flour and so he will throw away whatever is left. How much does he spend on flour if he buys the cheapest flour to get enough?",
+      "recommendation": "HOLD",
+      "rationale": "HOLD: only answer-correct response explicitly asserts false arithmetic “4.8 + 1 = 5” and omits a least-cost comparison. $50 itself is defensible; request independent tolerance decision or exclude under strict standard.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 164,
+          "extracted_answer": "88",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Confuses bag weights and prices and derives $88 through unrelated calculations.",
+          "report_extracted_response_sha256": "bc578bfc6dfdb56709b6463975bceea803fcd814136d91ac9ffbbf4fee412ae9"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 233,
+          "extracted_answer": "56",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats pounds per loaf as bags; inconsistent bag quantities and price arithmetic.",
+          "report_extracted_response_sha256": "aeea727b3647e31c38b58f2fccfa9a733c4643c84070f381cb9f297090a0dbe2"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 198,
+          "extracted_answer": "78",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses an incorrect 144-lb requirement and several unsupported calculations.",
+          "report_extracted_response_sha256": "a2f032988e20d1529429338e50dc9747d337432d17de1aa3a2bef0d2f694587b"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 115,
+          "extracted_answer": "50",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Selects five 10-lb bags costing $50 (indeed optimal), but explicitly writes false arithmetic “4.8 + 1 = 5” and does not compare against 12-lb bags or mixed purchases.",
+          "report_extracted_response_sha256": "b60e83a70a8f55c8adbe47ab4746d9cf888df6e9ecb90e7d8c8a312861d06349"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 376,
+      "original_reference_answer": "7",
+      "question": "Suraya picked 12 apples more than Caleb, and Caleb picked 5 apples less than Kayla. If Kayla picked 20 apples, how many more apples did Suraya pick than Kayla?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sound positive computes the requested difference; negative reports Suraya’s total.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 58,
+          "extracted_answer": "7",
+          "reasoning_verdict": "SOUND",
+          "reason": "Caleb 15, Suraya 27; Suraya exceeds Kayla’s 20 by seven.",
+          "report_extracted_response_sha256": "ed2133b5af3a629c019e6eea8753a7de14b59b7034325ca6da657830871e530c"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 50,
+          "extracted_answer": "7",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 20−5=15, 15+12=27, 27−20=7.",
+          "report_extracted_response_sha256": "020548fa13e9449062794a9ad5c71ac0d0cd308534926837092fccc53b3ea3a3"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 53,
+          "extracted_answer": "7",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct three-step comparison yielding seven.",
+          "report_extracted_response_sha256": "3021ad5485e7b9fa8099d54d4db1fedf092b426f09c8b8c4bd92b402d1310b51"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 36,
+          "extracted_answer": "27",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes Suraya’s count 27 but fails to subtract Kayla’s 20.",
+          "report_extracted_response_sha256": "372736743b5eb18bcf2d5dd7f6a03bfbd01439b7629c77ebbdb1c6f71aba3cee"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 14,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 434,
+      "original_reference_answer": "80",
+      "question": "Calvin has been saving his hair clippings after each haircut to make a wig for his dog. He has gotten 8 haircuts and knows that he needs 2 more to reach his goal. What percentage towards his goal is he?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive uses 8/10 completed; negative inverts the fraction.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "80",
+          "reasoning_verdict": "SOUND",
+          "reason": "Goal is 10 haircuts and 8/10=80% completed.",
+          "report_extracted_response_sha256": "aa7f35224c01be99b891d1cf624d042e23780cc0c8ae98d33b20ded27c31ca29"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 69,
+          "extracted_answer": "125",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Inverts the completion fraction, using 10/8 instead of 8/10.",
+          "report_extracted_response_sha256": "500fbf2ce6897894c124a0d7866d1555dbfd0c2413635dac235cbf7ca5d2461b"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "100",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mistakenly counts two haircuts still needed as already completed and miscalculates percentage.",
+          "report_extracted_response_sha256": "391e6eea76b56565c87c1fe0bac26216e3451b81a28f13780b7c8ff479358461"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 47,
+          "extracted_answer": "100",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats all ten needed haircuts as already completed and claims 100%.",
+          "report_extracted_response_sha256": "add7284c23e82924e801fc23d1e20c5dc7227165c6d4b5d91a7c9a9001f28b51"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 10,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 468,
+      "original_reference_answer": "504",
+      "question": "A shopping center sells T-shirts at $8 each, a sweater at $18,  and a jacket at $80. The jacket is on sale with a 10% discount. The sales tax is 5%.  Kevin wants to buy six T-shirts, four sweaters, and five jackets for his children. How much does Kevin have to pay for all the items, including the sales tax?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive handles both jacket discount and tax; negative misapplies additional arithmetic to jacket cost.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 198,
+          "extracted_answer": "1202",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes $360 discounted jackets, then treats 0.5 as tax, double counts costs, and sums incorrectly.",
+          "report_extracted_response_sha256": "6f3a2ebb8f4445aff01b4fc678c71800b4b87fdc56d2ac94cafa306334a4c9a6"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 190,
+          "extracted_answer": "504",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly discounts each jacket to $72 and applies 5% tax to $480 subtotal for $504.",
+          "report_extracted_response_sha256": "4547e292efc7d9a5aacb23ff182c990fd69fe46c362fa33953c46fbf69812f50"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 112,
+          "extracted_answer": "546",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits the advertised 10% jacket discount.",
+          "report_extracted_response_sha256": "c2bcd97216eef730f3838558748df45a4cc82e42751f49717d07bd08652ce458"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 145,
+          "extracted_answer": "546",
+          "reasoning_verdict": "FLAWED",
+          "reason": "States an incorrect $64 discounted jacket price, then ignores discount in total and taxes $520.",
+          "report_extracted_response_sha256": "efa8245183355b6bde63c36e5bcd5c2a85aa911836ccc25bbde717cda76a43d5"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 8,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 485,
+      "original_reference_answer": "63",
+      "question": "During the holidays, Lance works as a merchandiser. He works 35 hours a week, spread equally over 5 workdays. If Lance earns $9 an hour, how much does he make on each workday?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive computes the correct per-day pay; negative mistakes hours for days.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 36,
+          "extracted_answer": "9",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mistakes workdays for hours, claiming $45 weekly pay instead of $315.",
+          "report_extracted_response_sha256": "f881576a013942a1ac310468afc43910186405810f4e6c322c1c12b12be36b26"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 43,
+          "extracted_answer": "63",
+          "reasoning_verdict": "SOUND",
+          "reason": "Weekly earnings $9×35=$315, divided by five workdays gives $63.",
+          "report_extracted_response_sha256": "c80c4930b3fed0fe4f479921a517b6ef6bce5d4af5e57c2ae4e4e19de598bb0f"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "63",
+          "reasoning_verdict": "SOUND",
+          "reason": "Seven hours per workday at $9 per hour gives $63.",
+          "report_extracted_response_sha256": "f0cd22be759ceacddeef26791771d3f751ed8704d2bbfdd3eef195d7d9bbbdba"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 40,
+          "extracted_answer": "63",
+          "reasoning_verdict": "SOUND",
+          "reason": "Weekly $315 over five days yields $63 per day.",
+          "report_extracted_response_sha256": "246ce7f02218f9b2b8447ed06ed438a2a2315b7c364e9b232f63fa5e2c018327"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 4,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 528,
+      "original_reference_answer": "1825",
+      "question": "James buys 3 dirt bikes for $150 each and 4 off-road vehicles for $300 each.  It also cost him $25 to register each of these.  How much did he pay for everything?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive handles seven registrations; negative registers only four. Chosen has minor non-numeric noun slip (“trucks”).",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "1850",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts eight registrations instead of seven vehicles.",
+          "report_extracted_response_sha256": "49fe9d7b1c086de49a9046ce61e50c7cfdaf26fefa01bce158cacaddc73a1a6b"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 126,
+          "extracted_answer": "1825",
+          "reasoning_verdict": "SOUND",
+          "reason": "3×$150 + 4×$300 + 7×$25 = $1,825; calls the vehicles “trucks” once, a harmless noun slip.",
+          "report_extracted_response_sha256": "0f2e402c4f825536b7e957f643c0aea964b4213fa9ff09fc936092abc60ce658"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 120,
+          "extracted_answer": "1750",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts only four registration fees rather than seven.",
+          "report_extracted_response_sha256": "d26bbf2b3520df83da2bfb41ed306f6a682cb6eddadc850425df17094bb28e58"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "1750",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts four registrations rather than seven.",
+          "report_extracted_response_sha256": "2aa4b5456ed4d38f4cca9f7bb1e0cbea3dd53a0fd0f0b28b63df808f044475bb"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 552,
+      "original_reference_answer": "16000",
+      "question": "James paves a new parking lot.  It is 400 feet by 500 feet.  Only 80% of that is useable for parking.  It takes 10 square feet to park a car.  How many cars can be parked?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive computes usable square footage and divides by car footprint; negative multiplies instead.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 135,
+          "extracted_answer": "1600000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Multiplies usable parking area by 10 sq ft per car instead of dividing.",
+          "report_extracted_response_sha256": "a049ad89fa043ae132f2323b590565684c12b053c43afe7cea1e812b6ada49e1"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 107,
+          "extracted_answer": "16000",
+          "reasoning_verdict": "SOUND",
+          "reason": "200,000 square feet, 160,000 usable, 16,000 cars.",
+          "report_extracted_response_sha256": "d99450ee4f430bf0690e1bb69bd419ec285cace8ad908515d18db04506b77103"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 80,
+          "extracted_answer": "16000",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct area, 80% portion and division by ten.",
+          "report_extracted_response_sha256": "dc10d799d1bbc44c406e843ce5017403044fba2cd5087388abc55c073f10d47d"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "16000",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct compact area and capacity calculation.",
+          "report_extracted_response_sha256": "6acee2cba47251ccef8b4cc977704d86eed5f49aec4ef3b2e84beb224afe938a"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 28,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 557,
+      "original_reference_answer": "42",
+      "question": "Andy harvests all the tomatoes from 18 plants that have 7 tomatoes each. If he dries half the tomatoes and turns a third of the remainder into marinara sauce, how many tomatoes are left?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive properly subtracts sauce usage from tomatoes remaining after drying.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 78,
+          "extracted_answer": "42",
+          "reasoning_verdict": "SOUND",
+          "reason": "126 tomatoes, dry 63, sauce uses 21 of remaining 63, leaving 42.",
+          "report_extracted_response_sha256": "03dce5fba0c918a9a99885aaf642c62bf33a076b872bdff9df7a85598c0a5762"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "42",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Correct 42 and usable arithmetic, but describes the 63 dried tomatoes as the tomatoes used for sauce, an internal narration inconsistency.",
+          "report_extracted_response_sha256": "40fa0428bb1f81c9b1e86738415d5f202f892f3aa1f7efa02824772fe6623fa1"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "21",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes one-third of the remaining 63 as 21 but treats that as the number left, not used for sauce.",
+          "report_extracted_response_sha256": "46c95fa8f1139e63e767be57e669c673e7379c8865a7a31574a93ae83f6038be"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 88,
+          "extracted_answer": "42",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly subtracts one-third of the 63 remaining tomatoes, leaving 42.",
+          "report_extracted_response_sha256": "a3b4995a5a3b480f42033f93decabae1dadd5863d050da66e657b775dff7a61f"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 7,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 755,
+      "original_reference_answer": "12",
+      "question": "Tom swims for 2 hours at a speed of 2 miles per hour.  He then runs for half the time at 4 times the speed.  How many miles did he cover?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive multiplies running speed by four; negative invents inconsistent extra distance.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 82,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents an additional running distance and has inconsistent multiplication and addition.",
+          "report_extracted_response_sha256": "487ccd01e7af17460cb144cbdd891ff7ff151fe36fd430d5f58242eb4923961d"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 106,
+          "extracted_answer": "8",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 4 mph instead of four times the 2-mph swimming speed when running.",
+          "report_extracted_response_sha256": "5fb94188efa72255da406028db09abb6f6b83b7475fb03dac1cecb3cc9e6a839"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "12",
+          "reasoning_verdict": "SOUND",
+          "reason": "Swims four miles and runs one hour at eight mph, totaling 12 miles.",
+          "report_extracted_response_sha256": "7ef09fe7fd53d5259f5a55b5e331cf0900ea97ae46f94e0f5eaae8099fb25ea5"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "12",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct swimming and running durations, speeds and distances.",
+          "report_extracted_response_sha256": "e97a69138325ee6fd3255b622a30fb17e1ae6b7562cacf1dd25c0b25526cb616"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 9,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 815,
+      "original_reference_answer": "6",
+      "question": "Bingley has 5 bracelets. Kelly gives Bingley a fourth of her 16 bracelets. Then Bingley gives a third of his bracelets to his little sister. How many bracelets does Bingley have remaining?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive correctly computes bracelet transfer and remaining count. Rejected final written fraction 10/3 differs from auto-extracted 10; both are wrong versus 6.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 69,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Receives four bracelets, has nine, gives away three, retains six.",
+          "report_extracted_response_sha256": "cef71785c36271af6399fba186b107197ba460f0160f9b23b13eaae082754f07"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct steps; minor pronoun error does not change the calculation.",
+          "report_extracted_response_sha256": "cbce59e29299dcbd18460e69d27503c7e2b002fb94366b98cf48363d02c11692"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct one-fourth receipt and one-third donation.",
+          "report_extracted_response_sha256": "5b41d3ccad0896d693db1b28958bbc158af30061fccda0eb543d07b12cb4fd5c"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 87,
+          "extracted_answer": "10",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misapplies one-third of bracelets and obtains an impossible expression; extracted answer 10 differs from written fractional 10/3.",
+          "report_extracted_response_sha256": "7074663be15fa03f82b4f44da6ba0f178e835646176e5b61af56539107058a98"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 853,
+      "original_reference_answer": "6",
+      "question": "Eugene built a model house out of toothpicks and a deck of playing cards.  For every card, he used 75 toothpicks.  The deck of playing cards had 52 cards, and Eugene used all but 16 of the cards to build his house.  If a box of toothpicks contains 450 toothpicks, how many boxes of toothpicks did Eugene use to create his model house?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive divides by toothpicks per box, not toothpicks per card.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Uses 36 cards and 2,700 toothpicks, equal to six 450-toothpick boxes.",
+          "report_extracted_response_sha256": "6306bc6e0045e59370fb5f7680b87d3a1ff71c359e96f456287146013bc1ebc7"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "36",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides 2,700 toothpicks by 75 per card instead of 450 per box.",
+          "report_extracted_response_sha256": "19b8ea8d53478ae837b8258959bfc0639703842bdc58859a5c9deb7811f45f7b"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 99,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 52−16, then multiply by 75 and divide by 450.",
+          "report_extracted_response_sha256": "bd4a487508e5eef19df0e153bfd9f02b9cfef880c8fac9b649c1f4f7128202db"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 72,
+          "extracted_answer": "6",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 36×75/450=6.",
+          "report_extracted_response_sha256": "1c2ac433b7d0dba93c1e079cd7b7cbc46414db1bd0a8c8d2d29407fb966e8dc1"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 5,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1150,
+      "original_reference_answer": "1140",
+      "question": "A driver travels 30 miles per hour for 3 hours and 25 miles per hour for 4 hours to deliver goods to a town every day from Monday to Saturday. How many miles does the driver travel in a week?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive uses six working days; negative multiplies by seven days.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 117,
+          "extracted_answer": "1140",
+          "reasoning_verdict": "SOUND",
+          "reason": "Daily segments across six working days total 540+600=1,140 miles.",
+          "report_extracted_response_sha256": "be93123aa1c0d546cc70aa1900a47aa7ce921ec49b5fcb215a8955972a25e740"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 86,
+          "extracted_answer": "1155",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes an incorrect daily total of 165 miles and multiplies by seven rather than six days.",
+          "report_extracted_response_sha256": "3d69b47dc381826b45188d430a6e483a73aa106911dca14ce3366e8ca31b0278"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 230,
+          "extracted_answer": "570",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Incorrectly treats the two travel segments as occurring on alternating days.",
+          "report_extracted_response_sha256": "bdec92afe829fe5f8b8f7efa4d82d0b63650006f71dece75f2a475d5cb3c3d8e"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 140,
+          "extracted_answer": "1330",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Calculates 190 miles/day but multiplies by seven days, not Monday through Saturday (six).",
+          "report_extracted_response_sha256": "1f72df26d75eda3c743e5b89fd11b1236f09d9aff2386867fac8e17f652f212c"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 23,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1219,
+      "original_reference_answer": "37",
+      "question": "Victor works at Clucks Delux, a restaurant specializing in chicken. An order of Chicken Pasta uses 2 pieces of chicken, an order of Barbecue Chicken uses 3 pieces of chicken, and a family-size Fried Chicken Dinner uses 8 pieces of chicken. Tonight, Victor has 2 Fried Chicken Dinner orders, 6 Chicken Pasta orders, and 3 Barbecue Chicken orders. How many pieces of chicken does he need for all the orders?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive includes three barbecue pieces per order; negative uses two.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 97,
+          "extracted_answer": "34",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Calculates barbecue chicken as 2×3 instead of 3×3, undercounting three pieces.",
+          "report_extracted_response_sha256": "34c67cbd4c379f0beb94bd955c15cf6635f02111a21570c9a41d200139f40a5f"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 94,
+          "extracted_answer": "37",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct components 16, 12 and 9 sum to 37.",
+          "report_extracted_response_sha256": "830314f5711426c994524fdea03603aec2ef212b66d2707f93dd4ce631382bd4"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 104,
+          "extracted_answer": "37",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct order counts and total 37.",
+          "report_extracted_response_sha256": "461b9239c0a2a7c4d302ac5d0353a580330278398e696273dfcb65c85c846fbf"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "37",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct counts of all three kinds of chicken orders.",
+          "report_extracted_response_sha256": "97f5f1fd3ca7be3d31005221ada36c88fe1835ce10000d00acb48752ac89bd0e"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 3,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1293,
+      "original_reference_answer": "117",
+      "question": "Jimmy and Irene go shopping for clothes on a Tuesday, where senior citizens get a 10% discount on their purchases.  Jimmy picks out 3 shorts from the $15 rack.  Irene grabs 5 shirts from the $17 rack.  How much money do they give to the cashier?",
+      "recommendation": "HOLD",
+      "rationale": "HOLD: original question gives a discount for senior citizens without asserting either shopper is eligible. $117 is conditional on an unstated premise; no preference pair until adjudicated.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "130",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes undiscounted subtotal $130 without addressing the senior discount; whether it applies is unspecified.",
+          "report_extracted_response_sha256": "107df50043f2e2912a008e97c9df4516bcff46fd078fbbe786b9edeaf8e2fdd0"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 135,
+          "extracted_answer": "117",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Computes $117 only IF both shoppers qualify as senior citizens; the source does not state their ages or eligibility.",
+          "report_extracted_response_sha256": "2ec680330880caadc7dc2d6921a7a2d30538200d967d0e0e1ff2f3ed434c8e44"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 101,
+          "extracted_answer": "117",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Correct discounted arithmetic assuming eligibility, not established by the question.",
+          "report_extracted_response_sha256": "8301443fc7fb16ebe4d4c8ccb2cf0de5e63f6f257e7836a26855eb92f95512eb"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 103,
+          "extracted_answer": "117",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Correct discounted arithmetic assuming eligibility, not established by the question.",
+          "report_extracted_response_sha256": "f0eed84e1a21c4716f3907f57f41087b2f65fc3ccf10830a23d99776d69c9c55"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 1357,
+      "original_reference_answer": "140",
+      "question": "Lizzy's mother gave her 80 cents and her father gave her 40 cents for keeping to her promise. She went to her uncle's and spent 50 cents buying candy for her little cousin. Her uncle gave her another 70 cents. How many cents does she have now?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive correctly adds uncle’s gift; negative incorrectly treats it as expense.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "140",
+          "reasoning_verdict": "SOUND",
+          "reason": "Combines cents received and subtracts 50 cents to obtain 140.",
+          "report_extracted_response_sha256": "6a6b02e04a785ca8c3573ad1ee3bac0f422d6f45ccaaaaadbb981bf65b463e57"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 50,
+          "extracted_answer": "0",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats the uncle’s 70-cent gift as another expense.",
+          "report_extracted_response_sha256": "8b997632ea0fe90406b0fa8b603535e4e0a464891452237ca8092e0aa8dd747a"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "140",
+          "reasoning_verdict": "SOUND",
+          "reason": "80+40+70−50=140 cents.",
+          "report_extracted_response_sha256": "c131b2c85bf99ec7d8e10c9d3afd4099f4fa19cdf7bd2b9d1bd54ab6a247f91d"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 87,
+          "extracted_answer": "140",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly follows receipt, purchase and gift sequence to 140 cents.",
+          "report_extracted_response_sha256": "26377066f3482220077e5ca230f109145012fcc74316ec309c79886b4a5d6400"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 4,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1429,
+      "original_reference_answer": "20",
+      "question": "Ronald wants to make profits by re-selling some phones he bought a week ago. He bought 200 units for just $3000, and he wants to gain a third of the initial investment in profits when all units are sold. Including the profit margin, what will be the selling price for each phone?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive correctly amortizes desired total profit over all 200 units; negative adds aggregate profit to unit cost.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 99,
+          "extracted_answer": "20",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Numerically computes $1,000 intended profit, $4,000 needed revenue and $20 each, but twice calls revenue “total profit.”",
+          "report_extracted_response_sha256": "e6fc538f6b5abe5bd6b12a79a59567954f90eaf184b636029727d8524153627b"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 112,
+          "extracted_answer": "20",
+          "reasoning_verdict": "SOUND",
+          "reason": "Adds desired profit to original cost, divides $4,000 by 200 phones.",
+          "report_extracted_response_sha256": "56334e07a8916173e05435f61fdf150f987096fc01403a4229b661e4dd6e4efa"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "1150",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Miscomputes $3,000/200 as $150 and adds the entire $1,000 total profit to a per-unit price.",
+          "report_extracted_response_sha256": "7d81b7218788a21c2f404f13a2d2187c495669c9af7bb27166fa68cbf3d39492"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "20",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct concise $3,000/3=$1,000 profit, $4,000 revenue, $20 per phone.",
+          "report_extracted_response_sha256": "0a0ab40718cb2b997d30a29ba75c4bbd57ff17512b53e1bd727df5d257f252f5"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 7,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1438,
+      "original_reference_answer": "5",
+      "question": "Bobby made a big batch of soup weighing 80 kg. Each day the batch gets reduced by half. How many kg will it reach on the fourth day after he made the soup?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Positive applies four successive reductions; negative treats halving as an absolute daily subtraction.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "10",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts only three reductions by half rather than four days after creation.",
+          "report_extracted_response_sha256": "ad52901fe34dda585b9574837f3af3b2c8e57b5bcb4f3fb493566e75ca5ca4f6"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 134,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct four successive halvings: 80→40→20→10→5 kg.",
+          "report_extracted_response_sha256": "24be4aeb3dc3566f508f12449011574b0761be4701e20be0c5743ac712833acd"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 107,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct four successive halvings: 80→40→20→10→5 kg.",
+          "report_extracted_response_sha256": "2441541e638a475d096802689dc3756daad28da302d8d52e32a50883bdc79664"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "80",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats repeated halving as a fixed 40-kg daily reduction.",
+          "report_extracted_response_sha256": "32e47149b2a7ba354bfdbab17ab549924d497adbbed0743d1523d659f8ba0ec2"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 31,
+        "selection_rule": "minimize absolute token length gap among SOUND, answer-correct chosen and FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    }
+  ]
+}
