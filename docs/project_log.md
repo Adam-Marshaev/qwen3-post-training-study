@@ -789,3 +789,73 @@ generation lengths, answer extraction, continuation
 behavior, and token-cap frequency.
 
 ---
+
+## 2026-10-21 - Twenty-Question GSM8K Diagnostic
+
+### Configuration
+
+Model: Qwen/Qwen3-0.6B-Base
+Prompt: gsm8k_qa_v1
+Dataset: frozen GSM8K development validation
+Examples: first 20 validation records
+
+Precision: FP16
+Attention: eager
+Decoding: greedy
+KV cache: disabled
+Maximum new tokens: 192
+
+Run directory:
+data/eval_runs/diagnostic_20_cap192_v1/
+
+### Measured Results
+
+- Evaluated: 20
+- Correct: 13
+- Accuracy: 65.0%
+- Valid extraction rate: 95.0%
+- Missing answer rate: 5.0%
+- Ambiguous answer rate: 0.0%
+- Unwanted continuation rate: 95.0%
+- Token-cap rate: 5.0%
+- Mean generated tokens: 89.9
+
+### Failure Analysis
+
+Six examples produced valid but incorrect numerical answers.
+
+Source indices:
+58, 59, 62, 84, 140, 151
+
+Observed failure patterns:
+- Confusing quantities with monetary values
+- Misinterpreting a multi-hour quantity
+- Incorrect remaining-quantity arithmetic
+- Confusing a floor with a single room
+- Answering how many were denied instead of admitted
+- Off-by-one arithmetic error
+
+Source index 166:
+- Expected answer: 9
+- Extraction status: missing
+- Generated tokens: 192
+- Reached token cap: True
+
+### Conclusions
+
+The evaluator is detecting both mathematical errors
+and possible generation-budget truncation.
+
+The model demonstrates useful mathematical capabilities
+but makes errors in quantity interpretation, arithmetic,
+and translating intermediate results into final answers.
+
+These 20 examples form a diagnostic sample, not a
+representative benchmark result.
+
+### Next Step
+
+Investigate source index 166 with a longer generation
+budget while keeping other inference settings fixed.
+
+---
