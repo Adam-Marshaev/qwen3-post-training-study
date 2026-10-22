@@ -1046,3 +1046,72 @@ Then implement tokenization, EOS targets, and
 completion-only causal-language-model loss masking.
 
 ---
+
+## 2026-10-22 - SFT Sequence Length Audit
+
+### Completed
+
+Tokenized all 6726 approved GSM8K development-training
+examples using the pinned Qwen3 tokenizer.
+
+Tokenization implementation commit:
+f940227
+
+All 66 automated tests passed.
+
+### Measured Sequence Lengths
+
+Minimum: 53
+Median: 147
+Mean: 157.24
+P90: 233
+P95: 264
+P99: 320
+Maximum: 449
+
+Examples exceeding 256 tokens: 400
+Examples exceeding 384 tokens: 13
+Examples exceeding 512 tokens: 0
+
+### Tokenization Integrity
+
+Approved training examples: 6726
+
+Separate/full-text tokenization mismatches: 0
+Text round-trip mismatches: 0
+
+Completion-only labels and EOS targets verified.
+
+EOS token ID: 151645
+PAD token ID: 151643
+
+### Engineering Decisions
+
+Initial SFT maximum sequence length: 512 tokens.
+
+This is a bound on the total training sequence,
+including prompt, reference completion, and EOS.
+
+No current training examples require truncation.
+
+Use dynamic padding to the longest sequence within
+each training batch rather than padding all examples
+to 512 tokens.
+
+Tokenize the approved dataset once and reuse the
+tokenized examples across training epochs.
+
+### Evaluation Fairness
+
+The SFT training sequence limit is distinct from
+the baseline evaluation's max_new_tokens setting.
+
+Keep evaluation max_new_tokens=512 for pretrained,
+SFT, SFT+DPO, and SFT+GRPO comparisons.
+
+### Next Step
+
+Implement and unit-test a dynamically padded SFT
+batch collator with correct label masking.
+
+---
