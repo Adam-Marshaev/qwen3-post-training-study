@@ -1,0 +1,59 @@
+{
+  "flags": {
+    "derived_regrading_performed": false,
+    "official_test_used": false,
+    "original_candidates_modified": false,
+    "original_source_modified": false,
+    "pair_constructed": false,
+    "reference_correction_approved": false,
+    "reference_correction_implemented": false,
+    "training_approved": false,
+    "training_performed": false
+  },
+  "original_reference_answer": "55",
+  "proposed_label_preview": [
+    {
+      "extracted_answer": "55",
+      "original_correct": true,
+      "proposed_correct": false,
+      "sample_index": 0
+    },
+    {
+      "extracted_answer": "55",
+      "original_correct": true,
+      "proposed_correct": false,
+      "sample_index": 1
+    },
+    {
+      "extracted_answer": "50",
+      "original_correct": false,
+      "proposed_correct": true,
+      "sample_index": 2
+    },
+    {
+      "extracted_answer": "55",
+      "original_correct": true,
+      "proposed_correct": false,
+      "sample_index": 3
+    }
+  ],
+  "proposed_reference_answer": "50",
+  "provenance": {
+    "configs/data/gsm8k_split_v1.json": "31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719",
+    "configs/preference/e003_scale256_independent_adjudication3_v1.json": "23886515468df3c4d00f079d744b8eb62224d7d0f97820a665e06feb4adeb3e2",
+    "data/preference_runs/e003_scale256_k4_v1/candidates.jsonl": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+    "data/raw/gsm8k/train.jsonl": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465"
+  },
+  "rationale": "Five facial products create four waiting intervals. Four intervals multiplied by five minutes, plus 30 minutes of makeup, equals 50 minutes.",
+  "required_actions": [
+    "Independently authorize the training-only reference correction.",
+    "Create a separately versioned derivative regrading artifact.",
+    "Regrade all four original completions without changing them.",
+    "Review and approve any selected preference pair separately.",
+    "Exclude source 5436 if correction cannot be authorized."
+  ],
+  "schema": "e003_training_reference_erratum_proposal_v1",
+  "scope": "E003_training_only",
+  "source_index": 5436,
+  "status": "PROPOSED_NOT_APPROVED"
+}
