@@ -1,0 +1,38 @@
+{
+  "absolute_token_length_gap": 28,
+  "approved_training_only_reference_answer": "50",
+  "chosen_extracted_answer": "50",
+  "chosen_generated_tokens": 74,
+  "chosen_response_sha256": "7497e87a8213cf4994e860856593f140dc1e6bceb6a780da6213ae23d357b2df",
+  "chosen_sample_index": 2,
+  "decision": "APPROVED",
+  "decision_authority": "project_owner",
+  "decision_basis": "Project owner explicitly approved chosen sample 2 over rejected sample 0 after reviewing both original completions.",
+  "decision_date": "2026-10-22",
+  "flags": {
+    "dpo_training_approved": false,
+    "eligible_for_future_dataset_consideration": true,
+    "full_training_dataset_approved": false,
+    "independent_pair_signoff": true,
+    "official_test_used": false,
+    "original_data_modified": false,
+    "pair_dataset_constructed": false,
+    "specific_pair_approved": true,
+    "training_performed": false
+  },
+  "provenance": {
+    "approval_parent_revision": "627b14192e3010703f08ba83d5249b142ae7692c",
+    "derivative_manifest_sha256": "c276a21e54b7b6bdb9a9a76f330e7be148b2f37fc6d1e357eafef936a3e76ec0",
+    "derivative_path": "data/preference_runs/e003_reference_erratum_5436_v1/regraded_candidates.jsonl",
+    "derivative_sha256": "f8c74ddb4398fa4f79ca44bbda0c0d50c812ec73351fcacdee16d7e174e6662f",
+    "original_candidates_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+    "reference_approval_sha256": "a031184e0abaaa345bc38adbb794f4521c7e60ac5eb51c5acba7d55a14143f69"
+  },
+  "reasoning_justification": "The chosen completion correctly counts four five-minute waiting intervals between five facial products. The rejected completion counts five intervals, producing the incorrect answer 55.",
+  "rejected_extracted_answer": "55",
+  "rejected_generated_tokens": 46,
+  "rejected_response_sha256": "7221938420cae697d4881fc6d3f6734b4e2b115426dd386ee05004acfe6ca448",
+  "rejected_sample_index": 0,
+  "schema": "e003_source5436_pair_approval_v1",
+  "source_index": 5436
+}
