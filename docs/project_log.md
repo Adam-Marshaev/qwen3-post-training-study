@@ -545,3 +545,43 @@ Then build a multi-question inference runner and begin
 small-scale validation smoke tests.
 
 ---
+
+## 2026-10-21 - Baseline Prompt Verified
+
+### Completed
+
+Implemented the versioned GSM8K baseline prompt builder.
+
+Prompt version: gsm8k_qa_v1
+
+Template:
+Question: {question}
+Answer:
+
+### Verification
+
+All 38 automated tests passed.
+
+Verified the prompt against the first frozen GSM8K
+validation example:
+- Source index: 6
+- Topic: pizza slice arithmetic
+- Reference answer: 48
+
+The reference answer was not included in the model prompt.
+
+### Engineering Decisions
+
+Centralize evaluation prompt formatting.
+
+Treat prompt version as part of experimental configuration.
+
+Do not silently modify a frozen prompt version.
+Create a new version for intentional prompt experiments.
+
+### Next Step
+
+Build a multi-question GPU inference smoke test
+that saves individual predictions and aggregate metrics.
+
+---
