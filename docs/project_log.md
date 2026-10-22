@@ -489,3 +489,59 @@ Then build the pretrained baseline evaluation runner
 using the frozen development-validation split.
 
 ---
+
+## 2026-10-21 - Manifest-Aware GSM8K Loader
+
+### Completed
+
+Implemented a dataset loader that retrieves GSM8K examples
+according to the frozen development split manifest.
+
+Implementation commit:
+7abbde6
+
+### Verification
+
+Automated tests: 32 passed.
+
+Real dataset verification:
+- Development training examples: 6726
+- Development validation examples: 747
+- Overlapping indices: 0
+- Total unique examples: 7473
+
+Frozen split manifest SHA-256:
+31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719
+
+The loader verifies:
+- Source dataset checksum
+- Source revision
+- Manifest version and counts
+- Index validity and uniqueness
+- Complete partition coverage
+- No training/validation overlap
+- No normalized-question leakage
+
+### Observations
+
+First validation example:
+- Original source index: 6
+- Subject: pizza slice arithmetic
+- Reference numerical answer: 48
+
+### Engineering Decisions
+
+Keep the evaluation-facing example representation separate
+from the full reference solution used for supervised training.
+
+Preserve the frozen GSM8K split for all subsequent model
+comparisons.
+
+### Next Step
+
+Implement and freeze a deterministic baseline prompt format.
+
+Then build a multi-question inference runner and begin
+small-scale validation smoke tests.
+
+---
