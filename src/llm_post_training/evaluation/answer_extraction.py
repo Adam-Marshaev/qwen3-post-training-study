@@ -38,6 +38,20 @@ FINAL_ANSWER_PATTERN = re.compile(
 )
 
 
+# Recognize explicitly boxed numerical answers such as:
+#
+#   \boxed{9}
+#   \boxed{-12.5}
+#   \boxed{1,250}
+#
+# Deliberately reject boxed arithmetic expressions or variables.
+BOXED_ANSWER_PATTERN = re.compile(
+    r"\\boxed\{[ \t]*"
+    r"(?P<number>[+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)"
+    r"[ \t]*\}"
+)
+
+
 # Detect the start of a newly generated question.
 NEXT_QUESTION_PATTERN = re.compile(
     r"^[ \t]*(?:Question[ \t]*:|\[Question\])",
@@ -63,7 +77,10 @@ def extract_final_answer(response: str) -> AnswerExtraction:
     if next_question is not None:
         response = response[:next_question.start()]
 
-    matches = FINAL_ANSWER_PATTERN.findall(response)
+    matches = (
+        FINAL_ANSWER_PATTERN.findall(response)
+        + BOXED_ANSWER_PATTERN.findall(response)
+    )
 
     if not matches:
         return AnswerExtraction(

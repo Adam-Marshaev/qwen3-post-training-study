@@ -88,5 +88,71 @@ class TestAnswerExtraction(unittest.TestCase):
         self.assertTrue(result.unwanted_continuation)
 
 
+    def test_latex_boxed_final_answer(self):
+        response = (
+            "The calculation gives 3 + 6 = 9.\n"
+            "### Final Answer\n"
+            + r"\[\boxed{9}\]"
+        )
+
+        result = extract_final_answer(response)
+
+        self.assertEqual(result.status, "valid")
+        self.assertEqual(result.answer, Decimal("9"))
+        self.assertFalse(result.unwanted_continuation)
+
+
+    def test_latex_boxed_negative_decimal(self):
+        result = extract_final_answer(
+            r"\boxed{ -12.5 }"
+        )
+
+        self.assertEqual(result.status, "valid")
+        self.assertEqual(result.answer, Decimal("-12.5"))
+
+    def test_matching_text_and_boxed_answers(self):
+        response = (
+            "Final answer: 1,250\n"
+            + r"\boxed{1250}"
+        )
+
+        result = extract_final_answer(response)
+
+        self.assertEqual(result.status, "valid")
+        self.assertEqual(result.answer, Decimal("1250"))
+
+    def test_conflicting_text_and_boxed_answers(self):
+        response = (
+            "Final answer: 8\n"
+            + r"\boxed{9}"
+        )
+
+        result = extract_final_answer(response)
+
+        self.assertEqual(result.status, "ambiguous")
+        self.assertIsNone(result.answer)
+
+    def test_boxed_answer_after_next_question_is_ignored(self):
+        response = (
+            "The answer is 4.\n"
+            "[Question] Another problem.\n"
+            + r"\boxed{7}"
+        )
+
+        result = extract_final_answer(response)
+
+        self.assertEqual(result.status, "valid")
+        self.assertEqual(result.answer, Decimal("4"))
+        self.assertTrue(result.unwanted_continuation)
+
+    def test_boxed_expression_is_not_a_numeric_answer(self):
+        result = extract_final_answer(
+            r"\boxed{3+6}"
+        )
+
+        self.assertEqual(result.status, "missing")
+        self.assertIsNone(result.answer)
+
+
 if __name__ == "__main__":
     unittest.main()
