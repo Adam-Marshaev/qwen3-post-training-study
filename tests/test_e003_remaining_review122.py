@@ -122,5 +122,59 @@ class RemainingReviewTests(unittest.TestCase):
                     m.prepare(root, target, 'a'*40, False)
 
 
+    def test_13_no_git_loose_ref_passes_preflight(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            branch = root / '.git' / 'refs' / 'heads' / 'main'
+            branch.parent.mkdir(parents=True)
+            (root / '.git' / 'HEAD').write_text('ref: refs/heads/main\n')
+            branch.write_text('a' * 40 + '\n')
+            data = self._fake_preflight_inputs()
+            with patch.object(m, 'load_and_verify', return_value=data), \
+                 patch.object(m.subprocess, 'check_output', side_effect=FileNotFoundError):
+                m.prepare(root, root / 'output', 'a' * 40, True)
+            self.assertFalse((root / 'output').exists())
+
+    def test_14_no_git_packed_ref_passes_preflight(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            gitdir = root / '.git'
+            gitdir.mkdir()
+            (gitdir / 'HEAD').write_text('ref: refs/heads/main\n')
+            (gitdir / 'packed-refs').write_text(
+                '# pack-refs with: peeled fully-peeled sorted\n'
+                + ('b' * 40) + ' refs/heads/main\n'
+            )
+            self.assertEqual(m.git_head_from_files(root), 'b' * 40)
+
+    def test_15_no_git_mismatched_revision_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            branch = root / '.git' / 'refs' / 'heads' / 'main'
+            branch.parent.mkdir(parents=True)
+            (root / '.git' / 'HEAD').write_text('ref: refs/heads/main\n')
+            branch.write_text('a' * 40 + '\n')
+            with patch.object(m.subprocess, 'check_output', side_effect=FileNotFoundError):
+                with self.assertRaisesRegex(ValueError, 'Code revision'):
+                    m.prepare(root, root / 'output', 'b' * 40, True)
+            self.assertFalse((root / 'output').exists())
+
+    def test_16_detached_head_and_linked_worktree(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            gitdir = root / 'meta'
+            gitdir.mkdir()
+            (root / '.git').write_text('gitdir: meta\n')
+            (gitdir / 'HEAD').write_text('c' * 40 + '\n')
+            self.assertEqual(m.git_head_from_files(root), 'c' * 40)
+
+    def _fake_preflight_inputs(self):
+        indices = m.FIRST_BATCH + list(range(2000, 2100)) + m.LAST_BATCH
+        examples = {i: SimpleNamespace(source_index=i, question=f'Q{i}', reference_answer=50)
+                    for i in indices}
+        groups = {i: [record(i, s, correct=(s == 0)) for s in range(4)] for i in indices}
+        return examples, groups, indices, {}
+
+
 if __name__ == '__main__':
     unittest.main()

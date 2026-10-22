@@ -201,13 +201,72 @@ def load_and_verify(root: Path):
     return examples, groups, remaining, input_files
 
 
+def git_head_from_files(root: Path) -> str:
+    """Resolve a checked-out Git HEAD without requiring the `git` binary.
+
+    Supports ordinary, packed-ref, detached-HEAD, and linked-worktree layouts.
+    Does not infer a revision from caller-supplied metadata.
+    """
+    dotgit = root / ".git"
+    if dotgit.is_file():
+        pointer = dotgit.read_text(encoding="utf-8").strip()
+        require(pointer.startswith("gitdir: "), "Invalid .git worktree pointer")
+        location = Path(pointer[len("gitdir: "):])
+        gitdir = location if location.is_absolute() else (root / location).resolve()
+    else:
+        gitdir = dotgit
+    require(gitdir.is_dir(), f"Git metadata directory not accessible: {gitdir}")
+
+    common_dir = gitdir
+    common_pointer = gitdir / "commondir"
+    if common_pointer.is_file():
+        location = Path(common_pointer.read_text(encoding="utf-8").strip())
+        common_dir = location if location.is_absolute() else (gitdir / location).resolve()
+        require(common_dir.is_dir(), "Git common directory not accessible")
+
+    head = (gitdir / "HEAD").read_text(encoding="utf-8").strip()
+    if head.startswith("ref: "):
+        ref = head[len("ref: "):]
+        parts = Path(ref).parts
+        require(ref.startswith("refs/") and ".." not in parts and
+                not Path(ref).is_absolute(), "Invalid Git HEAD symbolic ref")
+        revision = None
+        for base in (gitdir, common_dir):
+            loose = base / ref
+            if loose.is_file():
+                revision = loose.read_text(encoding="utf-8").strip()
+                break
+            packed = base / "packed-refs"
+            if packed.is_file():
+                for line in packed.read_text(encoding="utf-8").splitlines():
+                    if line.startswith(("#", "^")) or not line.strip():
+                        continue
+                    fields = line.split(" ", 1)
+                    if len(fields) == 2 and fields[1] == ref:
+                        revision = fields[0]
+                        break
+            if revision is not None:
+                break
+        require(revision is not None, f"Cannot resolve Git HEAD ref: {ref}")
+    else:
+        revision = head
+
+    require(len(revision) == 40 and all(c in "0123456789abcdef" for c in revision),
+            "Invalid Git HEAD revision in checkout metadata")
+    return revision
+
+
 def prepare(root: Path, output_dir: Path, code_revision: str, preflight_only: bool):
     root = root.resolve()
     output_dir = output_dir.resolve()
     require(len(code_revision) == 40 and all(c in "0123456789abcdef" for c in code_revision),
             "Git revision must be 40 lowercase hex digits")
-    repo_revision = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"],
-                                             text=True).strip()
+    try:
+        repo_revision = subprocess.check_output(
+            ["git", "-C", str(root), "rev-parse", "HEAD"], text=True
+        ).strip()
+    except FileNotFoundError:
+        repo_revision = git_head_from_files(root)
     require(repo_revision == code_revision, "Code revision does not match checked-out Git HEAD")
     examples, groups, remaining, inputs = load_and_verify(root)
     batches = partition(remaining)
