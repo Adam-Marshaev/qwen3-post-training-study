@@ -1167,3 +1167,116 @@ Verify the LoRA software environment and inspect
 Qwen3 model architecture before attaching adapters.
 
 ---
+
+## 2026-10-22 - LoRA Optimizer Step Verified
+
+### Environment
+
+Model: Qwen/Qwen3-0.6B-Base
+Model revision: 57ca99e94acb83175495aa2c6b6b0cc498170924
+
+GPU: Tesla V100-SXM2-32GB
+Model weights: FP16
+Trainable LoRA adapters: FP32
+
+LoRA image ID:
+sha256:e6248de1867ccb6aae297a49228532721014f16888b126b8532705e0d9e8ee0e
+
+### Configuration
+
+LoRA rank: 8
+LoRA alpha: 16
+LoRA dropout: 0.05
+
+Target modules:
+q_proj, k_proj, v_proj, o_proj
+
+Trainable parameters: 2293760
+
+Training source indices: 0, 1
+Batch shape: [2, 87]
+
+Optimizer: AdamW
+Learning rate: 0.0001
+Weight decay: 0.0
+Gradient clipping threshold: 1.0
+
+Optimizer updates: 1
+
+### Initial Forward/Backward Results
+
+Initial loss: 1.4126319885253906
+
+Global gradient norm: 5.40293689
+
+Layer 0 gradient norm: 1.25843149
+Layer 13 gradient norm: 0.94563946
+Layer 27 gradient norm: 0.41938794
+
+LoRA A tensors with nonzero gradients: 0/112
+LoRA B tensors with nonzero gradients: 112/112
+
+All gradients were finite.
+
+### Gradient Clipping
+
+Norm before clipping: 5.40293694
+Norm after clipping: 0.99999982
+
+Gradient clipping verification: PASSED
+
+### Optimizer Update
+
+LoRA A tensors changed: 0/112
+LoRA B tensors changed: 112/112
+
+Frozen base-model projection remained unchanged.
+
+### Post-Update Forward/Backward
+
+Post-update loss: 1.1810376644134521
+
+Global gradient norm: 3.88988007
+
+Layer 0 gradient norm: 1.01737600
+Layer 13 gradient norm: 0.68483292
+Layer 27 gradient norm: 0.38313710
+
+LoRA A tensors with nonzero gradients: 112/112
+LoRA B tensors with nonzero gradients: 112/112
+
+All gradients remained finite.
+
+### GPU Memory
+
+Peak allocated VRAM: 1905.86 MiB
+Peak reserved VRAM: 2022.0 MiB
+
+### Interpretation
+
+One LoRA optimizer step completed successfully.
+
+Both LoRA A and B matrices received nonzero
+gradient signals after the optimizer update.
+
+The frozen pretrained model remained unchanged.
+
+The post-update loss was lower, but dropout was
+active during both forward passes. Therefore,
+the difference is not a controlled measure
+of learning progress.
+
+The experiment demonstrates functioning
+optimization mechanics, not long-term
+training stability or accuracy improvement.
+
+No checkpoint was saved.
+
+### Next Step
+
+Design the reproducible SFT training configuration.
+
+Verify microbatch memory requirements using
+longer examples before the full training run.
+
+---
