@@ -1,0 +1,63 @@
+{
+  "config_version": "sft_lora_v1",
+  "experiment_id": "E002",
+  "experiment_type": "supervised_fine_tuning",
+  "seed": 42,
+  "model": {
+    "model_id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "57ca99e94acb83175495aa2c6b6b0cc498170924",
+    "base_dtype": "float16",
+    "adapter_dtype": "float32",
+    "attention_implementation": "eager",
+    "use_cache": false
+  },
+  "dataset": {
+    "source_path": "data/raw/gsm8k/train.jsonl",
+    "manifest_path": "configs/data/gsm8k_split_v1.json",
+    "split": "training",
+    "expected_examples": 6726,
+    "prompt_version": "gsm8k_qa_v1",
+    "max_sequence_length": 512,
+    "truncation": false
+  },
+  "lora": {
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "bias": "none",
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training": {
+    "num_epochs": 2,
+    "microbatch_size": 4,
+    "gradient_accumulation_steps": 8,
+    "expected_optimizer_steps_per_epoch": 211,
+    "expected_total_optimizer_steps": 422,
+    "accumulation_normalization": "supervised_tokens",
+    "optimizer": "adamw",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0,
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-8,
+    "scheduler": "cosine",
+    "warmup_steps": 13,
+    "max_grad_norm": 1.0,
+    "log_every_optimizer_steps": 10,
+    "save_checkpoint_each_epoch": true
+  },
+  "evaluation": {
+    "split": "validation",
+    "expected_examples": 747,
+    "prompt_version": "gsm8k_qa_v1",
+    "answer_extraction_version": "explicit_numeric_v2",
+    "max_new_tokens": 512,
+    "decoding": "greedy",
+    "use_cache": false
+  }
+}
