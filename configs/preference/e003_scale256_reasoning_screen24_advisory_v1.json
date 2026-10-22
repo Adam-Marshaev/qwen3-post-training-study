@@ -1,0 +1,1331 @@
+{
+  "schema": "e003_scale256_reasoning_screen24_advisory_v1",
+  "review_basis": "uploaded unmodified E003 candidate text, manually checked against each question and arithmetic",
+  "original_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "review_report_sha256": "21f1ba9222a7d4b91f18286e0e5e01834a7dfdba41ff2ceb0235fda496c73add",
+  "selection_manifest_sha256": "0f94473f4081c2cf141528f01e51fac59a11043e48f123d500b077d82afbea71",
+  "generator_code_revision": "ab39e3bab29a9a3115e6ec754086187092dcf89e",
+  "selection_seed": 20261022,
+  "population_mixed_groups": 146,
+  "sampled_mixed_groups": 24,
+  "reviewed_candidates": 96,
+  "source_index_order": [
+    5,
+    744,
+    780,
+    784,
+    1035,
+    1576,
+    1767,
+    1920,
+    2320,
+    2738,
+    2909,
+    3027,
+    3087,
+    3612,
+    3676,
+    3869,
+    3912,
+    4324,
+    4457,
+    4503,
+    5436,
+    6117,
+    6771,
+    7207
+  ],
+  "summary": {
+    "advisory_approve_groups": 21,
+    "advisory_hold_groups": 2,
+    "advisory_exclude_groups": 1,
+    "group_approval_fraction": 0.875,
+    "wilson_95_interval_approx_no_fpc": [
+      0.689961,
+      0.956557
+    ],
+    "candidate_reasoning_verdict_counts": {
+      "FLAWED": 57,
+      "SOUND": 36,
+      "BORDERLINE": 2,
+      "SOURCE_CONFLICT_SOUND": 1
+    },
+    "answer_matches_reference_reasoning_counts": {
+      "SOUND": 36,
+      "BORDERLINE": 2,
+      "FLAWED": 8
+    },
+    "answer_differs_from_reference_reasoning_counts": {
+      "FLAWED": 49,
+      "SOURCE_CONFLICT_SOUND": 1
+    },
+    "proposed_pairs_count": 21,
+    "median_proposed_pair_abs_token_gap": 14,
+    "max_proposed_pair_abs_token_gap": 66
+  },
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "human_signoff_required_before_training": true,
+  "independent_human_signoff": false,
+  "training_approved": false,
+  "training_performed": false,
+  "official_test_used": false,
+  "groups": [
+    {
+      "source_index": 5,
+      "recommendation": "APPROVE",
+      "rationale": "The green-flower count must use 25% of all 28 yellow and purple flowers; only sample 3 does so.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 100,
+          "extracted_answer": "32.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 25% of purple flowers alone (18), omitting yellow flowers."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 74,
+          "extracted_answer": "48",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Miscomputes green flowers as 0.25×10 + 18 rather than 0.25×(10+18)."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 117,
+          "extracted_answer": "32.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 18/4 green flowers rather than (10+18)/4."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 138,
+          "extracted_answer": "35",
+          "reasoning_verdict": "SOUND",
+          "reason": "10 yellow; 18 purple; 7 green; total 35."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 21,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 744,
+      "recommendation": "HOLD",
+      "rationale": "Numerically correct sample 3 does not explain the relative closing speed: it substitutes the cyclist’s 20 mph into 5/20 and mentions a nonexistent restaurant. Needs independent adjudication.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 101,
+          "extracted_answer": "30",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invalid conversion of 20 mph to miles/minute and inconsistent time arithmetic."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 170,
+          "extracted_answer": "7.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes the time to reach Yolanda’s starting head start, ignoring that she keeps cycling."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 137,
+          "extracted_answer": "7.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Also ignores Yolanda’s continued motion; 5/40 hours is not catch-up time."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 147,
+          "extracted_answer": "15",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Correct 15 minutes, but incorrectly attributes closing-speed calculation to her own speed; relative speed 40−20=20 mph is never justified."
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 780,
+      "recommendation": "APPROVE",
+      "rationale": "Correct 36 pages/hour × 2 hours = 72.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 64,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "Triples the reading rate and multiplies by two hours."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 90,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly computes 36 pages/hour for two hours."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 85,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct rate and duration."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 27,
+          "extracted_answer": "36",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Stops at the one-hour enhanced rate (36); omits the two-hour factor."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 37,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 784,
+      "recommendation": "APPROVE",
+      "rationale": "Jessica’s 27-pound pumpkin is the lightest, not Brad’s 54-pound pumpkin.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 82,
+          "extracted_answer": "54",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mistakes Brad’s 54-pound pumpkin for the lightest instead of Jessica’s 27-pound pumpkin."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 66,
+          "extracted_answer": "81",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly identifies 108 pounds and 27 pounds; difference 81."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 106,
+          "extracted_answer": "81",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly compares heaviest Betty (108) with lightest Jessica (27)."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "54",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mistakes Brad’s 54-pound pumpkin for the lightest."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 11,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 1035,
+      "recommendation": "APPROVE",
+      "rationale": "Samples 0 and 1 are valid; sample 3 gets 960 despite stating the wrong difference.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 146,
+          "extracted_answer": "960",
+          "reasoning_verdict": "SOUND",
+          "reason": "600 boys, 1000 girls, 1600 total, 60%=960."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 84,
+          "extracted_answer": "960",
+          "reasoning_verdict": "SOUND",
+          "reason": "Computes 1000 girls and 60% of 1600 correctly."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "480",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assumes girls are 400 fewer than boys despite the explicit opposite condition."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 105,
+          "extracted_answer": "960",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Incorrectly states the girl/boy difference is 600, then uses 400 to compute girls; internal contradiction."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 7,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 1576,
+      "recommendation": "APPROVE",
+      "rationale": "Grimzi leaves 3 footprints per 6 meters rather than 3 per meter.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 109,
+          "extracted_answer": "27000",
+          "reasoning_verdict": "SOUND",
+          "reason": "24000 + 3000 = 27000."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 125,
+          "extracted_answer": "42000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misreads Grimzi’s footprint rate as 3 per meter."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 93,
+          "extracted_answer": "27000",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly scales 3/6 footprints per meter over 6000 meters."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "27000",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct footprint rates and total."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 16,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 1767,
+      "recommendation": "APPROVE",
+      "rationale": "Sample 1 has a wrong extra intermediate calculation, but sample 2 is fully sound.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "195",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts number of non-chive rows (5) directly from the plant count (200)."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "150",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Falsely claims first 3 rows contain 20×3=60 plants; correct is 3×10=30, although final result is right."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "150",
+          "reasoning_verdict": "SOUND",
+          "reason": "200 plants minus 30 parsley and 20 rosemary =150 chives."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 153,
+          "extracted_answer": "0",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts 50 plants from 20 rows, mixing units, and invents zero chives."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 2,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 1920,
+      "recommendation": "APPROVE",
+      "rationale": "Both samples 0 and 2 account for breakfast, lunch, snack, and dinner.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 95,
+          "extracted_answer": "2",
+          "reasoning_verdict": "SOUND",
+          "reason": "Subtracts all four consumptions; two remain."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 40,
+          "extracted_answer": "7",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits 5 slices eaten at dinner."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 85,
+          "extracted_answer": "2",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct successive subtractions, including dinner."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits the 2 lunch slices, yielding four instead of two."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 18,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 2320,
+      "recommendation": "HOLD",
+      "rationale": "Only correct-labelled sample 1 claims “2 toppings to each pizza” despite the question specifying 3. Its multiplication 2×3 and final $50 are correct; independent reviewer must resolve whether this is a harmless typo or invalid rationale.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 105,
+          "extracted_answer": "40",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Contradicts topping count and charges only $4 for six toppings instead of $12."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 164,
+          "extracted_answer": "50",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Correct amount $50 and correct 2×3×$2 math, but explicitly says 2 toppings per pizza rather than 3."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 140,
+          "extracted_answer": "42.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats six toppings as $6 rather than $12, ignoring the per-topping price."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 159,
+          "extracted_answer": "11.65",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Reassigns the $14 pizza price and $2 topping price nonsensically."
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 2738,
+      "recommendation": "APPROVE",
+      "rationale": "Two correct-labelled solutions sum $40+$15+$4.50=$59.50 and subtract $17.50.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "41",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Incorrectly adds $40+$15+$4.50 as $59 and computes $59−$17.50 as $41."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 156,
+          "extracted_answer": "42",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly computes $59.50 initial and $42.00 remaining."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 96,
+          "extracted_answer": "41",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Repeats the same $59 and $41 arithmetic errors as sample 0."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 102,
+          "extracted_answer": "42",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct $59.50 total and $42 balance; slight informal phrasing about loose change does not alter reasoning."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 2909,
+      "recommendation": "APPROVE",
+      "rationale": "Wrong sample makes elementary addition error; correct candidates are valid.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 64,
+          "extracted_answer": "88",
+          "reasoning_verdict": "SOUND",
+          "reason": "20×$2=$40; 6×$8=$48; total $88."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 62,
+          "extracted_answer": "98",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Adds $40+$48 as $98 instead of $88."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 80,
+          "extracted_answer": "88",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct egg and chicken subtotals."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 59,
+          "extracted_answer": "88",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct cost and sum."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 2,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3027,
+      "recommendation": "APPROVE",
+      "rationale": "Only sample 3 faithfully tracks the starting 72 books, all additions, and both removals.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 183,
+          "extracted_answer": "7",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misinterprets monthly books, omits starting 72 and other purchases, and produces conflicting totals."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 154,
+          "extracted_answer": "75",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misaccounts for purchases/gifts and treats sold books as additions."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 194,
+          "extracted_answer": "10",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits original 72 and double-counts a daughter’s gift."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 168,
+          "extracted_answer": "81",
+          "reasoning_verdict": "SOUND",
+          "reason": "72+12+5+2+1+4−12−3=81."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 14,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3087,
+      "recommendation": "APPROVE",
+      "rationale": "20 required pages/day minus 18 planned pages/day equals two.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "17",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts one day’s 18 pages from the total 140 pages before dividing, mixing time horizons."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 58,
+          "extracted_answer": "2",
+          "reasoning_verdict": "SOUND",
+          "reason": "140/7−3×6=2 more pages per day."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "12",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Compares 18 pages/day with six pages per reading, never incorporating the 140-page target correctly."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 82,
+          "extracted_answer": "2",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct daily target and increment."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 9,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3612,
+      "recommendation": "APPROVE",
+      "rationale": "Thirty-six 50-card packs at $3 each cost $108.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 58,
+          "extracted_answer": "36",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses one period’s students and treats card packs as dollars; omits pack price."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 72,
+          "extracted_answer": "108",
+          "reasoning_verdict": "SOUND",
+          "reason": "180 students ×10 =1800 cards; 36 packs ×$3=$108."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "36",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Finds 36 packs but fails to multiply by $3 per pack."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 135,
+          "extracted_answer": "130.8",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Changes the class size from 30 to 36 and computes a fractional pack count."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 14,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3676,
+      "recommendation": "APPROVE",
+      "rationale": "Two cups per night require two servings; 96 servings last 48 nights.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 126,
+          "extracted_answer": "32",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Adds cups and servings (2+1) instead of multiplying 2×1 servings."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 109,
+          "extracted_answer": "48",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 96 total servings /2 per night =48 nights."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 208,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Chains incorrect quantities and inconsistent units, ultimately concluding four nights."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 90,
+          "extracted_answer": "48",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct rate and division."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 17,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3869,
+      "recommendation": "APPROVE",
+      "rationale": "Sample 2 correctly compares ideal 56 hours against actual 37.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 109,
+          "extracted_answer": "21",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses only two nights for ideal sleep and reverses the deficit."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Applies 3-hour weeknight deficit to two nights rather than five; omits weekends."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 175,
+          "extracted_answer": "19",
+          "reasoning_verdict": "SOUND",
+          "reason": "Weeknights 25, weekend 12, ideal 56, deficit 19."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "66",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misreads nights and equates total sleeping hours with sleep deficit."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 66,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 3912,
+      "recommendation": "APPROVE",
+      "rationale": "$250×12×5=$15000 financed; adding $5000 down gives $20000.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "8000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts 12 payments instead of the 60 payments in five years."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "13640",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents interest despite explicitly interest-free loan and uses unrelated arithmetic."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "10000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts down payment from the already-financed payment total instead of adding it."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "20000",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct loan payments plus down payment."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 1,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 4324,
+      "recommendation": "APPROVE",
+      "rationale": "Combined $15 divided by five people gives $3/person; each cousin receives $1.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "2",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats total money and transfer amounts inconsistently; concludes $2/cousin."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 95,
+          "extracted_answer": "0.25",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Reverses payment direction and divides a one-dollar difference by four."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 66,
+          "extracted_answer": "-1",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts the cousins’ aggregate money from Carmela’s amount rather than equalizing all five."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "1",
+          "reasoning_verdict": "SOUND",
+          "reason": "Conserves $15 and equalizes each of five people at $3."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 5,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 4457,
+      "recommendation": "APPROVE",
+      "rationale": "Twenty pounds produce ten dozen (120) cookies; 105 remain.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 69,
+          "extracted_answer": "105",
+          "reasoning_verdict": "SOUND",
+          "reason": "4×5=20 lb; 20/2=10 dozen; 120−15=105."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 122,
+          "extracted_answer": "21",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides 20 pounds by six cookies per pound instead of multiplying and mishandles units."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 130,
+          "extracted_answer": "7",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Confuses cookies and dozens, and inconsistently subtracts 15 from eight."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 117,
+          "extracted_answer": "10",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Incorrect conversions between pounds, dozens, and cookies."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 48,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 4503,
+      "recommendation": "APPROVE",
+      "rationale": "Samples 0 and 3 have valid units; sample 1 misstates the number of egg whites per cake.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 69,
+          "extracted_answer": "32",
+          "reasoning_verdict": "SOUND",
+          "reason": "Two cakes need 16 egg whites, each replaced by two tablespoons, totaling 32."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 56,
+          "extracted_answer": "32",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Says 16 egg whites per cake, although 16 is the combined total for two cakes; final total happens to be correct."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 60,
+          "extracted_answer": "8",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides 16 by the replacement rate of two tablespoons per egg white instead of multiplying."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 70,
+          "extracted_answer": "32",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct total eggs and aquafaba conversion."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 9,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 5436,
+      "recommendation": "EXCLUDE",
+      "rationale": "Question says five products with waits BETWEEN products (four intervals), making 20+30=50 minutes. Reference 55 and three correct-labelled completions assume five waiting intervals; sample 2 marked incorrect is mathematically and linguistically justified. Reference/text conflict: do not make a pair.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "55",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assumes five waiting intervals; between five products there are four."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "55",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Again assumes five waits instead of four."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 74,
+          "extracted_answer": "50",
+          "reasoning_verdict": "SOURCE_CONFLICT_SOUND",
+          "reason": "Four intervals ×5 minutes +30 makeup =50, a sound reading of the literal source; nevertheless marked incorrect against reference 55."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 42,
+          "extracted_answer": "55",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assumes five gaps/waits, contradicting “between each product.”"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 6117,
+      "recommendation": "APPROVE",
+      "rationale": "Sample 2 correctly solves x+(2x−8)=40. Samples 1 and 3 have correct final answers but logically invalid intermediate equations.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 152,
+          "extracted_answer": "40",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Equates Cape May’s own count 2d−8 to the combined total, omitting Daytona from the total."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Writes an unjustified 2x−8+16=40, obtains x=12, and then incorrectly claims 2×12−8=24."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 132,
+          "extracted_answer": "24",
+          "reasoning_verdict": "SOUND",
+          "reason": "Sets x+(2x−8)=40, solves x=16 and Cape May=24."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 138,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Substitutes an invented Cape May relationship x+8 for the stated 2x−8; answer 24 is coincidental."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 20,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 6771,
+      "recommendation": "APPROVE",
+      "rationale": "Five office entries a day times two pull-ups times seven days is 70.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 78,
+          "extracted_answer": "350",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents five rooms and extra room/day factors; original specifies one office, five visits daily."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "70",
+          "reasoning_verdict": "SOUND",
+          "reason": "5×2=10 per day, 10×7=70 per week."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "70",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct daily and weekly multiplication."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 52,
+          "extracted_answer": "70",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct rate calculation."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 1,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    },
+    {
+      "source_index": 7207,
+      "recommendation": "APPROVE",
+      "rationale": "Current anniversary age is 100; 200th anniversary minus five years occurs in 95 years.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 113,
+          "extracted_answer": "190",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misuses the remaining 100 years and subtracts five years inconsistently."
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 48,
+          "extracted_answer": "95",
+          "reasoning_verdict": "SOUND",
+          "reason": "Compressed but valid reasoning: 100 years remain until the 200th anniversary; five years earlier is 95 years away."
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 101,
+          "extracted_answer": "1000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Introduces arbitrary calendar years and incorrect subtraction."
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "105",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Adds five years to the 200th anniversary rather than subtracting five."
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 29,
+        "selection_rule": "among verified SOUND chosen and FLAWED incorrect responses, minimize abs generated-token gap; break ties by chosen index, then rejected index"
+      }
+    }
+  ]
+}
