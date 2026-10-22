@@ -3,6 +3,7 @@
 import copy
 import json
 import unittest
+from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -135,12 +136,48 @@ class TestE003ProvisionalPairs(unittest.TestCase):
             def decode(self, ids, skip_special_tokens):
                 return response if ids == [15, 16, NATIVE_EOS] and skip_special_tokens else "wrong"
         def evaluator(**kwargs):
-            return SimpleNamespace(correct=True, extraction=SimpleNamespace(
-                answer=4, status="valid", unwanted_continuation=False))
+            # Catch the integration bug: JSON stores "4", but metric grading
+            # requires the original numeric reference-answer semantics.
+            self.assertIsInstance(kwargs["expected_answer"], Decimal)
+            self.assertEqual(kwargs["expected_answer"], Decimal("4"))
+            return SimpleNamespace(
+                correct=(kwargs["expected_answer"] == Decimal("4")),
+                extraction=SimpleNamespace(
+                    answer=4, status="valid", unwanted_continuation=False,
+                ),
+            )
         audit_candidate(record, "Question 250", "4", 256, 42, Tokenizer(), evaluator)
         record["generated_token_ids"] = [15, 17, NATIVE_EOS]
         with self.assertRaisesRegex(ValueError, "Token/text"):
             audit_candidate(record, "Question 250", "4", 256, 42, Tokenizer(), evaluator)
+
+    def test_numeric_reference_preserved_for_wrong_answer(self):
+        response = " Work. The answer is 5."
+        ids = [15, 16, NATIVE_EOS]
+        record = {
+            "source_index": 250, "sample_index": 2,
+            "prompt": "Question 250", "reference_answer": "4",
+            "sample_seed": 42 + 250 * 100 + 2,
+            "generated_token_ids": ids, "generated_tokens": 3,
+            "native_eos_stop": True, "reached_token_cap": False,
+            "response": response, "eligible": True,
+            "extraction_status": "valid", "unwanted_continuation": False,
+            "extracted_answer": "5", "correct": False,
+        }
+        class Tokenizer:
+            def __len__(self): return 160000
+            def decode(self, ids, skip_special_tokens):
+                return response if ids == [15, 16, NATIVE_EOS] and skip_special_tokens else "wrong"
+        def evaluator(**kwargs):
+            self.assertIsInstance(kwargs["expected_answer"], Decimal)
+            self.assertEqual(kwargs["expected_answer"], Decimal("4"))
+            return SimpleNamespace(
+                correct=(Decimal("5") == kwargs["expected_answer"]),
+                extraction=SimpleNamespace(
+                    answer=Decimal("5"), status="valid", unwanted_continuation=False,
+                ),
+            )
+        audit_candidate(record, "Question 250", "4", 256, 42, Tokenizer(), evaluator)
 
     def test_advisory_review_must_not_become_training_approval(self):
         pairs = select_pairs(self.review, synthetic_candidates(self.review))

@@ -11,6 +11,7 @@ import json
 import os
 import re
 from collections import Counter, defaultdict
+from decimal import Decimal
 from pathlib import Path
 
 NATIVE_EOS = 151643
@@ -112,7 +113,7 @@ def audit_candidate(record: dict, expected_prompt: str, expected_answer: str,
     require(tokenizer.decode(ids, skip_special_tokens=True) == record["response"], "Token/text mismatch")
     require(record["eligible"] is candidate_is_eligible(record), "Candidate eligibility mismatch")
     judged = evaluate_response(
-        response=record["response"], expected_answer=expected_answer,
+        response=record["response"], expected_answer=Decimal(expected_answer),
         generated_tokens=len(ids), reached_token_cap=record["reached_token_cap"]
     )
     require(record["correct"] is bool(judged.correct), "Incorrect correctness label")
