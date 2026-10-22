@@ -1115,3 +1115,55 @@ Implement and unit-test a dynamically padded SFT
 batch collator with correct label masking.
 
 ---
+
+## 2026-10-22 - SFT Batch Collator Verified
+
+### Completed
+
+Implemented dynamic right-padding for tokenized
+GSM8K supervised fine-tuning examples.
+
+The collator produces:
+- input_ids
+- attention_mask
+- labels
+
+All tensors use torch.int64.
+
+### Verified Real Batch
+
+Training source indices: 0, 1
+Original sequence lengths: 87, 81
+
+Batch size: 2
+Padded sequence length: 87
+
+Tensor shapes:
+- input_ids: [2, 87]
+- attention_mask: [2, 87]
+- labels: [2, 87]
+
+Padding:
+- First example: 0 tokens
+- Second example: 6 tokens
+
+### Correctness Properties
+
+Prompt labels are masked with -100.
+Padding labels are masked with -100.
+Padding attention-mask positions are zero.
+
+EOS is retained as a supervised target.
+
+No examples are truncated.
+
+Dynamic padding uses the longest example
+in each batch rather than padding every
+example to the 512-token training bound.
+
+### Next Step
+
+Verify the LoRA software environment and inspect
+Qwen3 model architecture before attaching adapters.
+
+---
