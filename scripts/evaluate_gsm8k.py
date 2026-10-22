@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
@@ -44,6 +45,12 @@ STOP_STRINGS = ["\nQuestion:", "\n[Question]"]
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=5)
+    parser.add_argument(
+        "--run-type",
+        choices=("engineering_smoke_test", "development_baseline"),
+        default="engineering_smoke_test",
+    )
+    parser.add_argument("--code-revision", default=None)
     parser.add_argument(
         "--source-index",
         type=int,
@@ -95,6 +102,18 @@ def main() -> None:
             raise ValueError(
                 f"Source index {args.source_index} "
                 "not found in validation split"
+            )
+
+    if args.run_type == "development_baseline":
+        if args.source_index is not None or args.limit != len(validation):
+            raise ValueError(
+                "Development baseline requires the full validation split"
+            )
+        if not args.code_revision or not re.fullmatch(
+            r"[0-9a-f]{40}", args.code_revision
+        ):
+            raise ValueError(
+                "Development baseline requires a 40-character Git SHA"
             )
 
     print("Validation examples selected:", len(examples))
@@ -216,7 +235,8 @@ def main() -> None:
     summary = summarize_evaluations(records)
 
     report = {
-        "run_type": "engineering_smoke_test",
+        "run_type": args.run_type,
+        "code_revision": args.code_revision,
         "model": MODEL_ID,
         "model_revision": MODEL_REVISION,
         "dataset_split": "development_validation",
