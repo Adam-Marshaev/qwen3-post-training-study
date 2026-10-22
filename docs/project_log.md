@@ -859,3 +859,83 @@ Investigate source index 166 with a longer generation
 budget while keeping other inference settings fixed.
 
 ---
+
+## 2026-10-21 - Targeted GSM8K Failure Analysis
+
+### Objective
+
+Investigate the missing answer for GSM8K development
+validation source index 166.
+
+### Implementation
+
+Added --source-index to the evaluation runner.
+
+This option selects one example from the frozen
+development validation split by its original source index.
+
+The selected source index is saved in run metadata.
+
+### Configuration
+
+Model: Qwen/Qwen3-0.6B-Base
+Prompt: gsm8k_qa_v1
+Decoding: greedy
+Precision: FP16
+Attention: eager
+KV cache: disabled
+Source index: 166
+
+### Observed Results
+
+192-token budget:
+- Generated tokens: 192
+- Reached token cap: True
+- Extraction status: missing
+
+384-token budget:
+- Generated tokens: 384
+- Reached token cap: True
+- Extraction status: missing
+- Correct: False
+
+Run directory:
+data/eval_runs/diagnostic_index166_cap384_v1/
+
+### Failure Analysis
+
+The 384-token response correctly calculated:
+- Tuesday viewing time: 270 minutes
+- Tuesday movies: 3
+- Wednesday movies: 6
+
+It then began calculating the combined total but
+reached the token limit before completing the answer.
+
+The correct reference answer is 9.
+
+The generated reasoning was unusually verbose,
+including Markdown headings and LaTeX expressions.
+
+### Interpretation
+
+The observed failure involves answer completion
+and generation length.
+
+Correct intermediate calculations do not establish
+that the model would have produced a correct final answer.
+
+The evaluator correctly counted the missing answer
+as incorrect.
+
+### Verification
+
+All 40 automated tests passed.
+Targeted GPU evaluation succeeded.
+
+### Next Step
+
+Test a 512-token generation budget on source index 166,
+then move toward freezing the baseline evaluation protocol.
+
+---
