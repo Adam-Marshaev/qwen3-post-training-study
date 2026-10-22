@@ -10,6 +10,7 @@ from time import perf_counter
 
 import torch
 import torch.backends.python_native as python_native
+from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from llm_post_training.data.loader import load_gsm8k_split
@@ -42,12 +43,165 @@ DEFAULT_MAX_NEW_TOKENS = 192
 STOP_STRINGS = ["\nQuestion:", "\n[Question]"]
 
 
+
+E002_CONFIG_SHA256 = (
+    "43c002773e83228d2ae86854927c6fe679ec6a0ac054cbeb251f0415604b7fe9"
+)
+E002_TRAINING_REVISION = (
+    "f293df899a9c073615d0bae9e5feee5e64bcf1bc"
+)
+
+
+def validate_adapter_evaluation_request(
+    *,
+    run_type,
+    adapter_dir,
+    expected_adapter_sha256,
+    source_index,
+    limit,
+    validation_size,
+    code_revision,
+    max_new_tokens,
+):
+    """Enforce the frozen full-validation comparison protocol."""
+
+    if (adapter_dir is None) != (expected_adapter_sha256 is None):
+        raise ValueError(
+            "Adapter path and expected SHA-256 must be provided together"
+        )
+
+    if expected_adapter_sha256 is not None:
+        if re.fullmatch(
+            r"[0-9a-f]{64}",
+            expected_adapter_sha256,
+        ) is None:
+            raise ValueError("Invalid adapter SHA-256")
+
+    if run_type == "development_baseline" and adapter_dir is not None:
+        raise ValueError(
+            "Pretrained baseline cannot load a LoRA adapter"
+        )
+
+    if run_type == "development_sft" and adapter_dir is None:
+        raise ValueError(
+            "E002 evaluation requires a LoRA adapter"
+        )
+
+    if run_type in ("development_baseline", "development_sft"):
+        if source_index is not None or limit != validation_size:
+            raise ValueError(
+                "Development evaluation requires the full validation split"
+            )
+
+        if max_new_tokens != 512:
+            raise ValueError(
+                "Development evaluation requires max_new_tokens=512"
+            )
+
+        if code_revision is None or re.fullmatch(
+            r"[0-9a-f]{40}",
+            code_revision,
+        ) is None:
+            raise ValueError(
+                "Development evaluation requires a 40-character Git SHA"
+            )
+
+
+def verify_adapter_checkpoint(
+    adapter_dir,
+    expected_sha256,
+    *,
+    require_completed_e002,
+):
+    """Verify the exact LoRA checkpoint before loading the model."""
+
+    adapter_dir = Path(adapter_dir)
+
+    weights_path = adapter_dir / "adapter_model.safetensors"
+    config_path = adapter_dir / "adapter_config.json"
+
+    if not weights_path.is_file() or not config_path.is_file():
+        raise ValueError("Incomplete LoRA adapter checkpoint")
+
+    digest = hashlib.sha256()
+
+    with weights_path.open("rb") as source:
+        for chunk in iter(
+            lambda: source.read(1024 * 1024),
+            b"",
+        ):
+            digest.update(chunk)
+
+    actual_sha256 = digest.hexdigest()
+
+    if actual_sha256 != expected_sha256:
+        raise ValueError("Adapter SHA-256 mismatch")
+
+    adapter_config = json.loads(
+        config_path.read_text(encoding="utf-8")
+    )
+
+    if adapter_config.get("base_model_name_or_path") != MODEL_ID:
+        raise ValueError("Unexpected adapter base model")
+
+    if (
+        adapter_config.get("r") != 8
+        or adapter_config.get("lora_alpha") != 16
+        or set(adapter_config.get("target_modules", []))
+        != {"q_proj", "k_proj", "v_proj", "o_proj"}
+    ):
+        raise ValueError("Unexpected E002 LoRA configuration")
+
+    provenance = {
+        "adapter_sha256": actual_sha256,
+        "adapter_dir": str(adapter_dir),
+    }
+
+    if require_completed_e002:
+        manifest_path = adapter_dir.parent / "manifest.json"
+
+        if not manifest_path.is_file():
+            raise ValueError("Completed E002 manifest is missing")
+
+        manifest = json.loads(
+            manifest_path.read_text(encoding="utf-8")
+        )
+
+        if (
+            manifest.get("completed_optimizer_steps") != 422
+            or manifest.get("next_epoch") != 2
+            or manifest.get("config_sha256") != E002_CONFIG_SHA256
+            or manifest.get("code_revision") != E002_TRAINING_REVISION
+            or manifest.get("model_revision") != MODEL_REVISION
+        ):
+            raise ValueError(
+                "Checkpoint is not the completed, pinned E002 run"
+            )
+
+        if manifest.get("checksums", {}).get(
+            "adapter/adapter_model.safetensors"
+        ) != actual_sha256:
+            raise ValueError(
+                "Adapter checksum differs from training manifest"
+            )
+
+        provenance["training_manifest"] = {
+            "completed_optimizer_steps": 422,
+            "config_sha256": E002_CONFIG_SHA256,
+            "code_revision": E002_TRAINING_REVISION,
+            "model_revision": MODEL_REVISION,
+        }
+
+    return provenance
+
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument(
         "--run-type",
-        choices=("engineering_smoke_test", "development_baseline"),
+        choices=("engineering_smoke_test", "development_baseline", "development_sft"),
         default="engineering_smoke_test",
     )
     parser.add_argument("--code-revision", default=None)
@@ -63,6 +217,8 @@ def main() -> None:
         default=DEFAULT_MAX_NEW_TOKENS,
     )
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--adapter-dir", type=Path)
+    parser.add_argument("--expected-adapter-sha256")
     args = parser.parse_args()
 
     if args.limit < 1:
@@ -104,6 +260,28 @@ def main() -> None:
                 "not found in validation split"
             )
 
+    validate_adapter_evaluation_request(
+        run_type=args.run_type,
+        adapter_dir=args.adapter_dir,
+        expected_adapter_sha256=args.expected_adapter_sha256,
+        source_index=args.source_index,
+        limit=args.limit,
+        validation_size=len(validation),
+        code_revision=args.code_revision,
+        max_new_tokens=args.max_new_tokens,
+    )
+
+    adapter_provenance = None
+
+    if args.adapter_dir is not None:
+        adapter_provenance = verify_adapter_checkpoint(
+            args.adapter_dir,
+            args.expected_adapter_sha256,
+            require_completed_e002=(
+                args.run_type == "development_sft"
+            ),
+        )
+
     if args.run_type == "development_baseline":
         if args.source_index is not None or args.limit != len(validation):
             raise ValueError(
@@ -139,6 +317,20 @@ def main() -> None:
         use_safetensors=True,
     ).to(DEVICE)
 
+    if args.adapter_dir is not None:
+        print("Loading verified LoRA adapter...")
+
+        model = PeftModel.from_pretrained(
+            model,
+            str(args.adapter_dir),
+            is_trainable=False,
+            autocast_adapter_dtype=True,
+        )
+
+        if len(model.peft_config) != 1:
+            raise ValueError("Expected exactly one active LoRA adapter")
+
+    model.config.use_cache = False
     model.eval()
     torch.cuda.reset_peak_memory_stats()
 
@@ -239,6 +431,11 @@ def main() -> None:
         "code_revision": args.code_revision,
         "model": MODEL_ID,
         "model_revision": MODEL_REVISION,
+        "model_variant": (
+            "sft_lora" if args.adapter_dir is not None
+            else "pretrained"
+        ),
+        "adapter_provenance": adapter_provenance,
         "dataset_split": "development_validation",
         "selected_source_indices": [
             example.source_index for example in examples
