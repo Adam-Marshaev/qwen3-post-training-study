@@ -1326,3 +1326,27 @@ Next: audit candidate and pair quality, freeze a versioned
 preference dataset, then implement and test DPO optimization.
 Keep the official GSM8K test partition untouched.
 
+
+<!-- e003_provisional_pairs18_verified_v1 -->
+
+### E003 — Provisional Pair Builder Verified
+
+The initial E003 preference-pair pipeline completed successfully.
+
+The builder's numeric reference-answer mismatch was corrected.
+The resulting implementation passed 149 regression tests.
+
+The final audit verified 18 provisional pairs against original
+candidate identities, correctness labels, and exact generated
+token IDs, including native EOS 151643.
+
+Builder Git revision:
+`6c911165cc8643c11550b7e71d389d35c14ea7e3`
+
+Pairs SHA256:
+`ecc3748b6c54f4ea66d8173bb4a81e7b3b412db59d69d1307a07da825778dca8`
+
+No independent reasoning signoff or DPO training has occurred.
+
+Next: implement separately versioned intermediate-scale
+candidate generation, preserving the original 32-question pilot.

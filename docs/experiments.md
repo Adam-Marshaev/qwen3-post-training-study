@@ -325,3 +325,33 @@ no model optimization.
 **Decision:** Proceed to candidate-quality auditing and deterministic
 preference-pair construction before scaling generation or starting DPO.
 
+
+<!-- e003_provisional_pairs18_verified_v1 -->
+
+### E003: Verified Provisional Preference-Pair Artifact
+
+**Status:** CPU-only construction and integrity audit complete.
+
+- Input: 128 frozen E002a-generated pilot candidates.
+- Mixed correct/incorrect groups: 21.
+- Provisionally selected preference pairs: 18.
+- Held groups: 1.
+- Excluded groups: 2.
+- Unique training questions represented: 18.
+- Median selected-pair length difference: 14.5 tokens.
+- Maximum selected-pair length difference: 64 tokens.
+- Native completion EOS: 151643.
+- Candidate token sequences preserved exactly.
+- Builder revision: `6c911165cc8643c11550b7e71d389d35c14ea7e3`.
+- Regression suite: 149 passing tests.
+- Artifact: `data/preference_runs/e003_pilot_pairs18_v1/`.
+- Pairs SHA256: `ecc3748b6c54f4ea66d8173bb4a81e7b3b412db59d69d1307a07da825778dca8`.
+- Independent human signoff: not obtained.
+- Training authorization: not granted.
+- DPO optimization: not started.
+
+The original candidate generation, screening decisions, and pair
+construction are separately versioned and auditable.
+
+These 18 pairs validate the data pipeline. They are not a
+full-scale DPO training dataset.
