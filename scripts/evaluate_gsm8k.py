@@ -42,6 +42,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument(
+        "--source-index",
+        type=int,
+        default=None,
+        help="Evaluate one example by its original GSM8K index",
+    )
+    parser.add_argument(
         "--max-new-tokens",
         type=int,
         default=DEFAULT_MAX_NEW_TOKENS,
@@ -73,7 +79,20 @@ def main() -> None:
         "validation",
     )
 
-    examples = validation[:args.limit]
+    if args.source_index is None:
+        examples = validation[:args.limit]
+    else:
+        examples = [
+            example
+            for example in validation
+            if example.source_index == args.source_index
+        ]
+
+        if len(examples) != 1:
+            raise ValueError(
+                f"Source index {args.source_index} "
+                "not found in validation split"
+            )
 
     print("Validation examples selected:", len(examples))
     print("Prompt version:", BASELINE_PROMPT_VERSION)
@@ -197,6 +216,9 @@ def main() -> None:
         "model": MODEL_ID,
         "model_revision": MODEL_REVISION,
         "dataset_split": "development_validation",
+        "selected_source_indices": [
+            example.source_index for example in examples
+        ],
         "manifest_sha256": MANIFEST_SHA256,
         "prompt_version": BASELINE_PROMPT_VERSION,
         "precision": "float16",
