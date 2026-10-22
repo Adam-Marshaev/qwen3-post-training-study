@@ -175,3 +175,153 @@ The official GSM8K test split remains untouched.
 The generation and grading configuration must remain identical
 for subsequent model comparisons unless a change is explicitly
 versioned and applied consistently across all variants.
+
+<!-- sft_eos_ablation_and_e003_pilot_2026_10_22 -->
+
+## E002/E002a: SFT EOS-Supervision Ablation
+
+**Status:** Complete and audited, 2026-10-22.
+
+### Experimental design
+
+Both experiments fine-tuned the same pinned Qwen3-0.6B-Base
+checkpoint on the frozen 6,726-example GSM8K training partition.
+
+The sole intended difference in the training objective was
+the supervised completion-termination token:
+
+| Property | E002 | E002a |
+|---|---|---|
+| Supervised EOS | 151645 (`<|im_end|>`) | 151643 (`<|endoftext|>`) |
+| Base model | Same | Same |
+| Training examples | 6,726 | 6,726 |
+| Epochs | 2 | 2 |
+| Optimizer steps | 422 | 422 |
+| Supervised tokens | 1,264,128 | 1,264,128 |
+| LoRA and optimizer settings | Original | Identical |
+
+The full dataset audit verified that corresponding tokenized
+examples differed only in their final EOS token. Actual EOS labels
+were supervised even when native EOS and PAD shared ID 151643;
+padding labels remained -100.
+
+### Validation results
+
+GSM8K validation partition: 747 questions.
+
+| Model | Correct | Accuracy | Protocol |
+|---|---:|---:|---|
+| E001 pretrained | 420/747 | 56.22% | Historical uncached |
+| E002 original SFT | 318/747 | 42.57% | Historical uncached |
+| E001 pretrained | 419/747 | 56.09% | Cached v1 |
+| E002a native-EOS SFT | 433/747 | 57.97% | Cached v1 |
+
+Cached v1 uses eager attention, FP16 base weights, greedy decoding,
+a 512-token generation limit, native EOS 151643, KV caching,
+the frozen gsm8k_qa_v1 prompt, and explicit_numeric_v2 extraction.
+
+Historical E002 and cached E002a accuracy results are not
+a perfectly protocol-matched full-validation comparison.
+
+### Protocol-matched E001 versus E002a
+
+- E001 correct: 419/747.
+- E002a correct: 433/747.
+- Observed improvement: +14/747 (+1.874 percentage points).
+- Both correct: 324.
+- E001 only correct: 95.
+- E002a only correct: 109.
+- Both incorrect: 219.
+- Discordant pairs: 204.
+- Exact two-sided McNemar p-value: 0.362761.
+- Paired bootstrap 95% CI: [-2.01, +5.62] percentage points.
+
+The observed accuracy increase is not statistically significant.
+These findings do not establish equivalence between the models.
+
+### Termination behavior
+
+| Metric | E001 cached | E002a cached |
+|---|---:|---:|
+| Native-EOS stops | 65/747 | 734/747 |
+| Token-cap responses | 13/747 | 13/747 |
+| Mean generated tokens | 108.77 | 97.71 |
+| Answer extraction rate | 94.2% | 98.3% |
+
+Historical E002 generated an average of 448.8 tokens and reached
+the 512-token cap on 579/747 validation responses.
+
+At matched epoch-1 checkpoints, E002 strongly suppressed native EOS
+on eight tested training completions, whereas E002a ranked native
+EOS first on all eight with mean probability 0.999813.
+
+On a separate 12-question held-out generation diagnostic,
+E002a epoch 1 stopped with native EOS in all 12 responses.
+
+**Interpretation:** The controlled evidence strongly supports
+native-EOS supervision as a major correction for E002's termination
+regression. It does not prove that EOS selection was the only cause
+of every accuracy or generation difference.
+
+### Provenance
+
+- Base model revision:
+  `57ca99e94acb83175495aa2c6b6b0cc498170924`
+- E002a training revision:
+  `31b73e9ac15572b44ee479ce047048d6404bb72f`
+- E002a training config SHA256:
+  `11c9977d2edc288129a2fafdf6331e473fab79beee88d6fc32cb0e4b7cedae52`
+- E002a final adapter SHA256:
+  `f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`
+- Cached evaluator revision:
+  `d734c6c5da15f29ab01e455b8cb70a91522f4aed`
+- Inference protocol:
+  `gsm8k_val512_greedy_eager_cached_v1`
+- E002a final adapter:
+  `data/train_runs/e002a_sft_lora_native_eos_v1/epoch_0002/adapter/`
+- Cached E001 results:
+  `data/eval_runs/e001_pretrained_cached_val747_v1/`
+- Cached E002a results:
+  `data/eval_runs/e002a_epoch2_cached_val747_v1/`
+
+The official GSM8K test set was not used.
+
+### E003: Preference-Generation Pilot
+
+**Status:** Pilot complete; DPO training not started.
+
+The frozen E002a epoch-2 adapter generated four sampled candidates
+for each of 32 selected GSM8K training questions.
+
+| Metric | Result |
+|---|---:|
+| Questions | 32 |
+| Candidates | 128 |
+| Eligible candidates | 127 |
+| Correct eligible candidates | 53 |
+| Native-EOS stops | 127 |
+| Token-cap responses | 1 |
+| Mixed groups allowing potential pairs | 21 |
+| Groups with no correct eligible candidate | 8 |
+| Groups with all four candidates correct | 3 |
+| Mean generated tokens | 95.2578 |
+| Mean generation seconds | 1.8191 |
+
+The observed potential-pair yield was 21/32 (65.625%).
+This is a small pilot estimate, not a guaranteed full-dataset yield.
+
+Pilot code revision:
+`dd3a80247c92e57d5d01d8e8531778e861b5b2ad`
+
+Pilot configuration SHA256:
+`e57f800f08dc58c8b4c8d4f97ce641762950c0955e1375739e652f3079b24d1c`
+
+Pilot artifacts:
+`data/preference_runs/e003_pilot32_k4_v1/`
+
+The pilot used the GSM8K training partition only and performed
+no model optimization.
+
+**Decision:** Proceed to candidate-quality auditing and deterministic
+preference-pair construction before scaling generation or starting DPO.
+

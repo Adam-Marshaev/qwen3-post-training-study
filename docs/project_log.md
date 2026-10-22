@@ -1280,3 +1280,49 @@ Verify microbatch memory requirements using
 longer examples before the full training run.
 
 ---
+
+<!-- sft_eos_ablation_and_e003_pilot_2026_10_22 -->
+
+## 2026-10-22 — Corrected SFT and E003 Preference Pilot
+
+Completed and audited E002a, a controlled SFT ablation replacing
+the tokenizer EOS target 151645 with the base model's native EOS
+target 151643.
+
+E002a completed 422 optimizer steps with verified epoch-boundary
+resume state and a frozen final adapter.
+
+The corrected model restored reliable termination: 734/747
+native-EOS stops under the cached validation protocol.
+
+Protocol-matched GSM8K validation:
+- E001 pretrained: 419/747 (56.09%).
+- E002a native-EOS SFT: 433/747 (57.97%).
+- Difference: +1.874 percentage points.
+- Exact McNemar p = 0.362761.
+- Paired bootstrap 95% CI = [-2.01, +5.62] percentage points.
+
+Accuracy improvement was observed but was not statistically
+significant. The termination correction was substantially clearer.
+
+Decision: Freeze E002a epoch 2 as the common starting checkpoint
+for E003 DPO and E004 GRPO. Preserve E002 as a negative result.
+Use KV caching for new autoregressive inference and rollouts,
+but not teacher-forced gradient-bearing training.
+
+E003 pilot implementation committed at:
+dd3a80247c92e57d5d01d8e8531778e861b5b2ad
+
+The preference-generation pilot completed 128 generations over
+32 training questions. Of 128 candidates, 127 were eligible;
+21/32 questions contained both eligible correct and incorrect
+responses and could potentially produce DPO preference pairs.
+
+Pilot findings support continuing with four candidates per
+question as an initial design, subject to quality auditing.
+No DPO training has started.
+
+Next: audit candidate and pair quality, freeze a versioned
+preference dataset, then implement and test DPO optimization.
+Keep the official GSM8K test partition untouched.
+
