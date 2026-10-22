@@ -1,0 +1,65 @@
+{
+  "config_version": "sft_lora_native_eos_v1",
+  "dataset": {
+    "expected_examples": 6726,
+    "manifest_path": "configs/data/gsm8k_split_v1.json",
+    "max_sequence_length": 512,
+    "prompt_version": "gsm8k_qa_v1",
+    "source_path": "data/raw/gsm8k/train.jsonl",
+    "split": "training",
+    "target_eos_token_id": 151643,
+    "truncation": false
+  },
+  "evaluation": {
+    "answer_extraction_version": "explicit_numeric_v2",
+    "decoding": "greedy",
+    "expected_examples": 747,
+    "max_new_tokens": 512,
+    "prompt_version": "gsm8k_qa_v1",
+    "protocol_version": "gsm8k_val512_greedy_eager_cached_v1",
+    "split": "validation",
+    "use_cache": true
+  },
+  "experiment_id": "E002a",
+  "experiment_type": "supervised_fine_tuning",
+  "lora": {
+    "alpha": 16,
+    "bias": "none",
+    "dropout": 0.05,
+    "rank": 8,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "model": {
+    "adapter_dtype": "float32",
+    "attention_implementation": "eager",
+    "base_dtype": "float16",
+    "model_id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "57ca99e94acb83175495aa2c6b6b0cc498170924",
+    "use_cache": false
+  },
+  "seed": 42,
+  "training": {
+    "accumulation_normalization": "supervised_tokens",
+    "adam_beta1": 0.9,
+    "adam_beta2": 0.999,
+    "adam_epsilon": 1e-08,
+    "expected_optimizer_steps_per_epoch": 211,
+    "expected_total_optimizer_steps": 422,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0001,
+    "log_every_optimizer_steps": 10,
+    "max_grad_norm": 1.0,
+    "microbatch_size": 4,
+    "num_epochs": 2,
+    "optimizer": "adamw",
+    "save_checkpoint_each_epoch": true,
+    "scheduler": "cosine",
+    "warmup_steps": 13,
+    "weight_decay": 0.0
+  }
+}

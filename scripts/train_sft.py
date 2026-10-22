@@ -53,6 +53,11 @@ def write_json_new(path: Path, value: dict) -> None:
         os.fsync(output.fileno())
 
 
+def get_supervised_eos_token_id(config: dict) -> int:
+    """Return the explicitly selected SFT termination target."""
+    return config["dataset"].get("target_eos_token_id", 151645)
+
+
 def validate_config(config: dict) -> None:
     """Refuse protocol changes until a new config version is reviewed."""
     model = config["model"]
@@ -61,9 +66,49 @@ def validate_config(config: dict) -> None:
     train = config["training"]
     evaluation = config["evaluation"]
 
+    is_native_eos = (
+        config["config_version"] == "sft_lora_native_eos_v1"
+    )
+
+    if is_native_eos:
+        if (
+            type(data.get("target_eos_token_id")) is not int
+            or data["target_eos_token_id"] != 151643
+        ):
+            raise ValueError(
+                "E002a must supervise native EOS token 151643"
+            )
+
+        if evaluation.get("protocol_version") != (
+            "gsm8k_val512_greedy_eager_cached_v1"
+        ):
+            raise ValueError(
+                "E002a must declare the cached evaluation protocol"
+            )
+    else:
+        if "target_eos_token_id" in data:
+            raise ValueError(
+                "E002 must not override its original EOS target"
+            )
+
+        if "protocol_version" in evaluation:
+            raise ValueError(
+                "E002 must preserve its original evaluation protocol"
+            )
+
     expected = [
-        (config["config_version"] == "sft_lora_v1", "config version"),
-        (config["experiment_id"] == "E002", "experiment ID"),
+        (
+            config["config_version"] in (
+                "sft_lora_v1",
+                "sft_lora_native_eos_v1",
+            ),
+            "config version",
+        ),
+        (
+            config["experiment_id"]
+            == ("E002a" if is_native_eos else "E002"),
+            "experiment ID",
+        ),
         (config["experiment_type"] == "supervised_fine_tuning", "experiment type"),
         (config["seed"] == 42, "seed"),
         (model["model_id"] == MODEL_ID, "model ID"),
@@ -105,11 +150,17 @@ def validate_config(config: dict) -> None:
         (evaluation["answer_extraction_version"] == "explicit_numeric_v2", "answer extraction"),
         (evaluation["max_new_tokens"] == 512, "generation budget"),
         (evaluation["decoding"] == "greedy", "decoding"),
-        (evaluation["use_cache"] is False, "evaluation KV cache"),
+        (
+            evaluation["use_cache"] is is_native_eos,
+            "evaluation KV cache",
+        ),
     ]
     for valid, field in expected:
         if not valid:
-            raise ValueError(f"Unexpected E002 configuration: {field}")
+            raise ValueError(
+                f"Unexpected {config['experiment_id']} "
+                f"configuration: {field}"
+            )
 
     if len({data["source_path"], data["manifest_path"]}) != 2:
         raise ValueError("Source and manifest paths must differ")
@@ -192,6 +243,7 @@ def main():
 
     config = json.loads(args.config.read_text(encoding="utf-8"))
     validate_config(config)
+    supervised_eos_id = get_supervised_eos_token_id(config)
     config_sha = sha256_file(args.config)
     data_config = config["dataset"]
     train_config = config["training"]
@@ -224,6 +276,9 @@ def main():
         "planned_optimizer_steps": EXPECTED_TOTAL_STEPS if checkpoint_mode else args.smoke_optimizer_steps,
         "resume_policy": "epoch_boundary_only" if checkpoint_mode else "not_resumable",
     }
+
+    if config["experiment_id"] == "E002a":
+        metadata["supervised_eos_token_id"] = supervised_eos_id
 
     output_dir = args.output_dir
     log_path = output_dir / "training_log.jsonl"
@@ -261,7 +316,10 @@ def main():
             raise ValueError("Checkpoint step count does not match epoch")
         reconcile_logs_for_resume(log_path, completed_steps)
 
-    print("=== E002 SFT TRAINING ===", flush=True)
+    print(
+        f"=== {config['experiment_id']} SFT TRAINING ===",
+        flush=True,
+    )
     print("Mode:", args.run_type, flush=True)
     print("Config SHA-256:", config_sha, flush=True)
     print("Code revision:", args.code_revision, flush=True)
@@ -278,12 +336,31 @@ def main():
         Path(data_config["manifest_path"]),
     )
     assert len(examples) == 6726
-    tokenized = [tokenize_sft_example(example, tokenizer) for example in examples]
+    tokenized = [
+        tokenize_sft_example(
+            example,
+            tokenizer,
+            target_eos_token_id=supervised_eos_id,
+        )
+        for example in examples
+    ]
+
     assert max(x.sequence_length for x in tokenized) <= 512
+
+    assert all(
+        record.input_ids[-1] == supervised_eos_id
+        and record.labels[-1] == supervised_eos_id
+        and record.attention_mask[-1] == 1
+        for record in tokenized
+    ), "Dataset contains an invalid supervised EOS target"
+
     collator = SFTBatchCollator(
         pad_token_id=tokenizer.pad_token_id,
-        eos_token_id=tokenizer.eos_token_id,
+        eos_token_id=supervised_eos_id,
         max_seq_length=512,
+        allow_pad_eos_collision=(
+            supervised_eos_id == tokenizer.pad_token_id
+        ),
     )
 
     base = AutoModelForCausalLM.from_pretrained(
@@ -294,6 +371,11 @@ def main():
         attn_implementation="eager",
     )
     base.config.use_cache = False
+
+    if config["experiment_id"] == "E002a":
+        assert base.config.eos_token_id == supervised_eos_id, (
+            "E002a target must match the base model's native EOS"
+        )
 
     if args.resume_from is None:
         lora = config["lora"]
@@ -501,12 +583,19 @@ def main():
         if completed_steps != EXPECTED_TOTAL_STEPS:
             raise RuntimeError("Formal training did not reach 422 optimizer steps")
         write_json_new(output_dir / "summary.json", summary)
-        print("E002 SFT training: COMPLETED (evaluation still required)", flush=True)
+        print(
+            f"{config['experiment_id']} SFT training: "
+            "COMPLETED (evaluation still required)",
+            flush=True,
+        )
     else:
         model.save_pretrained(output_dir / "smoke_adapter", safe_serialization=True)
         write_json_new(output_dir / "summary.json", summary)
         print("Bounded SFT training smoke test: PASSED", flush=True)
-        print("Full E002 training started: NO", flush=True)
+        print(
+            f"Full {config['experiment_id']} training started: NO",
+            flush=True,
+        )
     print("Steps completed:", completed_steps, flush=True)
     print("Training log:", log_path, flush=True)
     print("Summary:", output_dir / "summary.json", flush=True)
