@@ -21,6 +21,7 @@ class SFTBatchCollator:
     pad_token_id: int
     eos_token_id: int
     max_seq_length: int = DEFAULT_MAX_SEQUENCE_LENGTH
+    allow_pad_eos_collision: bool = False
 
     def __post_init__(self) -> None:
         if self.pad_token_id < 0:
@@ -29,9 +30,13 @@ class SFTBatchCollator:
         if self.eos_token_id < 0:
             raise ValueError("EOS token ID must be nonnegative")
 
-        if self.pad_token_id == self.eos_token_id:
+        if (
+            self.pad_token_id == self.eos_token_id
+            and not self.allow_pad_eos_collision
+        ):
             raise ValueError(
-                "PAD and EOS token IDs must be distinct"
+                "PAD and EOS token IDs must be distinct "
+                "unless explicitly allowed"
             )
 
         if self.max_seq_length < 1:

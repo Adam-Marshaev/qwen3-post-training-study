@@ -46,6 +46,8 @@ class SFTTokenizedExample:
 def tokenize_sft_example(
     example: SFTTrainingExample,
     tokenizer: SFTTokenizer,
+    *,
+    target_eos_token_id: int | None = None,
 ) -> SFTTokenizedExample:
     """Construct completion-only labels, including an EOS target.
 
@@ -56,10 +58,16 @@ def tokenize_sft_example(
     batch padding will be handled in separate components.
     """
 
-    eos_id = tokenizer.eos_token_id
+    eos_id = (
+        tokenizer.eos_token_id
+        if target_eos_token_id is None
+        else target_eos_token_id
+    )
 
-    if eos_id is None:
-        raise ValueError("Tokenizer must define an EOS token")
+    if not isinstance(eos_id, int) or eos_id < 0:
+        raise ValueError(
+            "SFT target EOS token ID must be a nonnegative integer"
+        )
 
     prompt_ids = tokenizer.encode(
         example.prompt,
