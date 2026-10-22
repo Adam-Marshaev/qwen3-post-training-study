@@ -158,11 +158,25 @@ def parse_args():
     parser.add_argument("--docker-image-id", required=True)
     parser.add_argument("--smoke-optimizer-steps", type=int)
     parser.add_argument("--resume-from", type=Path)
+    parser.add_argument("--stop-after-epoch", type=int)
     return parser.parse_args()
+
+
+def validate_pause_request(run_type, stop_after_epoch, resume_from):
+    """Allow a deliberate stop only after formal epoch one."""
+    if stop_after_epoch is None:
+        return
+    if run_type != "formal_training":
+        raise ValueError("Epoch pause is for formal training only")
+    if stop_after_epoch != 1:
+        raise ValueError("Only --stop-after-epoch 1 is supported")
+    if resume_from is not None:
+        raise ValueError("Cannot request a pause while resuming")
 
 
 def main():
     args = parse_args()
+    validate_pause_request(args.run_type, args.stop_after_epoch, args.resume_from)
     if re.fullmatch(r"[0-9a-f]{40}", args.code_revision) is None:
         raise ValueError("--code-revision must be a 40-character Git SHA")
     if re.fullmatch(r"sha256:[0-9a-f]{64}", args.docker_image_id) is None:
@@ -466,6 +480,11 @@ def main():
                 "checkpoint": str(checkpoint_dir),
             })
             print(f"Saved verified epoch checkpoint: {checkpoint_dir}", flush=True)
+            if args.stop_after_epoch == epoch + 1:
+                torch.cuda.synchronize()
+                print("Formal run intentionally paused after verified epoch 1.", flush=True)
+                print("No completion summary has been written.", flush=True)
+                return
 
     torch.cuda.synchronize()
     summary = {
