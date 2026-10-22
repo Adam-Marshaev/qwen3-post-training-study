@@ -727,3 +727,65 @@ Investigate longer problems before freezing the full
 baseline evaluation configuration.
 
 ---
+
+## 2026-10-21 - Token-Cap Diagnostics Verified
+
+### Completed
+
+Extended the GSM8K evaluation framework to detect when
+generation reaches its configured maximum token budget.
+
+Added:
+- Per-example reached_token_cap field
+- Aggregate token-cap count
+- Aggregate token-cap rate
+- Regression test for correct answers reaching the cap
+
+### Verification
+
+Automated tests: 40 passed.
+
+Test question:
+GSM8K validation source index 6.
+
+16-token configuration:
+- Generated tokens: 16
+- Reached token cap: True
+- Extraction status: missing
+- Correct: False
+
+192-token configuration:
+- Generated tokens: 63
+- Reached token cap: False
+- Extracted answer: 48
+- Correct: True
+
+Both GPU smoke tests passed.
+
+Per-example diagnostics agreed with aggregate metrics.
+
+### Engineering Decision
+
+Reaching the generation cap is recorded separately
+from mathematical correctness.
+
+The field indicates possible truncation, not proof
+that generation was interrupted mid-answer.
+
+Primary accuracy continues to include all examples
+in its denominator.
+
+### Limitations
+
+These were single-question engineering tests,
+not benchmark accuracy measurements.
+
+No representative GSM8K accuracy estimate exists yet.
+
+### Next Step
+
+Run a 20-question diagnostic evaluation to investigate
+generation lengths, answer extraction, continuation
+behavior, and token-cap frequency.
+
+---
