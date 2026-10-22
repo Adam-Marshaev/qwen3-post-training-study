@@ -34,18 +34,26 @@ SOURCE = Path("data/raw/gsm8k/train.jsonl")
 MANIFEST = Path("configs/data/gsm8k_split_v1.json")
 
 DEVICE = "cuda:0"
-MAX_NEW_TOKENS = 96
+DEFAULT_MAX_NEW_TOKENS = 192
 STOP_STRINGS = ["\nQuestion:", "\n[Question]"]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=5)
+    parser.add_argument(
+        "--max-new-tokens",
+        type=int,
+        default=DEFAULT_MAX_NEW_TOKENS,
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
     if args.limit < 1:
         raise ValueError("--limit must be positive")
+
+    if args.max_new_tokens < 1:
+        raise ValueError("--max-new-tokens must be positive")
 
     if args.output_dir.exists():
         raise FileExistsError(
@@ -116,7 +124,7 @@ def main() -> None:
             with torch.inference_mode():
                 generated_ids = model.generate(
                     **inputs,
-                    max_new_tokens=MAX_NEW_TOKENS,
+                    max_new_tokens=args.max_new_tokens,
                     do_sample=False,
                     use_cache=False,
                     stop_strings=STOP_STRINGS,
@@ -188,7 +196,7 @@ def main() -> None:
         "attention_implementation": "eager",
         "decoding": "greedy",
         "kv_cache": False,
-        "max_new_tokens": MAX_NEW_TOKENS,
+        "max_new_tokens": args.max_new_tokens,
         "stop_strings": STOP_STRINGS,
         "metrics": asdict(summary),
         "peak_allocated_vram_mib": (
