@@ -400,3 +400,92 @@ Audit duplicate questions and create a deterministic,
 leakage-aware training/validation split.
 
 ---
+
+## 2026-10-21 - GSM8K Development Split
+
+### Completed
+
+Audited all 7473 official GSM8K training examples for
+duplicate questions.
+
+Implemented a deterministic, duplicate-aware development
+training/validation split.
+
+Created and validated:
+
+configs/data/gsm8k_split_v1.json
+
+### Duplicate Audit
+
+Exact duplicate question groups: 0
+Normalized duplicate question groups: 0
+Conflicting answers among duplicate groups: 0
+
+Normalization:
+- Unicode-aware case folding
+- Whitespace normalization
+
+The audit does not establish the absence of semantic
+duplicates or pretraining contamination.
+
+### Source Dataset
+
+Dataset: openai/grade-school-math
+
+Source commit:
+3101c7d5072418e28b9008a6636bde82a006892c
+
+Training data SHA-256:
+17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465
+
+### Split Configuration
+
+Split version: 1
+Random seed: 42
+Validation fraction: 0.10
+
+Assignment method:
+SHA-256 ranking grouped by normalized question.
+
+Development training examples: 6726
+Development validation examples: 747
+Total examples: 7473
+
+Overlapping indices: 0
+Missing indices: 0
+
+Manifest SHA-256:
+31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719
+
+### Verification
+
+All 26 unit tests passed.
+
+Manifest integrity verification passed:
+- Correct split sizes
+- No overlapping indices
+- Complete coverage
+- Correct source checksum
+
+### Engineering Decisions
+
+The v1 split manifest is frozen for future experiments.
+
+SFT, DPO, and GRPO training must use the same
+development-training partition.
+
+Validation examples must not be used as training prompts,
+preference-training examples, or GRPO training prompts.
+
+The official GSM8K test split remains untouched.
+
+Any future split changes require a new versioned manifest.
+
+### Next Step
+
+Implement manifest-aware dataset loading.
+
+Then build the pretrained baseline evaluation runner
+using the frozen development-validation split.
+
+---
