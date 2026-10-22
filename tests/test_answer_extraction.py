@@ -75,5 +75,18 @@ class TestAnswerExtraction(unittest.TestCase):
         self.assertTrue(result.unwanted_continuation)
 
 
+    def test_bracketed_question_continuation(self):
+        response = (
+            "The answer is 48.\n"
+            "[Question]A group of friends buys tickets."
+        )
+
+        result = extract_final_answer(response)
+
+        self.assertEqual(result.answer, Decimal("48"))
+        self.assertEqual(result.status, "valid")
+        self.assertTrue(result.unwanted_continuation)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -40,7 +40,7 @@ FINAL_ANSWER_PATTERN = re.compile(
 
 # Detect the start of a newly generated question.
 NEXT_QUESTION_PATTERN = re.compile(
-    r"^[ \t]*Question[ \t]*:",
+    r"^[ \t]*(?:Question[ \t]*:|\[Question\])",
     flags=re.IGNORECASE | re.MULTILINE,
 )
 
