@@ -50,6 +50,27 @@ E002_CONFIG_SHA256 = (
 E002_TRAINING_REVISION = (
     "f293df899a9c073615d0bae9e5feee5e64bcf1bc"
 )
+E002A_CONFIG_SHA256 = (
+    "11c9977d2edc288129a2fafdf6331e473fab79beee88d6fc32cb0e4b7cedae52"
+)
+E002A_TRAINING_REVISION = (
+    "31b73e9ac15572b44ee479ce047048d6404bb72f"
+)
+NATIVE_EOS_TOKEN_ID = 151643
+INFERENCE_PROTOCOL_VERSION = "gsm8k_val512_greedy_eager_cached_v1"
+
+
+def cached_generation_kwargs(max_new_tokens, tokenizer):
+    """Frozen greedy decoding settings for new inference runs."""
+    return {
+        "max_new_tokens": max_new_tokens,
+        "do_sample": False,
+        "use_cache": True,
+        "eos_token_id": NATIVE_EOS_TOKEN_ID,
+        "pad_token_id": NATIVE_EOS_TOKEN_ID,
+        "stop_strings": STOP_STRINGS,
+        "tokenizer": tokenizer,
+    }
 
 
 def validate_adapter_evaluation_request(
@@ -62,6 +83,7 @@ def validate_adapter_evaluation_request(
     validation_size,
     code_revision,
     max_new_tokens,
+    native_eos_epoch=None,
 ):
     """Enforce the frozen full-validation comparison protocol."""
 
@@ -77,6 +99,18 @@ def validate_adapter_evaluation_request(
         ) is None:
             raise ValueError("Invalid adapter SHA-256")
 
+    if native_eos_epoch is not None:
+        if native_eos_epoch not in (1, 2):
+            raise ValueError("Native-EOS epoch must be 1 or 2")
+        if run_type not in ("engineering_smoke_test", "development_native_eos"):
+            raise ValueError("Native-EOS epoch requires native-EOS evaluation")
+        if adapter_dir is None:
+            raise ValueError("Native-EOS epoch requires an adapter")
+
+    if run_type == "development_native_eos":
+        if adapter_dir is None or native_eos_epoch not in (1, 2):
+            raise ValueError("Native-EOS development evaluation requires a pinned epoch")
+
     if run_type == "development_baseline" and adapter_dir is not None:
         raise ValueError(
             "Pretrained baseline cannot load a LoRA adapter"
@@ -87,7 +121,9 @@ def validate_adapter_evaluation_request(
             "E002 evaluation requires a LoRA adapter"
         )
 
-    if run_type in ("development_baseline", "development_sft"):
+    if run_type in (
+        "development_baseline", "development_sft", "development_native_eos"
+    ):
         if source_index is not None or limit != validation_size:
             raise ValueError(
                 "Development evaluation requires the full validation split"
@@ -112,6 +148,7 @@ def verify_adapter_checkpoint(
     expected_sha256,
     *,
     require_completed_e002,
+    native_eos_epoch=None,
 ):
     """Verify the exact LoRA checkpoint before loading the model."""
 
@@ -192,6 +229,55 @@ def verify_adapter_checkpoint(
             "model_revision": MODEL_REVISION,
         }
 
+    if native_eos_epoch is not None:
+        if require_completed_e002:
+            raise ValueError("Cannot verify E002 and E002a simultaneously")
+        if native_eos_epoch not in (1, 2):
+            raise ValueError("Unexpected native-EOS epoch")
+        if adapter_dir.name != "adapter" or (
+            adapter_dir.parent.name != f"epoch_{native_eos_epoch:04d}"
+        ):
+            raise ValueError("Native-EOS adapter must be inside its epoch directory")
+
+        manifest_path = adapter_dir.parent / "manifest.json"
+        metadata_path = adapter_dir.parent.parent / "run_metadata.json"
+        if not manifest_path.is_file() or not metadata_path.is_file():
+            raise ValueError("Native-EOS checkpoint provenance is incomplete")
+
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        completed_steps = 211 * native_eos_epoch
+
+        if (
+            manifest.get("completed_optimizer_steps") != completed_steps
+            or manifest.get("next_epoch") != native_eos_epoch
+            or manifest.get("config_sha256") != E002A_CONFIG_SHA256
+            or manifest.get("code_revision") != E002A_TRAINING_REVISION
+            or manifest.get("model_revision") != MODEL_REVISION
+            or manifest.get("checksums", {}).get(
+                "adapter/adapter_model.safetensors"
+            ) != actual_sha256
+        ):
+            raise ValueError("Native-EOS epoch checkpoint manifest mismatch")
+
+        if (
+            metadata.get("run_type") != "formal_training"
+            or metadata.get("experiment_id") != "E002a"
+            or metadata.get("supervised_eos_token_id") != NATIVE_EOS_TOKEN_ID
+            or metadata.get("config_sha256") != E002A_CONFIG_SHA256
+            or metadata.get("code_revision") != E002A_TRAINING_REVISION
+            or metadata.get("model_revision") != MODEL_REVISION
+        ):
+            raise ValueError("Native-EOS run metadata mismatch")
+
+        provenance["training_manifest"] = {
+            "completed_optimizer_steps": completed_steps,
+            "config_sha256": E002A_CONFIG_SHA256,
+            "code_revision": E002A_TRAINING_REVISION,
+            "model_revision": MODEL_REVISION,
+            "supervised_eos_token_id": NATIVE_EOS_TOKEN_ID,
+        }
+
     return provenance
 
 
@@ -201,7 +287,10 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=5)
     parser.add_argument(
         "--run-type",
-        choices=("engineering_smoke_test", "development_baseline", "development_sft"),
+        choices=(
+            "engineering_smoke_test", "development_baseline",
+            "development_sft", "development_native_eos",
+        ),
         default="engineering_smoke_test",
     )
     parser.add_argument("--code-revision", default=None)
@@ -219,6 +308,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--adapter-dir", type=Path)
     parser.add_argument("--expected-adapter-sha256")
+    parser.add_argument("--native-eos-epoch", type=int, choices=(1, 2))
     args = parser.parse_args()
 
     if args.limit < 1:
@@ -269,6 +359,7 @@ def main() -> None:
         validation_size=len(validation),
         code_revision=args.code_revision,
         max_new_tokens=args.max_new_tokens,
+        native_eos_epoch=args.native_eos_epoch,
     )
 
     adapter_provenance = None
@@ -280,6 +371,7 @@ def main() -> None:
             require_completed_e002=(
                 args.run_type == "development_sft"
             ),
+            native_eos_epoch=args.native_eos_epoch,
         )
 
     if args.run_type == "development_baseline":
@@ -307,6 +399,9 @@ def main() -> None:
         revision=MODEL_REVISION,
     )
 
+    if tokenizer.eos_token_id != 151645 or tokenizer.pad_token_id != 151643:
+        raise ValueError("Unexpected pinned Qwen3 tokenizer EOS/PAD IDs")
+
     print("Loading model...")
 
     model = AutoModelForCausalLM.from_pretrained(
@@ -316,6 +411,9 @@ def main() -> None:
         attn_implementation="eager",
         use_safetensors=True,
     ).to(DEVICE)
+
+    if model.config.eos_token_id != NATIVE_EOS_TOKEN_ID:
+        raise ValueError("Unexpected pinned base-model native EOS")
 
     if args.adapter_dir is not None:
         print("Loading verified LoRA adapter...")
@@ -330,7 +428,7 @@ def main() -> None:
         if len(model.peft_config) != 1:
             raise ValueError("Expected exactly one active LoRA adapter")
 
-    model.config.use_cache = False
+    model.config.use_cache = True
     model.eval()
     torch.cuda.reset_peak_memory_stats()
 
@@ -357,12 +455,7 @@ def main() -> None:
             with torch.inference_mode():
                 generated_ids = model.generate(
                     **inputs,
-                    max_new_tokens=args.max_new_tokens,
-                    do_sample=False,
-                    use_cache=False,
-                    stop_strings=STOP_STRINGS,
-                    tokenizer=tokenizer,
-                    pad_token_id=tokenizer.eos_token_id,
+                    **cached_generation_kwargs(args.max_new_tokens, tokenizer),
                 )
 
             torch.cuda.synchronize()
@@ -408,6 +501,10 @@ def main() -> None:
                 "input_tokens": input_tokens,
                 "generated_tokens": len(new_token_ids),
                 "reached_token_cap": reached_token_cap,
+                "native_eos_stop": bool(
+                    len(new_token_ids) > 0
+                    and int(new_token_ids[-1]) == NATIVE_EOS_TOKEN_ID
+                ),
                 "generation_seconds": elapsed_seconds,
             }
 
@@ -432,7 +529,8 @@ def main() -> None:
         "model": MODEL_ID,
         "model_revision": MODEL_REVISION,
         "model_variant": (
-            "sft_lora" if args.adapter_dir is not None
+            "sft_lora_native_eos" if args.native_eos_epoch is not None
+            else "sft_lora" if args.adapter_dir is not None
             else "pretrained"
         ),
         "adapter_provenance": adapter_provenance,
@@ -446,7 +544,10 @@ def main() -> None:
         "precision": "float16",
         "attention_implementation": "eager",
         "decoding": "greedy",
-        "kv_cache": False,
+        "kv_cache": True,
+        "eos_token_id": NATIVE_EOS_TOKEN_ID,
+        "pad_token_id": NATIVE_EOS_TOKEN_ID,
+        "inference_protocol_version": INFERENCE_PROTOCOL_VERSION,
         "max_new_tokens": args.max_new_tokens,
         "stop_strings": STOP_STRINGS,
         "metrics": asdict(summary),
@@ -461,7 +562,7 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    print("\n=== SMOKE TEST SUMMARY ===")
+    print("\n=== EVALUATION SUMMARY ===")
     print("Problems evaluated:", summary.total)
     print("Correct answers:", summary.correct)
     print(f"Accuracy: {summary.accuracy:.1%}")
@@ -473,7 +574,7 @@ def main() -> None:
     )
     print("Predictions:", predictions_path)
     print("Summary:", summary_path)
-    print("\nEvaluation smoke test: PASSED")
+    print("\nEvaluation run: COMPLETED")
 
 
 if __name__ == "__main__":
