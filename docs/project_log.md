@@ -984,3 +984,65 @@ Begin the supervised fine-tuning data pipeline using only
 the 6726-example GSM8K development-training partition.
 
 ---
+
+## 2026-10-22 - SFT Training Data Verified
+
+### Completed
+
+Implemented GSM8K SFT text formatting and a
+manifest-restricted training-data loader.
+
+The formatter:
+- Uses the frozen gsm8k_qa_v1 prompt format
+- Preserves reference mathematical reasoning
+- Removes GSM8K calculator annotations
+- Converts #### reference answers into explicit
+  "The answer is ..." declarations
+
+The SFT data loader retrieves reference solutions
+only for source indices approved by the frozen
+GSM8K development-training split.
+
+### Verification
+
+Automated tests: 60 passed.
+
+Full training-data audit:
+- Training examples: 6726
+- Unique training indices: 6726
+- Validation examples: 747
+- Training/validation overlap: 0
+- Invalid formatted targets: 0
+
+All formatted final answers matched the approved
+numerical references.
+
+### Observations
+
+First approved training source index: 0
+
+Question: Natalia sells clips in April and May.
+Reference answer: 72
+
+Formatted completion ends with:
+The answer is 72.
+
+### Engineering Decisions
+
+Preserve the exact E001 prompt interface for SFT.
+
+Separate prompt text from completion text to allow
+completion-only loss masking during training.
+
+Do not allow validation examples into the SFT
+training-data interface.
+
+### Next Step
+
+Inspect the pinned Qwen3 tokenizer's behavior at the
+prompt/completion boundary.
+
+Then implement tokenization, EOS targets, and
+completion-only causal-language-model loss masking.
+
+---
