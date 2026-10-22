@@ -137,6 +137,10 @@ def main() -> None:
 
             new_token_ids = generated_ids[0, input_tokens:]
 
+            reached_token_cap = (
+                len(new_token_ids) == args.max_new_tokens
+            )
+
             response = tokenizer.decode(
                 new_token_ids,
                 skip_special_tokens=True,
@@ -146,6 +150,7 @@ def main() -> None:
                 response=response,
                 expected_answer=example.reference_answer,
                 generated_tokens=len(new_token_ids),
+                reached_token_cap=reached_token_cap,
             )
 
             records.append(record)
@@ -168,6 +173,7 @@ def main() -> None:
                 ),
                 "input_tokens": input_tokens,
                 "generated_tokens": len(new_token_ids),
+                "reached_token_cap": reached_token_cap,
                 "generation_seconds": elapsed_seconds,
             }
 
@@ -179,7 +185,8 @@ def main() -> None:
                 f"index={example.source_index} "
                 f"correct={record.correct} "
                 f"status={record.extraction.status} "
-                f"tokens={len(new_token_ids)}",
+                f"tokens={len(new_token_ids)} "
+                f"cap={reached_token_cap}",
                 flush=True,
             )
 
@@ -216,6 +223,10 @@ def main() -> None:
     print(f"Accuracy: {summary.accuracy:.1%}")
     print(f"Extraction rate: {summary.extraction_rate:.1%}")
     print(f"Mean generated tokens: {summary.mean_generated_tokens:.1f}")
+    print(
+        "Responses reaching token cap:",
+        summary.reached_token_cap_count,
+    )
     print("Predictions:", predictions_path)
     print("Summary:", summary_path)
     print("\nEvaluation smoke test: PASSED")

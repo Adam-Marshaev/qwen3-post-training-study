@@ -87,5 +87,42 @@ class TestEvaluationMetrics(unittest.TestCase):
         self.assertTrue(record.correct)
 
 
+    def test_token_cap_aggregation(self):
+        records = [
+            evaluate_response(
+                "Final answer: 48",
+                Decimal("48"),
+                generated_tokens=10,
+                reached_token_cap=True,
+            ),
+            evaluate_response(
+                "Incomplete calculation.",
+                Decimal("300"),
+                generated_tokens=10,
+                reached_token_cap=True,
+            ),
+            evaluate_response(
+                "Final answer: 99",
+                Decimal("100"),
+                generated_tokens=6,
+                reached_token_cap=False,
+            ),
+        ]
+
+        summary = summarize_evaluations(records)
+
+        self.assertEqual(summary.total, 3)
+        self.assertEqual(summary.correct, 1)
+        self.assertEqual(summary.reached_token_cap_count, 2)
+        self.assertAlmostEqual(
+            summary.reached_token_cap_rate,
+            2 / 3,
+        )
+
+        # Reaching the cap does not automatically mean incorrect.
+        self.assertTrue(records[0].correct)
+        self.assertTrue(records[0].reached_token_cap)
+
+
 if __name__ == "__main__":
     unittest.main()

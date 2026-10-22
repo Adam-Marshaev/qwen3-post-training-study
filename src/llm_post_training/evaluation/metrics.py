@@ -17,6 +17,7 @@ class EvaluationRecord:
     expected_answer: Decimal
     extraction: AnswerExtraction
     generated_tokens: int
+    reached_token_cap: bool = False
 
     def __post_init__(self) -> None:
         if self.generated_tokens < 0:
@@ -41,12 +42,14 @@ class EvaluationSummary:
     missing_answers: int
     ambiguous_answers: int
     unwanted_continuations: int
+    reached_token_cap_count: int
 
     accuracy: float
     extraction_rate: float
     missing_rate: float
     ambiguous_rate: float
     unwanted_continuation_rate: float
+    reached_token_cap_rate: float
     mean_generated_tokens: float
 
 
@@ -54,6 +57,7 @@ def evaluate_response(
     response: str,
     expected_answer: Decimal,
     generated_tokens: int,
+    reached_token_cap: bool = False,
 ) -> EvaluationRecord:
     """Evaluate one generated mathematical response."""
 
@@ -63,6 +67,7 @@ def evaluate_response(
         expected_answer=expected_answer,
         extraction=extraction,
         generated_tokens=generated_tokens,
+        reached_token_cap=reached_token_cap,
     )
 
 
@@ -98,6 +103,11 @@ def summarize_evaluations(
         for record in records
     )
 
+    token_cap_count = sum(
+        record.reached_token_cap
+        for record in records
+    )
+
     total_generated_tokens = sum(
         record.generated_tokens
         for record in records
@@ -110,10 +120,12 @@ def summarize_evaluations(
         missing_answers=missing,
         ambiguous_answers=ambiguous,
         unwanted_continuations=continuations,
+        reached_token_cap_count=token_cap_count,
         accuracy=correct / total,
         extraction_rate=valid / total,
         missing_rate=missing / total,
         ambiguous_rate=ambiguous / total,
         unwanted_continuation_rate=continuations / total,
+        reached_token_cap_rate=token_cap_count / total,
         mean_generated_tokens=total_generated_tokens / total,
     )
