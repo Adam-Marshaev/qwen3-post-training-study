@@ -12,6 +12,9 @@ import torch.backends.python_native as python_native
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from llm_post_training.data.loader import load_gsm8k_split
+from llm_post_training.evaluation.answer_extraction import (
+    ANSWER_EXTRACTION_VERSION,
+)
 from llm_post_training.evaluation.metrics import (
     evaluate_response,
     summarize_evaluations,
@@ -176,6 +179,7 @@ def main() -> None:
 
             result = {
                 "source_index": example.source_index,
+                "answer_extraction_version": ANSWER_EXTRACTION_VERSION,
                 "question": example.question,
                 "prompt": prompt,
                 "reference_answer": str(example.reference_answer),
@@ -221,6 +225,7 @@ def main() -> None:
         ],
         "manifest_sha256": MANIFEST_SHA256,
         "prompt_version": BASELINE_PROMPT_VERSION,
+        "answer_extraction_version": ANSWER_EXTRACTION_VERSION,
         "precision": "float16",
         "attention_implementation": "eager",
         "decoding": "greedy",

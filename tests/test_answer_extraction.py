@@ -154,5 +154,16 @@ class TestAnswerExtraction(unittest.TestCase):
         self.assertIsNone(result.answer)
 
 
+    def test_extraction_policy_version(self):
+        from llm_post_training.evaluation.answer_extraction import (
+            ANSWER_EXTRACTION_VERSION,
+        )
+
+        self.assertEqual(
+            ANSWER_EXTRACTION_VERSION,
+            "explicit_numeric_v2",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

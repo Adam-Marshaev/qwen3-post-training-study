@@ -7,6 +7,8 @@ from decimal import Decimal
 from typing import Literal
 
 
+ANSWER_EXTRACTION_VERSION = "explicit_numeric_v2"
+
 ExtractionStatus = Literal["valid", "missing", "ambiguous"]
 
 
