@@ -1,0 +1,42 @@
+{
+  "approved_reference_answer": "50",
+  "authorized_actions": {
+    "preserve_original_candidate_labels": true,
+    "preserve_original_generated_tokens": true,
+    "training_only_reference_override": true,
+    "versioned_derivative_regrading": true
+  },
+  "decision": "APPROVED",
+  "decision_authority": "project_owner",
+  "decision_basis": "Explicit project-owner approval of the proposed source 5436 training-only reference correction.",
+  "decision_date": "2026-10-22",
+  "original_reference_answer": "55",
+  "prohibited_actions": {
+    "modify_frozen_split": true,
+    "modify_original_candidates": true,
+    "modify_original_gsm8k": true,
+    "modify_validation_references": true,
+    "use_official_test_set": true
+  },
+  "provenance": {
+    "adjudication_path": "configs/preference/e003_scale256_independent_adjudication3_v1.json",
+    "adjudication_sha256": "23886515468df3c4d00f079d744b8eb62224d7d0f97820a665e06feb4adeb3e2",
+    "approval_parent_revision": "78ef9440573f1714f78bb9c9d59d042dbb4526eb",
+    "candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+    "proposal_path": "configs/preference/e003_training_reference_erratum_proposal_v1.json",
+    "proposal_sha256": "c547546d5008ec7b8320edf9171263adbbf5fed66e92ed6b1aff0a4dfa194d2c"
+  },
+  "rationale": "Five facial products create four waiting intervals. Four intervals of five minutes plus 30 minutes of makeup give 50 minutes.",
+  "schema": "e003_training_reference_erratum_approval_v1",
+  "scope": "E003_training_derived_preference_labels_only",
+  "source_index": 5436,
+  "status": {
+    "derivative_regrading_performed": false,
+    "dpo_training_approved": false,
+    "full_training_dataset_approved": false,
+    "reference_correction_approved": true,
+    "reference_correction_implemented": false,
+    "source_5436_pair_approved": false,
+    "training_performed": false
+  }
+}
