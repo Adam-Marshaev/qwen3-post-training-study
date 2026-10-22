@@ -663,3 +663,67 @@ Investigate the effect of increasing the generation budget
 to 192 tokens while keeping other settings fixed.
 
 ---
+
+## 2026-10-21 - GSM8K Generation Budget Investigation
+
+### Objective
+
+Investigate whether the 96-token generation limit caused
+an incomplete solution in the initial GSM8K smoke test.
+
+### Configuration
+
+Model: Qwen/Qwen3-0.6B-Base
+Prompt version: gsm8k_qa_v1
+Decoding: greedy
+KV cache: disabled
+Precision: FP16
+
+Same five validation examples and stopping strings.
+
+Only the maximum generation budget changed.
+
+### Results
+
+96-token budget:
+- Correct answers: 4/5
+- Accuracy: 80%
+- Mean generated tokens: 69.8
+- Unwanted continuation rate: 80%
+
+192-token budget:
+- Correct answers: 5/5
+- Accuracy: 100%
+- Mean generated tokens: 85.2
+- Unwanted continuation rate: 100%
+
+Source index 44:
+- 96-token result: incomplete, missing final answer
+- 192-token result: correct numerical answer, 300
+- Generated tokens: 96 -> 173
+
+The other four examples produced unchanged token counts
+and remained correct.
+
+### Conclusion
+
+The failure on source index 44 was sensitive to the
+generation budget.
+
+The 96-token limit truncated its solution before a final
+answer was produced.
+
+This does not establish that 192 tokens is sufficient
+for the entire GSM8K validation set.
+
+Five-example accuracy is not a benchmark estimate.
+
+### Next Step
+
+Make generation settings configurable and record them
+in run metadata.
+
+Investigate longer problems before freezing the full
+baseline evaluation configuration.
+
+---
