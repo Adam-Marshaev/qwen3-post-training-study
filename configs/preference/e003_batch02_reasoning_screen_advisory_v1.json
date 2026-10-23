@@ -1,0 +1,1276 @@
+{
+  "schema": "e003_remaining_review122_batch02_reasoning_screen_advisory_v1",
+  "review_basis": "Assistant mathematical and semantic review of all 80 original candidate response texts in uploaded Batch 02",
+  "original_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "batch_number": 2,
+  "batch_source_selection_schema": "e003_remaining_review122_v1_batch_selection",
+  "batch_selection_manifest_sha256": "5dd9ded0613103844c318428eb53ebc04eaab4dc26418ba1b943fafd6c18503a",
+  "batch_review_report_sha256": "b238ae97a6c1e6a0c657f9961606bc9ad7866e963c767fab5630f5506e84a54e",
+  "source_index_order": [
+    3419,
+    3530,
+    3631,
+    3674,
+    3785,
+    3948,
+    3992,
+    4067,
+    4151,
+    4156,
+    4168,
+    4200,
+    4275,
+    4317,
+    4320,
+    4446,
+    4456,
+    4499,
+    4500,
+    4674
+  ],
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "independent_human_signoff": false,
+  "human_signoff_required_before_training": true,
+  "training_approved": false,
+  "training_performed": false,
+  "official_test_used": false,
+  "input_labels_unmodified": true,
+  "original_candidates_modified": false,
+  "review_policy": "Strict mathematical/semantic validity; no automatic approval for answer-only match; ambiguous or contradictory derivations HOLD; no pair constructed for groups without SOUND answer-correct completions; no reference edits.",
+  "summary": {
+    "group_count": 20,
+    "candidate_count": 80,
+    "provisional_approve_groups": 17,
+    "hold_groups": 3,
+    "exclude_groups": 0,
+    "candidate_reasoning_verdict_counts": {
+      "BORDERLINE": 3,
+      "FLAWED": 48,
+      "SOUND": 29
+    },
+    "answer_matches_reference_reasoning_counts": {
+      "BORDERLINE": 3,
+      "FLAWED": 1,
+      "SOUND": 29
+    },
+    "answer_differs_from_reference_reasoning_counts": {
+      "FLAWED": 47
+    },
+    "proposed_pairs_count": 17,
+    "median_proposed_pair_abs_token_gap": 8,
+    "max_proposed_pair_abs_token_gap": 53,
+    "mathematical_reference_question_flags": [
+      3631,
+      4151,
+      4456
+    ],
+    "answer_extraction_text_mismatch_flags": [
+      {
+        "source_index": 4456,
+        "sample_index": 2,
+        "extracted_answer": "6",
+        "written_final_answer": "6 2/7"
+      }
+    ],
+    "length_bias_review_flags": [
+      {
+        "source_index": 3419,
+        "absolute_token_length_gap": 53
+      },
+      {
+        "source_index": 4200,
+        "absolute_token_length_gap": 41
+      }
+    ],
+    "ineligible_truncated_samples": [],
+    "answer_correct_but_reasoning_not_sound": [
+      {
+        "source_index": 3631,
+        "sample_index": 3,
+        "verdict": "FLAWED"
+      },
+      {
+        "source_index": 4151,
+        "sample_index": 2,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 4275,
+        "sample_index": 0,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 4456,
+        "sample_index": 1,
+        "verdict": "BORDERLINE"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "source_index": 3419,
+      "original_reference_answer": "5",
+      "question": "Luis needed to buy some socks. He bought 4 pairs of red socks and 6 pairs of blue ones. In total, he spent $42. If the red socks cost $3 each, how much did he pay for each blue pair?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Reference $5: red pairs cost $12; remaining $30 divided by six blue pairs. All three correct-labelled responses have valid arithmetic.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "4×$3=$12; ($42−$12)/6=$5.",
+          "report_extracted_response_sha256": "5a2f90855568c53deba1bff92b965abf3d077064f1cfda9d8f58a3bf201f0aea"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 112,
+          "extracted_answer": "2",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents blue-pair price from $12−$3, confuses expenditures and gets $2 without a coherent constraint.",
+          "report_extracted_response_sha256": "3ead1c0812668d2f5837aa1d7844cd2eedb933d6b5ef3c353c07f28b6d3d41ac"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly subtracts red costs and divides $30 by six blue pairs.",
+          "report_extracted_response_sha256": "d0021ba3f0bd77be5bd8f4cf6a63328d140ba129954119efcb21ffeb4b3a1157"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 59,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 12,30,5 calculation with matching units.",
+          "report_extracted_response_sha256": "627b37bbd40e7d1bee99343f6606916a89a764d070d8a3bfc799c2285c67c802"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 53,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3530,
+      "original_reference_answer": "75",
+      "question": "Walter works 5 days a week in a fast-food chain and earns $5 per hour. Since he is a working student, he can only work 4 hours a day and allocates 3/4 of his weekly earning for his schooling. How much does he allocate for school?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Weekly pay 5 days ×4 hours ×$5=$100; 3/4 is $75.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 75,
+          "extracted_answer": "75",
+          "reasoning_verdict": "SOUND",
+          "reason": "$20 per day, $100 per week, three-quarters=$75.",
+          "report_extracted_response_sha256": "e2cbc51cedd832718716367833cd2e8238da7a382f6aaf8a79c6248afa8a30c4"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 41,
+          "extracted_answer": "15",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats one day’s $20 pay as the entire weekly paycheck; ignores five days.",
+          "report_extracted_response_sha256": "91a3cb35ce6ef22943cfc0f53828a15250b8005eb68c120601ff59d22c412bc9"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "75",
+          "reasoning_verdict": "SOUND",
+          "reason": "20 hours/week ×$5/hour=$100; schooling=$75.",
+          "report_extracted_response_sha256": "0871365cc08c2044a332a4e838236dd70a7728574fff2ea9c09d5dffa2dc3358"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "75",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct total weekly hours and 3/4 allocation.",
+          "report_extracted_response_sha256": "2bb989615224bdefa392f310ac7f9c508b29333e1b07dad27f0a2bb098d7dc08"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 34,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3631,
+      "original_reference_answer": "6",
+      "question": "Codger is a three-footed sloth.  He has a challenging time buying shoes because the stores only sell the shoes in pairs. If he already owns the 3-piece set of shoes he is wearing, how many pairs of shoes does he need to buy to have 5 complete 3-piece sets of shoes?",
+      "recommendation": "HOLD",
+      "rationale": "The only answer-matching candidate (sample 3) incorrectly says the already-owned three shoes equal nine, then conflates number of shoes with number of pairs. The correct derivation is (5×3−3)/2=6 pairs; no SOUND chosen exists.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 94,
+          "extracted_answer": "16",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Falsely calls one three-shoe set four shoe pairs, then extrapolates to 16 pairs.",
+          "report_extracted_response_sha256": "241718eb0955a61a4260b9bd365bf36d773d8c7794c5f06ac2b54f887828cb18"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 61,
+          "extracted_answer": "9",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly needs 15 shoes but subtracts six already owned instead of three and treats nine shoes as nine pairs.",
+          "report_extracted_response_sha256": "da7ebf9beae3afd83d754ebfa5a8f88672cead9c6f7c3f9f13ed185261d4ac81"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 64,
+          "extracted_answer": "12",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Finds 12 additional shoes but calls that 12 pairs instead of six pairs.",
+          "report_extracted_response_sha256": "81c054087bcb4a49808711a3a17484f4f3de51c95f3ff8349382de98bb7fbbf9"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 57,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Coincidentally answers six, but 3×3=9 shoes already owned contradicts three; 15−9=6 is shoes, not pairs.",
+          "report_extracted_response_sha256": "3b9ed7fc76e598541ba27a90ea0fff26eb44c0e1f2255a1e3c45544bb3d43578"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 3674,
+      "original_reference_answer": "62",
+      "question": "At a UFO convention, there are 120 conference attendees. If there are 4 more male attendees than female attendees, how many male attendees are there?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Let female F; male F+4; 2F+4=120 gives F=58, male=62.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "64",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Solves equal genders then adds four instead of incorporating the difference into 120.",
+          "report_extracted_response_sha256": "6cd7fc0b7a05a655573cd3081fac33dc5f6a42c3450a621d25753ad98c1171d7"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 115,
+          "extracted_answer": "62",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct equations F+M=120 and M=F+4 give M=62.",
+          "report_extracted_response_sha256": "d33e95e292a55e970dcf62ab505be538844fca139df607a865e51c1c09301b8d"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 72,
+          "extracted_answer": "116",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats 4+F=120 and wrongly assigns 116 males, discarding female attendees.",
+          "report_extracted_response_sha256": "5f8e9ffaac6408b97e86ebf0a1a5b1f5441b8d6808e718fff9a95e572dae43ba"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 107,
+          "extracted_answer": "64",
+          "reasoning_verdict": "FLAWED",
+          "reason": "First assumes equal male/female counts then adds four without adjusting total.",
+          "report_extracted_response_sha256": "fd6525ab1e3533b741c6c00d5813a2edac4d3ce54b321c8ab476a5918b2c93a9"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 8,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3785,
+      "original_reference_answer": "95",
+      "question": "Kat gets a 95% on her first math test and an 80% on her second math test. If she wants an average grade of at least 90% in her math class, what does she need to get on her third final math test?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "For three equally weighted tests, target total 270 percentage points; first two sum to 175, leaving minimum 95%.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 62,
+          "extracted_answer": "95",
+          "reasoning_verdict": "SOUND",
+          "reason": "3×90−(95+80)=95, correctly answers minimum third-test score.",
+          "report_extracted_response_sha256": "33e8b13f4266a652db1e7edf73dd23c5737df0247cf7c41690d8671c869645e2"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "90",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Miscomputes first-two-test average and simply assigns the target mean 90 to the final test.",
+          "report_extracted_response_sha256": "6f09b568b3b22309772778027d1d07961b60149a6fcfb52370b1cc7c69967f9b"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 116,
+          "extracted_answer": "125",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents a 50-point scale and has multiple incorrect calculations.",
+          "report_extracted_response_sha256": "d143a0f577eff3d803cee04436ff67b7f7d7bb768d522890bcf4d451acf5d7fe"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "270",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes required total 270 but incorrectly identifies 270 as the third test result.",
+          "report_extracted_response_sha256": "6a0fb3a43eb728eb6d636e84f8f8be41a21c57445de559f3a3daea029548eedf"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 14,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3948,
+      "original_reference_answer": "250",
+      "question": "John started weightlifting when he was 16.  When he first started he could Clean & Jerk 80 kg and he could Snatch 50 kg.  He manages to double his clean and jerk and increase his snatch by 80%.  What is his new combined total lifting capacity?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Clean and jerk 80×2=160 kg; snatch 50×1.8=90 kg; total 250 kg.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 73,
+          "extracted_answer": "250",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct doubling and 80% increase yield 160+90=250.",
+          "report_extracted_response_sha256": "a8dabffff4cee4f8a101e7b81cc972f9099f18778b081f21cfcf773fecb6fa6e"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 88,
+          "extracted_answer": "250",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly multiplies snatch by 1.8 and combines with doubled lift.",
+          "report_extracted_response_sha256": "fc2de0d91b75ef9bd35991447be7002917b21835196d58640f8d213d657efd30"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "290",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Claims 50+0.8×50=130 (actual 90); misreports combined capacity.",
+          "report_extracted_response_sha256": "e37cb5a412e97af9379159f62e09b1f756be865ad0f5f214e33bdfb13e975a4b"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "250",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct 160+90=250 calculation.",
+          "report_extracted_response_sha256": "a27d53535e61d45cc62635836d4021519fe74e670d2aaebbe5d33a933a611032"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 0,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3992,
+      "original_reference_answer": "480",
+      "question": "Hooper Bay has twice as many pounds of lobster than the two other harbors combined. If the other two harbors have 80 pounds of lobster each, how many pounds of lobster are the three harbors holding?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "The two smaller harbors hold 160 lb; Hooper holds twice their combined amount (320); three harbors total 480.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 103,
+          "extracted_answer": "640",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misstates Hooper inventory and double-counts subtotal, obtaining 640.",
+          "report_extracted_response_sha256": "5ba819f6295f572d634efd3bc877d4ac7ff58359fd742354633149567a4727b7"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 92,
+          "extracted_answer": "480",
+          "reasoning_verdict": "SOUND",
+          "reason": "80+80=160, double it for Hooper=320, then add for total 480.",
+          "report_extracted_response_sha256": "fa21a6cb3a5f8e4a00281a041668e7340e278981745f67d36364071ae70348ae"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 50,
+          "extracted_answer": "320",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assigns only 160 lb to Hooper and gives 320 total.",
+          "report_extracted_response_sha256": "7d83bdc31baa1ef4a4571aadf2e04deac058184c5bd621f153752226b9c88505"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "320",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Calculates twice the smaller-harbors subtotal but omits their 160 lb from the full total.",
+          "report_extracted_response_sha256": "2cf153265db75a23b685a6ef311057e08574d20ea5b30e50d8e8e1f0601d6af9"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 11,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4067,
+      "original_reference_answer": "110",
+      "question": "A group of 5 children are taken to an amusement park. Only 3 of them were daring enough to get on the Ferris wheel which cost $5 per child. Everyone had a go at the merry-go-round (at $3 per child). On their way home, they bought 2 cones of ice cream each (each cone cost $8). How much did they spend altogether?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Ferris wheel 3×$5=$15; merry-go-round 5×$3=$15; ice cream 5×2×$8=$80; total $110.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 103,
+          "extracted_answer": "120",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Interchanges number of children and price, then assigns ice-cream charges without using $8 per cone.",
+          "report_extracted_response_sha256": "4e727a1dda132428afde18595abdfd4bd65aaaf7b219f7568384fad8474faf87"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "110",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct contributions $15+$15+$80=$110.",
+          "report_extracted_response_sha256": "0f9eb5fed6b0ddb32c9d5d3d4f55d80d8618980358ba4fde6bcf4425809be284"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "34",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 2×2 for ice-cream cost, ignoring five children and $8 per cone.",
+          "report_extracted_response_sha256": "0a0315040eaf64ee509e823efcdd4835a33fcb6d9dd2c1012996dedd86fc2c78"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "60",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Prices ice cream as twice $15, not five children × two cones ×$8.",
+          "report_extracted_response_sha256": "3fdcafeff770d93834cc10e8fb09a7c4dac41320d2092cf352818eed1ff8fe1b"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 8,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4151,
+      "original_reference_answer": "160",
+      "question": "Jenny collects cans and bottles to take down to the recycling center. Each bottle weighs 6 ounces and each can weighs 2 ounces. Jenny can carry a total of 100 ounces. She collects 20 cans and as many bottles as she can carry. If she gets paid 10 cents per bottle and 3 cents per can, how much money does she make (in cents)?",
+      "recommendation": "HOLD",
+      "rationale": "The only answer-matching sample describes the 20 items as “cans and bottles together” but values all 20 at the can weight. The intended computation uses 20 cans, 40 ounces, 10 bottles, and 160 cents; preserve as BORDERLINE for an independent semantic review.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 131,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mixes ounces, dollars, and cents; invents 30 cans from the available bottle mass.",
+          "report_extracted_response_sha256": "1e2b15b0a733a6d65ed59f776c24b1f596c509bc9233e1044cecdc82e1ef612f"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "780",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats ounce counts as item counts and multiplies them by redemption amounts.",
+          "report_extracted_response_sha256": "b9d304baef177963e74fb702e8d10ba0c72d7d2edd532bc41a71bcec618d878c"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 116,
+          "extracted_answer": "160",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Numerically computes 20×2=40 ounces, 60/6=10 bottles, 100+60=160 cents; incorrectly calls 20 a combined count of “cans and bottles” instead of 20 cans.",
+          "report_extracted_response_sha256": "c6ee32f88f4d5a17d600d5ea2b2751b7113f003811441fd75de0aa8c0efb4073"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 162,
+          "extracted_answer": "135",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats a can+bottle as an eight-ounce unit, mislabels twenty cans, and allows fractional bottles.",
+          "report_extracted_response_sha256": "c0c04243c563871635c74e5e6eda9fe81d770162cbb1cc1b16ecf3fec890bffd"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 4156,
+      "original_reference_answer": "18",
+      "question": "Wendy's truck has a gas tank that can hold 20 gallons. She also has a car with a gas tank that holds 12 gallons. The truck's tank is half full. The car's tank is 1/3 full. If she fills them both up completely, how many gallons does she add?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Needed top-ups are 20−10=10 truck gallons plus 12−4=8 car gallons, totaling 18.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts combined initial gasoline from truck capacity alone, ignoring separate tank volumes.",
+          "report_extracted_response_sha256": "cb1807ad3b650c34cdb75adca7090329cd20fcbadafec6dca87c20d816f644b2"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 47,
+          "extracted_answer": "14",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Answers with gas already present (10+4), rather than gas needed to fill tanks.",
+          "report_extracted_response_sha256": "3108f7cdc39e21882a37fc87290a645a3e3832c1da39cb94bea58177f48bbadc"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 93,
+          "extracted_answer": "18",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly evaluates remaining capacity in each tank: 10+8=18 gallons.",
+          "report_extracted_response_sha256": "2cecc2ba8d5ee1c41eed87b06a4ee3074ea8294768b76a215126e00cf329a40b"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 82,
+          "extracted_answer": "14",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes initial combined fill (14 gallons), not required added gallons.",
+          "report_extracted_response_sha256": "dfae419877c8e03642bebca778a65229ffa42a2678955b547d76fa9c317113b8"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 11,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4168,
+      "original_reference_answer": "72",
+      "question": "Rachel weighs 75 pounds, 6 pounds less than Jimmy and 15 pounds more than Adam. What is the average weight of the three people, in pounds?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Jimmy 81 lb, Adam 60 lb, Rachel 75 lb; mean (81+60+75)/3=72 lb.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 111,
+          "extracted_answer": "96",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Misassigns difference constraints and double-counts weights, giving 96.",
+          "report_extracted_response_sha256": "fa3e963b1e4af714732f9a852e51e10414e0c6955070cbe0b449c99ee0fd4e7e"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 91,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly derives both other weights and arithmetic mean 72.",
+          "report_extracted_response_sha256": "4f30ce41892ace5158d82438a14595db049a0020572bd6867165f0dd375cae0e"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "135",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Adds the two differences incorrectly, computes Jimmy’s weight wrongly, and omits division by three.",
+          "report_extracted_response_sha256": "37e5473d8154873280becc36193420cf4cb0d1eca5f482c0eb9fd17a40fdfaed"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 85,
+          "extracted_answer": "122",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Reassigns Rachel’s weight to Jimmy and falsely states 222/3=122.",
+          "report_extracted_response_sha256": "cadd5e5d38b1c3f6e577e976be826e8810bccf682afefb4853978b282348d27a"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4200,
+      "original_reference_answer": "75",
+      "question": "Alexis has four times as many mangoes as Dilan and Ashley combined. If Alexis has 60 mangoes, how many mangoes does all of them have combined?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Alexis’s 60 is four times Dilan and Ashley combined, so the two together have 15; full total 75.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 112,
+          "extracted_answer": "135",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Obtains correct intermediate 75 for all three and then adds Alexis’s 60 again.",
+          "report_extracted_response_sha256": "f0653aaf07c6b0f7450925ab4e5d7bc244a9ce6351dc822ca0e752418df0fb49"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 71,
+          "extracted_answer": "75",
+          "reasoning_verdict": "SOUND",
+          "reason": "60/4=15; combined 60+15=75.",
+          "report_extracted_response_sha256": "0133e4092e32c69e1605c6ca3bfb116e5805c6777ab82b779878d92427da6387"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 39,
+          "extracted_answer": "75",
+          "reasoning_verdict": "SOUND",
+          "reason": "Succinct correct calculation of 15+60=75.",
+          "report_extracted_response_sha256": "f9633c903076d626355175eac015146c59762c04a1a119b62224b61f8530eb40"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 119,
+          "extracted_answer": "15",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Sets up the combined unknown incorrectly and reports only the smaller pair’s 15.",
+          "report_extracted_response_sha256": "b57e22cd43ccd0ceae21711e1c1fc93233e141343483bd2d94e98c4def906a62"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 41,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4275,
+      "original_reference_answer": "600",
+      "question": "Scott, Mary, and Ken committed to raising $4,000 for their local children’s cancer hospital. Right now, Mary’s collection is five times what Ken has, but three times Scott’s funds. If Ken has $600, by how much have the three exceeded their goal?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Mary 5×$600=$3000, Scott $3000/3=$1000; total $4600 exceeds the goal by $600.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 126,
+          "extracted_answer": "600",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Adds an irrelevant and unfounded reference to $1 coins in an unused x variable; all subsequent calculations are correct.",
+          "report_extracted_response_sha256": "7116d403cbf2697abd21a207d17ad566182238f4d6c1ba5982ae773fa78800db"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 109,
+          "extracted_answer": "600",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly computes Mary=3000, Scott=1000, excess=600.",
+          "report_extracted_response_sha256": "c78984506a5fe766bdc44c2444180326297d6de758b801c486fb4b7dcfea59e1"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 106,
+          "extracted_answer": "0",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits Ken’s $600 from the total despite correctly computing Mary and Scott.",
+          "report_extracted_response_sha256": "a76791424c50feb72bbff79277736fbd91a4fe1181345cee17d2b07e620c7e40"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 137,
+          "extracted_answer": "600",
+          "reasoning_verdict": "SOUND",
+          "reason": "All three fund totals and excess are correctly derived.",
+          "report_extracted_response_sha256": "a8b2eb8a476616237723b747f861fbe12731a5b1c45968410e10f006c460a53c"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 3,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4317,
+      "original_reference_answer": "12",
+      "question": "For this month, Lily wants to finish reading twice as many books as she finished last month. If she finished reading 4 books last month, what will be the total number of books that she will finish for two months?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Last month 4 books, this month 8; both months together 12.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 47,
+          "extracted_answer": "12",
+          "reasoning_verdict": "SOUND",
+          "reason": "Finds 2×4=8 this month; 4+8=12 total.",
+          "report_extracted_response_sha256": "8b063ed5e9624459462d9e7bf045dafe08ef44662c0d448e6b3d9adb294e5b81"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 62,
+          "extracted_answer": "16",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Applies the doubling to both months and calls each eight books.",
+          "report_extracted_response_sha256": "0669d3258d1080954de80c65dc2cc983f0c77a23c7b164e8cf11aa81f0a80dc2"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 44,
+          "extracted_answer": "12",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correct compact 8+4=12 calculation.",
+          "report_extracted_response_sha256": "c52db7dc029157027f0e271d52237dcdbefe0d8d8b2bc59e0966fd34df8e6c42"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "12",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly distinguishes last month from this month and adds.",
+          "report_extracted_response_sha256": "efc7d553c281cac48e63807d5f0bfa71d8ad0ff643c9954e72e72e677fa49d33"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4320,
+      "original_reference_answer": "192",
+      "question": "John paints a giant mural that is 6m by 3m. The paint costs $4 per square meter. The artist can paint 1.5 square meters per hour and charges $10 per hour. How much does the mural cost?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Mural area 6×3=18 m²; paint $72, 12 labor hours at $10=$120; total $192.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 87,
+          "extracted_answer": "192",
+          "reasoning_verdict": "SOUND",
+          "reason": "Computes 18 area, $72 paint, 12 hours, $120 labor, $192 total; “m*square meter” is imprecise unit typography.",
+          "report_extracted_response_sha256": "c45293d9c19f84d5ad0215ff82426524c16d7b7703191ed2d3deecd3a19acbc4"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "168",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Multiplies $4/m² by 12 labor hours rather than 18 m².",
+          "report_extracted_response_sha256": "01979e4c4f69c008a5ff12ecae09fba45463f12c77d7e9718ca029b04e88e537"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 89,
+          "extracted_answer": "168",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Repeats the confusion between painting time and paint-area charge.",
+          "report_extracted_response_sha256": "f6b0b22dd5b2ee0480d8ed1396dd97562a2c14c917cc1b14cd0507fc85c181dc"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 172,
+          "extracted_answer": "34622",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Combines paint cost with hourly rate, invents 48 hours and reports a vastly inflated figure.",
+          "report_extracted_response_sha256": "d0edd516ead609fcf2553f3a6539eacd3fc247caa15115437b4b933ea5c5448e"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 2,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4446,
+      "original_reference_answer": "52",
+      "question": "Hans reserved a table at a fine dining restaurant for twelve people. He has to pay a deposit for the reservation, and the deposit is a flat $20 plus an extra $3 per adult but only $1 per child. Two of the people in Hans’s party are his kid cousins, and the rest are adults. How many dollars does Hans have to pay as a deposit for the restaurant reservation?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Deposit is $20 flat +10 adults×$3 +2 children×$1=$52.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 225,
+          "extracted_answer": "36",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents free food/drinks charges and never calculates reservation deposit as specified.",
+          "report_extracted_response_sha256": "93af049848a4b0029a06a4a980db34c96f0f8d78db590cf9453c485f9465b11d"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 78,
+          "extracted_answer": "50",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes base plus adult charge but omits two children at $1 each.",
+          "report_extracted_response_sha256": "fb0fe89d9957cfb15460328205a0bd485068b2e3c42f05d12f8e5474b64c193c"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "52",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly counts ten adults and two children; total $20+$30+$2=$52.",
+          "report_extracted_response_sha256": "cac55b6cf9a61468a7a9bd8f0cb4a68fdcd961fb698be3795fc59e8bf0fc92e3"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "50",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits the child-specific deposit charge.",
+          "report_extracted_response_sha256": "771abec5a44b20edd22fc9cd65e016aa705babe565b7caba6dd94ec4086aaa95"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 1,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4456,
+      "original_reference_answer": "9",
+      "question": "Each class uses 200 sheets of paper per day. The school uses a total of 9000 sheets of paper every week. If there are 5 days of school days, how many classes are there in the school?",
+      "recommendation": "HOLD",
+      "rationale": "The sole answer-matching completion explicitly says the SCHOOL uses 200×5=1000 sheets weekly, though 1000 is the amount per CLASS. The correct division is shown but relies on an unstated correction to the mislabeled premise.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 70,
+          "extracted_answer": "45",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes nine classes per day then changes to 9000/200=45, dropping the five-day factor.",
+          "report_extracted_response_sha256": "7071a3822325adc3768045868dbbd79305554bec4760b38df9849bee104b076a"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "9",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Correct 200×5=1000 sheets per CLASS per week, then 9000/1000=9, but explicitly calls 1000 the SCHOOL weekly usage.",
+          "report_extracted_response_sha256": "66c20d3952a394af6edeae8aa9ec35e222ff5c37014aca2d6b0f0155767a14a8"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 110,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Introduces seven days, a false calculation of weeks, and fractional class counts.",
+          "report_extracted_response_sha256": "aa4932b5310886e649c00a61c63c5c4a94fe115bebc96df313b7bdb1cf69b530"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 114,
+          "extracted_answer": "1",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Claims 5×7=35 days in a week, giving invalid school paper totals.",
+          "report_extracted_response_sha256": "0d9cbfee28009c79835c53136414762255c83283000dcbdd22ce0f5df99b403d"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 4499,
+      "original_reference_answer": "15",
+      "question": "Maisy has been offered a new job and now has the option of continuing to work at her current job or take the new job. Her current job is 8 hours a week with a wage of $10 per hour. The new job is offering 4 hours a week with a wage of $15 per hour with an additional bonus of $35 per week if she exceeds her quota. Maisy is confident that she will exceed her quota and decides to include this when calculating her wage at the new job. How much more money, in dollars, will Maisy earn at her new job?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Current weekly wage $80; new weekly wage $60+$35=$95 given bonus assumption; difference $15.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "15",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly compares $80 versus $95 including intended bonus and finds $15 increase.",
+          "report_extracted_response_sha256": "f9c9bb846317e78db704535d46e97afe9364f17a5649f1bfee6a445875ee2c5a"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 124,
+          "extracted_answer": "55",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assigns new-job bonus to current wages and reverses subtraction.",
+          "report_extracted_response_sha256": "51ce73a4aa0c4f9a1c77ee25677d8e0121ff5ea1d2b65e30dfe995b1f7f349c5"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 147,
+          "extracted_answer": "30",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents an extra fifth hour at the new job, inflating weekly pay.",
+          "report_extracted_response_sha256": "87b90f3c70305abde7b79a5e384d958b7c56447a9c1ed9179b4bf307cbaccac5"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 97,
+          "extracted_answer": "50",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Adds $35 bonus to hourly rate and current earnings without calculating new-job pay.",
+          "report_extracted_response_sha256": "eaedc88af9131cf12235e8b960741d63f25668af23cc4bc614a31a79fc401137"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 29,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4500,
+      "original_reference_answer": "13",
+      "question": "Uncle Bradley has a $1000 bill that he wants to change into smaller bills so he could give them to his nieces and nephews. He wants to change 3/10 of the money into $50 bills while the rest into $100 bills. How many pieces of bills will Uncle Bradley have in all?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "$300 becomes six $50 bills and $700 becomes seven $100 bills, hence 13 bills.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 143,
+          "extracted_answer": "1000",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly calculates six and seven bills but answers the original dollar amount ($1000) rather than number of bills.",
+          "report_extracted_response_sha256": "a19450873ffeafcfea30caa6bc5776aed7639ed51061d6cf99aab241af251d1e"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 195,
+          "extracted_answer": "13",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly calculates 300/50=6 bills, 700/100=7 bills, total 13.",
+          "report_extracted_response_sha256": "506a4ae9cb05caa79727f07c957cc97c86c3223b6ce6fa6c1303d3b4c1823230"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 127,
+          "extracted_answer": "13",
+          "reasoning_verdict": "SOUND",
+          "reason": "All counts correct; minor dollar-sign notation preceding bill counts does not change the result.",
+          "report_extracted_response_sha256": "5cc967af96ada8a777185f6131b1e7a02d5bdf0c4e654406cc7d1b712ad31afb"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 198,
+          "extracted_answer": "15",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Subtracts six bills instead of $300 from $1000 and uses an incoherent 940/100 calculation.",
+          "report_extracted_response_sha256": "30ca202b624697b68d6e1a89d21575e5f92a3bde974fc3657fd5b175f16b9c96"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 3,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 4674,
+      "original_reference_answer": "72",
+      "question": "Steve is 5'6\".  He grows 6 inches.  How tall is he in inches?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Five feet six inches is 66 inches, plus six inches growth =72.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 31,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Incorrectly converts five feet six inches into 18 inches and reports 24.",
+          "report_extracted_response_sha256": "95334563db26c93e11a7d498d89755d6b6b101f7b7e89098a54d342df0d3d13b"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 42,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "5×12+6=66, plus 6=72 inches.",
+          "report_extracted_response_sha256": "802779f3c9140b59c7e8ba9c1e1ccc48e5eb1edfe007be953a55033cc8ff48ca"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 44,
+          "extracted_answer": "78",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Erroneously multiplies a six-inch growth by 12, then adds it inconsistently.",
+          "report_extracted_response_sha256": "bb4a30b8c4b853b94e2de131a5d70fd4d1514ac9d072cc8574888b1c1d2ee57e"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 53,
+          "extracted_answer": "72",
+          "reasoning_verdict": "SOUND",
+          "reason": "Correctly converts feet and inches, then adds six inches growth.",
+          "report_extracted_response_sha256": "86476057e7248f673b969e64bbaa880d372216f29e897c8bba6e8689e5d913a2"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 2,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    }
+  ]
+}
