@@ -29,7 +29,7 @@ Current status as of 2026-10-23:
 - E001: Pretrained baseline completed.
 - E002: Original SFT completed; EOS regression documented.
 - E002a: Corrected native-EOS SFT completed and evaluated.
-- E003: Signed-109 DPO training completed; validation result pending.
+- E003: Signed-109 DPO training and validation completed; 433/747 (57.97%).
 - E004: GRPO not started.
 
 The official GSM8K test partition remains untouched.
@@ -359,8 +359,7 @@ full-scale DPO training dataset.
 ## E003 — Signed-109 DPO Training
 
 **Training status:** Completed, 2026-10-23.
-**Validation status:** Full frozen 747-question evaluation launched;
-result not yet recorded.
+**Validation status:** Completed, 433/747 (57.97%); see paired audit below.
 
 ### Reproducibility
 
@@ -424,3 +423,58 @@ Training completed and produced measurable adapter-weight changes.
 No reasoning-accuracy improvement is claimed before the frozen
 747-question development-validation evaluation is verified.
 The official GSM8K test partition was not used.
+
+---
+
+## E003 — Frozen Validation and Paired Audit
+
+**Status:** Completed and paired-audited, 2026-10-23.
+
+- Validation examples: 747.
+- E002a correct: 433/747 (57.97%).
+- E003 DPO correct: 433/747 (57.97%).
+- Net accuracy change: 0.00 percentage points.
+- Both correct: 427.
+- Both incorrect: 308.
+- DPO correctness gains: 6.
+- DPO correctness losses: 6.
+- Discordant correctness pairs: 12.
+- Exact two-sided McNemar p-value: 1.0.
+- Changed raw responses: 82/747.
+- Unchanged raw responses: 665/747.
+- DPO mean generated tokens: approximately 97.5.
+- DPO answer extraction rate: approximately 98.3%.
+- DPO responses reaching the 512-token cap: 13.
+
+### Evaluation provenance
+
+- Evaluation code revision:
+  `44fba97f6decaaf802713056f12ebd89984584d6`
+- Inference protocol: `gsm8k_val512_greedy_eager_cached_v1`.
+- Greedy decoding, FP16, eager attention.
+- Native EOS: 151643.
+- Maximum new tokens: 512.
+- KV cache: enabled.
+- Frozen GSM8K development-validation split.
+- Official GSM8K test set: untouched.
+
+E002a predictions SHA256:
+`b14a887d3942dcd0dec56abac1f4ea9ec748573d4a2d703dac1457e52df31b9c`
+
+E003 predictions SHA256:
+`7da6283538b92f27518be8b140785fc5a6bd21fd34b674ac9549d3d3f8399d7c`
+
+E003 evaluation artifacts:
+`data/eval_runs/e003_dpo_signed109_cached_val747_v1_retry1/`
+
+### Interpretation
+
+The first E003 DPO run changed 82 raw validation responses,
+including six correctness gains and six correctness losses.
+
+Aggregate accuracy was unchanged relative to E002a.
+The paired comparison provides no evidence of an accuracy
+improvement in this run, but does not establish model equivalence.
+
+This result applies to the signed-109 dataset and the specific
+one-epoch, 14-step, 1e-6-learning-rate configuration tested.

@@ -1391,3 +1391,32 @@ Evaluation uses greedy decoding, FP16, eager attention, native EOS
 
 The evaluation result was not yet recorded at this milestone.
 No further SFT training was performed.
+
+---
+
+## 2026-10-23 — E003 DPO Validation Verified
+
+The first signed-109 E003 DPO run completed its frozen
+747-question GSM8K development-validation evaluation.
+
+E003 scored 433/747 (57.97%), matching E002a's 433/747.
+
+The paired prediction audit found:
+- Both correct: 427.
+- Both incorrect: 308.
+- DPO gains: 6.
+- DPO losses: 6.
+- Changed raw responses: 82.
+- Exact two-sided McNemar p-value: 1.0.
+
+The evaluation used the established FP16, eager-attention,
+greedy, 512-token protocol with KV cache enabled and native
+EOS 151643.
+
+The adapter was updated by DPO, but this configuration did
+not improve aggregate validation accuracy.
+
+No further training was performed. The official GSM8K
+test set remains untouched.
+
+See docs/experiments.md for evaluation provenance and hashes.
