@@ -1420,3 +1420,48 @@ No further training was performed. The official GSM8K
 test set remains untouched.
 
 See docs/experiments.md for evaluation provenance and hashes.
+
+---
+
+<!-- e003b_lr5e6_complete_2026_10_23 -->
+
+## 2026-10-23 — E003b DPO Learning-Rate Ablation Completed
+
+Completed a controlled DPO experiment increasing the learning
+rate from 1e-6 to 5e-6.
+
+The run used the same 109 approved preference pairs, starting
+E002a checkpoint, reference policy, beta, epoch count, effective
+batch size and 14 optimizer updates as E003.
+
+Training revision:
+66822ee01f2b3958dc30ef764479534214eed922
+
+Training completed with exit code 0. Checkpoint integrity and
+all 224 finite LoRA tensors were verified.
+
+The global L2 adapter update was approximately 5.01 times larger
+than E003's update.
+
+The mean training-pair preference-margin improvement increased
+from +0.060744 to +0.330544.
+
+The frozen 747-question GSM8K development validation completed
+successfully with KV caching enabled.
+
+E002a, E003 and E003b each scored 433/747 (57.97%).
+
+Compared with E002a, E003b changed 178 raw responses, including
+11 correctness gains and 11 correctness losses.
+
+Qualitative review identified genuine reasoning corrections
+and equally numerous substantive reasoning regressions.
+
+Decision: Preserve E003b as a completed negative accuracy
+result. Do not infer that further learning-rate increases
+will improve mathematical accuracy.
+
+Next: Audit coverage and quality of the 109 preference pairs
+before designing any separately authorized dataset expansion.
+
+The official GSM8K test partition remains untouched.

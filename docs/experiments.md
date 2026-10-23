@@ -30,6 +30,7 @@ Current status as of 2026-10-23:
 - E002: Original SFT completed; EOS regression documented.
 - E002a: Corrected native-EOS SFT completed and evaluated.
 - E003: Signed-109 DPO training and validation completed; 433/747 (57.97%).
+- E003b: Controlled DPO learning-rate ablation completed; 433/747 (57.97%), no net accuracy improvement.
 - E004: GRPO not started.
 
 The official GSM8K test partition remains untouched.
@@ -478,3 +479,161 @@ improvement in this run, but does not establish model equivalence.
 
 This result applies to the signed-109 dataset and the specific
 one-epoch, 14-step, 1e-6-learning-rate configuration tested.
+
+---
+
+<!-- e003b_lr5e6_complete_2026_10_23 -->
+
+## E003b — Controlled DPO Learning-Rate Ablation
+
+**Status:** Training, preference audit, validation and paired analysis completed.
+
+### Experimental design
+
+E003b tests a fivefold DPO learning-rate increase while preserving
+the approved E003 preference dataset and all other training settings.
+
+| Setting | E003 | E003b |
+|---|---|---|
+| Starting checkpoint | E002a epoch 2 | Same |
+| Preference pairs | 109 | 109 |
+| Epochs | 1 | 1 |
+| Optimizer steps | 14 | 14 |
+| Learning rate | 1e-6 | 5e-6 |
+| DPO beta | 0.1 | 0.1 |
+| Effective batch size | 8 | 8 |
+| Training KV cache | Disabled | Disabled |
+
+Approved preference-pair dataset SHA256:
+`7d088bd70dc1d3d8b05f251a5560b37aca24a064ec7c4c81c91a03b8d84dc8e9`
+
+Starting E002a adapter SHA256:
+`f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`
+
+### Training provenance
+
+Training Git revision:
+`66822ee01f2b3958dc30ef764479534214eed922`
+
+Training script:
+`scripts/train_e003b_dpo_signed109_lr5e6_v1.py`
+
+Training run:
+`data/train_runs/e003b_dpo_signed109_lr5e6_66822ee_v1/`
+
+Final adapter SHA256:
+`f28b9644a9f656f46894720a0c42ae339d25705260985092b2453e735d60a741`
+
+Measured training:
+- Completed optimizer steps: 14.
+- Reported average training loss: 0.691045480115073.
+- Training runtime: 15.9834 seconds.
+- Modified LoRA tensors: 224/224.
+- All adapter tensors finite.
+- Training native EOS: 151643.
+- Training KV cache: disabled.
+
+Global L2 adapter difference from E002a:
+- E003: 0.00452754008633176.
+- E003b: 0.022666958783056874.
+- E003b/E003 magnitude ratio: 5.0065.
+
+### Training-pair preference audit
+
+| Measurement | E003 | E003b |
+|---|---:|---:|
+| Mean preference-margin improvement | +0.060744 | +0.330544 |
+| Median improvement | +0.031250 | +0.218750 |
+| Final mean training-pair DPO loss | 0.69012507 | 0.67696388 |
+| Positive margin changes | 69 | 91 |
+| Negative margin changes | 31 | 16 |
+| Zero margin changes | 9 | 2 |
+| Pairs preferring chosen | 79/109 | 79/109 |
+
+These measurements use the training preference pairs, not held-out
+preference examples. They establish stronger optimization of the
+training objective, not generalization.
+
+### Frozen GSM8K development validation
+
+Evaluation protocol:
+`gsm8k_val512_greedy_eager_cached_v1`
+
+- Questions: 747.
+- Decoding: greedy.
+- Precision: FP16.
+- Attention: eager.
+- Maximum new tokens: 512.
+- Native EOS: 151643.
+- Evaluation KV cache: enabled.
+- Official GSM8K test set: untouched.
+
+| Model | Correct | Accuracy |
+|---|---:|---:|
+| E002a | 433/747 | 57.97% |
+| E003 | 433/747 | 57.97% |
+| E003b | 433/747 | 57.97% |
+
+E003b evaluation artifacts:
+`data/eval_runs/e003b_dpo_signed109_lr5e6_cached_val747_v1/`
+
+E003b predictions SHA256:
+`9026502bf9c23e9490df2eb1d14c38adedfe2b1f07b649f14877717c6d2d0dcd`
+
+### Paired evaluation
+
+E003b versus E002a:
+- Both correct: 422.
+- Both incorrect: 303.
+- Correctness gains: 11.
+- Correctness losses: 11.
+- Changed raw responses: 178/747.
+- Exact two-sided McNemar p-value: 1.0.
+
+E003b versus E003:
+- Both correct: 421.
+- Both incorrect: 302.
+- Correctness gains: 12.
+- Correctness losses: 12.
+- Changed raw responses: 158/747.
+- Exact two-sided McNemar p-value: 1.0.
+
+Across the three models:
+- All three correct: 418.
+- All three incorrect: 300.
+- Differing correctness outcomes: 29.
+
+### Qualitative error analysis
+
+The 11 E003b gains versus E002a involved genuine corrections to
+mathematical reasoning or previously incomplete solutions.
+
+The 11 losses involved incorrect arithmetic, mathematical relationships,
+quantity aggregation, dimensional reasoning, or incomplete solutions.
+
+In particular:
+- Source 1374: corrected double-counting of books.
+- Source 3668: correctly doubled ingredients after efficacy was halved.
+- Source 1034: completed a previously repetitive solution.
+- Source 5348: introduced an incorrect square-unit conversion.
+- Source 7366: introduced double-counting of packages.
+- Source 1533: introduced repetitive, unfinished reasoning.
+
+The same broad reasoning operations occurred among improvements
+and regressions. No uniformly more reliable reasoning procedure
+was demonstrated.
+
+### Conclusion
+
+Increasing DPO learning rate from 1e-6 to 5e-6 strengthened
+optimization of the 109 training preferences and produced larger
+adapter updates and more changed validation responses.
+
+However, aggregate GSM8K accuracy remained unchanged at 433/747.
+
+These findings do not establish model equivalence or prove that
+dataset size alone caused the lack of improvement.
+
+Preserve the original E003 and E003b checkpoints and evaluation
+artifacts. Any expanded preference dataset must be separately
+versioned, reviewed and authorized.
