@@ -1,0 +1,1317 @@
+{
+  "schema": "e003_remaining_review122_batch01_reasoning_screen_advisory_v1",
+  "review_basis": "Assistant mathematical and semantic review of all 80 original candidate response texts in uploaded Batch 01",
+  "original_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "batch_number": 1,
+  "batch_source_selection_schema": "e003_remaining_review122_v1_batch_selection",
+  "batch_selection_manifest_sha256": "2ca1ad3263504bcaeed4352162bfa9fa2db3cfbfe826aa57e6f782372e2c767c",
+  "batch_review_report_sha256": "c22dab37d29f56b46d396a4d3eb6acb329db5c495c2fdc9def3a2ce538b644db",
+  "source_index_order": [
+    1512,
+    1520,
+    1651,
+    1859,
+    1870,
+    1889,
+    1927,
+    2125,
+    2272,
+    2277,
+    2477,
+    2491,
+    2515,
+    2717,
+    2731,
+    2786,
+    2860,
+    3012,
+    3181,
+    3287
+  ],
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "independent_human_signoff": false,
+  "human_signoff_required_before_training": true,
+  "training_approved": false,
+  "training_performed": false,
+  "official_test_used": false,
+  "input_labels_unmodified": true,
+  "original_candidates_modified": false,
+  "review_policy": "Strict mathematical/semantic validity; no automatic approval for answer-only match; ambiguity, contradictory derivations and explicit erroneous equations HOLD; ineligible/truncated candidates cannot be paired; no source reference edits.",
+  "summary": {
+    "group_count": 20,
+    "candidate_count": 80,
+    "provisional_approve_groups": 16,
+    "hold_groups": 4,
+    "exclude_groups": 0,
+    "candidate_reasoning_verdict_counts": {
+      "BORDERLINE": 4,
+      "CONDITIONAL": 6,
+      "FLAWED": 50,
+      "SOUND": 20
+    },
+    "answer_matches_reference_reasoning_counts": {
+      "BORDERLINE": 4,
+      "CONDITIONAL": 5,
+      "FLAWED": 5,
+      "SOUND": 20
+    },
+    "answer_differs_from_reference_reasoning_counts": {
+      "CONDITIONAL": 1,
+      "FLAWED": 45
+    },
+    "proposed_pairs_count": 16,
+    "median_proposed_pair_abs_token_gap": 11.5,
+    "max_proposed_pair_abs_token_gap": 50,
+    "mathematical_reference_question_flags": [
+      1512,
+      1651,
+      2272,
+      2515
+    ],
+    "answer_extraction_text_mismatch_flags": [],
+    "ineligible_truncated_samples": [
+      {
+        "source_index": 1927,
+        "sample_index": 0
+      },
+      {
+        "source_index": 1927,
+        "sample_index": 3
+      }
+    ],
+    "answer_correct_but_reasoning_not_sound": [
+      {
+        "source_index": 1512,
+        "sample_index": 0,
+        "verdict": "CONDITIONAL"
+      },
+      {
+        "source_index": 1512,
+        "sample_index": 2,
+        "verdict": "CONDITIONAL"
+      },
+      {
+        "source_index": 1512,
+        "sample_index": 3,
+        "verdict": "CONDITIONAL"
+      },
+      {
+        "source_index": 1520,
+        "sample_index": 2,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 1651,
+        "sample_index": 0,
+        "verdict": "FLAWED"
+      },
+      {
+        "source_index": 1651,
+        "sample_index": 2,
+        "verdict": "FLAWED"
+      },
+      {
+        "source_index": 1870,
+        "sample_index": 3,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 2272,
+        "sample_index": 3,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 2277,
+        "sample_index": 0,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "source_index": 2477,
+        "sample_index": 2,
+        "verdict": "FLAWED"
+      },
+      {
+        "source_index": 2477,
+        "sample_index": 3,
+        "verdict": "FLAWED"
+      },
+      {
+        "source_index": 2515,
+        "sample_index": 1,
+        "verdict": "CONDITIONAL"
+      },
+      {
+        "source_index": 2515,
+        "sample_index": 2,
+        "verdict": "CONDITIONAL"
+      },
+      {
+        "source_index": 3181,
+        "sample_index": 0,
+        "verdict": "FLAWED"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "source_index": 1512,
+      "original_reference_answer": "16",
+      "question": "In a certain company, for every customer served, an employee gets as many bonus points, as 20% of the number of customers served. On Monday, Tom served 10 customers per hour for 8 hours. How many bonus points did Tom earn that day?",
+      "recommendation": "HOLD",
+      "rationale": "The stem says “for every customer” but also defines the bonus as 20% of the number served, permitting both per-customer and aggregate readings (1280 versus 16). Do not select a training pair until the reward rule is clarified.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 75,
+          "extracted_answer": "16",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Correct 80 customers and 20% = 16 under the aggregate bonus interpretation; stem could imply points awarded per individual customer.",
+          "report_extracted_response_sha256": "6159427f5e48d4ec5ca6f0b9fe4d916c367df3de871bf13d2ba6a53a60262d48"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 118,
+          "extracted_answer": "1280",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "80 customers, 16 points calculated for EACH of 80 customers gives 1280; plausible under literal per-customer interpretation, inconsistent with the reference convention.",
+          "report_extracted_response_sha256": "d742cf81c4cff727ce1846d5de4b60fbc018b1fd2e5d276cbf2627c9d9331d6c"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 45,
+          "extracted_answer": "16",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Computes 80 × 20% = 16 under total-bonus interpretation; ambiguous use of “for every customer”.",
+          "report_extracted_response_sha256": "e598d65d0fbea407fd3845f4325406002424ab14103048a554d21aabd0908293"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "16",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Computes 20% of 80 = 16, but text could specify 20%-of-total award per customer.",
+          "report_extracted_response_sha256": "66e326dda21acd90dfbc3ff641eb052e950efe6db45d24a1c1cc7373b77422ac"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 1520,
+      "original_reference_answer": "8",
+      "question": "Monica made cookies for herself and her family. Her father ate 10 cookies and her mother ate half as much as the father. Her brother ate 2 more than her mother. How many cookies are left for Monica if she made 30 cookies in total?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 1 cleanly calculates mother 5, brother 7, and 30−10−5−7=8. Sample 2 misidentifies family members as “three girls” despite sound arithmetic.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 63,
+          "extracted_answer": "0",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes mother=5 and brother=7 but invents subtraction 7−10=−3 and concludes zero.",
+          "report_extracted_response_sha256": "3ddd41b11c89ec403e2aa2923ac0a57fb25f1dedd2a58759e9db034a7f4c9b00"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "8",
+          "reasoning_verdict": "SOUND",
+          "reason": "Mother=5, brother=7, parents=15, leaving 30−15−7=8.",
+          "report_extracted_response_sha256": "273fffa21b52a84bcf511c5ae612a1b11ffbb8cff7a4453a592fc6914b3be466"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 81,
+          "extracted_answer": "8",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Correct 10+5+7=22 and 30−22=8 but refers to father, mother and brother as “three girls”.",
+          "report_extracted_response_sha256": "3563fc776fe52faa97e7232c19db4b278fec6ea24189a65d5528b1f449c8c350"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 59,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Writes 30−10−5−7=6, an explicit arithmetic error: the expression equals 8.",
+          "report_extracted_response_sha256": "976a393f2a2e7e486c93f04e3e1e9aa9f856e15895437a5e576970c4db2a02cb"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 13,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1651,
+      "original_reference_answer": "4",
+      "question": "John builds a box.  The box is 26 inches by 26 inches by 14 inches.  The walls are 1 inch thick on each side.  How much is the internal volume in cubic feet?",
+      "recommendation": "HOLD",
+      "rationale": "Neither answer-matching candidate derives 4 cubic feet correctly. Assuming 1-inch walls on each side, internal dimensions 24×24×12 inches produce 6912/1728=4 ft³.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 78,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 24×24×13 (wrong height) and claims 24×24×13=7680 and 7680/1728=4; both equalities are false.",
+          "report_extracted_response_sha256": "d86727e62713ae151da1f7f713a0a3492788ba0f82c58902d422ed85ece27c67"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 102,
+          "extracted_answer": "73.67",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Confuses area/volume, calculates 26×26×14 incorrectly, and uses a false cubic-inch conversion.",
+          "report_extracted_response_sha256": "2b83e0e8402ce35ef8900b8b661e1cf3fd5fddc837499e1abc4de518092fcb2a"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 93,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses 24×26×12 instead of 24×24×12; falsely claims 24×26×12=7728 and 7728/1728=4.",
+          "report_extracted_response_sha256": "8ca6128a3c888c3c7e9922933c17927fb84655da101b152235af50549b8ede29"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 103,
+          "extracted_answer": "53.1",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly sets 24×24×12=6912 cubic inches, then wrongly uses 128 instead of 1728 cubic inches per cubic foot.",
+          "report_extracted_response_sha256": "e20c52df3328c2cb4d36994b262452138c835557436e65e8ce9e053b0d8d7698"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 1859,
+      "original_reference_answer": "2100",
+      "question": "If Janet reads 80 pages a day and Belinda reads 30 pages a day, how many more pages does Janet read in 6 weeks?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Only sample 3 correctly multiplies each daily rate by 42 days and subtracts 3360−1260=2100.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 128,
+          "extracted_answer": "42.84",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides daily page rates by 7 rather than multiplying by 7 days per week.",
+          "report_extracted_response_sha256": "302b2ddcbbe3ef33cbdbacf8287b9b11c03af109566a613550edc1e2ef7a6ff4"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 86,
+          "extracted_answer": "350",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes one-week difference 350 but fails to multiply by 6 weeks.",
+          "report_extracted_response_sha256": "cbbd64f3b1ca5b9c8d91ca9b78f5270c51bc793c03e442982301795d01c12f11"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 120,
+          "extracted_answer": "1100",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes totals 3360 and 1260, then reports the invalid subtraction 1260−3360=1100.",
+          "report_extracted_response_sha256": "f271c9f874c4a1b79791d208d183cfa15d8cb141b8c1527c7d9867af0531210d"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 123,
+          "extracted_answer": "2100",
+          "reasoning_verdict": "SOUND",
+          "reason": "80×7×6=3360, 30×7×6=1260, difference 2100.",
+          "report_extracted_response_sha256": "ab6775e5f8d34e33cd69b03559f78011b0e5907136312364eb21f12711c0f935"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 3,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1870,
+      "original_reference_answer": "80",
+      "question": "In a triangle with angles A, B, and C, A is 60 degrees, and B is two times as big as C. Calculate the angle of B.",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 0 derives 60+B+C=180, B=2C, then B=80. Sample 3 begins with an incorrect B+C=180 claim before correcting it.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 180,
+          "extracted_answer": "80",
+          "reasoning_verdict": "SOUND",
+          "reason": "Sets B+C=120, B=2C, yielding C=40, B=80.",
+          "report_extracted_response_sha256": "0d1b94d518d7e961701618e12acb86ef055485a678bd814e6a10b9fda4125c2d"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 45,
+          "extracted_answer": "120",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats B as twice A=60 rather than twice C.",
+          "report_extracted_response_sha256": "e01c6a7fdd5387921e91694ed2b7ada7c2862af32bc65609ed22a0d47c5ea8dc"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 130,
+          "extracted_answer": "120",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Omits known angle A=60 when summing triangle angles, giving B+C=180.",
+          "report_extracted_response_sha256": "719d2e5dce10d7bcec53f1c14d549e3442c282b715d738c9b6b3178d8bffa3e5"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 230,
+          "extracted_answer": "80",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Opens by falsely asserting B+C=180, then gives a valid derivation B+C=120 and B=80.",
+          "report_extracted_response_sha256": "a47210bb95a812ae16d477dd65a29a01e66799e638343b2c1672712a119329fb"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 50,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1889,
+      "original_reference_answer": "680",
+      "question": "Trevor and two of his neighborhood friends go to the toy shop every year to buy toys. Trevor always spends $20 more than his friend Reed on toys, and Reed spends 2 times as much money as their friend Quinn on the toys. If Trevor spends $80 every year to buy his toys, calculate how much money in total the three spend in 4 years.",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 0 correctly infers yearly spending 80,60,30 and multiplies 170 by four.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 142,
+          "extracted_answer": "680",
+          "reasoning_verdict": "SOUND",
+          "reason": "Reed=80−20=60, Quinn=60/2=30; (80+60+30)×4=680.",
+          "report_extracted_response_sha256": "90074ab47bcdc863cda107483dc88679e49fb768a2bce681e1d4609278c64705"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 131,
+          "extracted_answer": "740",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts 30 for Reed’s already inferred amount as a separate person and invents another $15 Quinn, yielding four terms for three people.",
+          "report_extracted_response_sha256": "bbf0168a43fb426ec122577633193e7f352a7d1e5e7e007da8cc68f339e3c1de"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 123,
+          "extracted_answer": "480",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Uses Trevor’s $80 incorrectly as Reed/Quinn starting amount and omits Quinn.",
+          "report_extracted_response_sha256": "0556a2ed0887e2a02d71ebf20c6458938ac78dd2ed87c1a11186f4bfebf3fe98"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 111,
+          "extracted_answer": "1440",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats Reed as spending 2×60, double counts expenditures and arbitrarily multiplies by 2.",
+          "report_extracted_response_sha256": "222eb79efb41ff2bbfce39806ea89d79a5b350663ba0772bdf3d394e7f01d7d2"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 11,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 1927,
+      "original_reference_answer": "9400",
+      "question": "Mike and Leo have to print as many pamphlets as possible for a social gathering. Mike manages to print as fast as 600 pamphlets per hour for 9 consecutive hours. After a break, he resumes the task for another 2 hours achieving a third of the speed he was doing before. Leo, on the other hand, only works a third as many hours as Mike did before his break, but was twice as fast as Mike before he took his break. How many pamphlets do both manage to print at the end?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 1 is sound and terminates with native EOS; sample 2 is an eligible incorrect negative. Samples 0 and 3 are truncated/ineligible and cannot form preference pairs.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": false,
+          "native_eos_stop": false,
+          "generated_tokens": 256,
+          "extracted_answer": "None",
+          "reasoning_verdict": "FLAWED",
+          "reason": "INELIGIBLE/TRUNCATED at 256 tokens without final answer; also incorrectly adds old/new printing speeds and reverses Leo’s conditions.",
+          "report_extracted_response_sha256": "c58e848a739d7578fa27e986586b70a9c138819cd3e05c5ca5cdc46030dddebf"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 189,
+          "extracted_answer": "9400",
+          "reasoning_verdict": "SOUND",
+          "reason": "Mike prints 600×9+200×2=5800; Leo prints (2×600)×(9/3)=3600; total 9400.",
+          "report_extracted_response_sha256": "62f2f10c9570ae872beb7801ff872bbfebc34d8fb6aecc05c5d71788ba94088f"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 211,
+          "extracted_answer": "8250",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats printed total as hourly speed, miscalculates post-break quantity and invents Leo output.",
+          "report_extracted_response_sha256": "9b66ccfec70d05b1b4e772a5663e03faf00f4f2acf37de3c601f497ee98b0651"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": false,
+          "native_eos_stop": false,
+          "generated_tokens": 256,
+          "extracted_answer": "None",
+          "reasoning_verdict": "FLAWED",
+          "reason": "INELIGIBLE/TRUNCATED at 256 tokens without final answer; confuses Mike’s reduced speed and Leo’s speed/hours.",
+          "report_extracted_response_sha256": "ea38deff58e4e0bac60259436602c27ce0f181020d25fcd9128f2e12af85b9df"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 22,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2125,
+      "original_reference_answer": "18",
+      "question": "For every 1 year a human ages, a dog ages 7 years.  When Max is 3, how much older, in dog years, will his 3-year-old dog be?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 2 cleanly converts dog age 3×7=21 and subtracts Max’s 3 years to obtain the reference difference 18.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 63,
+          "extracted_answer": "21",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes dog age 21 but omits subtraction of Max’s 3 years.",
+          "report_extracted_response_sha256": "466a269e24fceff30126787b150b0204d20a658233dec628b14ab9354b799c12"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "15",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Computes 21−3=18 and then subtracts Max’s age a second time to obtain 15.",
+          "report_extracted_response_sha256": "b77600f1a37ea4e102402cbdd611079fbb4236c05f4c36a6e8aab63d4000d3f2"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 45,
+          "extracted_answer": "18",
+          "reasoning_verdict": "SOUND",
+          "reason": "Dog=21 dog years; difference from Max’s 3-year age =18.",
+          "report_extracted_response_sha256": "030156e9d26d466cc33e4ed0becbf87f2c8a2a635fb0e6be9d087328cf87a589"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 108,
+          "extracted_answer": "15",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Double-subtracts the human age, giving 15 instead of 18.",
+          "report_extracted_response_sha256": "2043ea4001735b946044c3eff77626f5350de4f22ff27e53ad01f635a6433168"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "absolute_token_length_gap": 18,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2272,
+      "original_reference_answer": "225",
+      "question": "A company hires employees on a contract basis, depending on the availability of work. In a particular month, they hired 200 more employees on the first week than on the second week, and 150 fewer employees on the second week than on the third week. If the number of employees hired on the fourth week was twice the number hired in the third week,  and the number of employees on the fourth week was 400, what's the average number of employees hired per week?",
+      "recommendation": "HOLD",
+      "rationale": "Only sample 3 returns 225, but its sentence incorrectly states that week 2 has “50 fewer” employees than week 1 (250 versus 50 means 200 fewer). Preserve as borderline until independent reviewer accepts or rejects the explanatory contradiction.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 249,
+          "extracted_answer": "190",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly derives week counts 250,50,200,400 but invents five weekly entries and divides by 5.",
+          "report_extracted_response_sha256": "f6507a4b4c321da4470dfaa0668ee36681f349d224fb9f40385e90d18d8b8645"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 169,
+          "extracted_answer": "262.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Derives correct weekly counts but substitutes 200 for week 2 instead of 50 in the total.",
+          "report_extracted_response_sha256": "02f919091c2c1679bf4e868135b066bffd905d6c83cc22a8e90e8a5c6b7abbfd"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 201,
+          "extracted_answer": "575",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Transforms the stated fourth-week total of 400 into 800, then uses internally inconsistent algebra.",
+          "report_extracted_response_sha256": "fd8430101451fe86d2a180c028c08c19ce5cef992b858176900058a94a861087"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 170,
+          "extracted_answer": "225",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Arithmetic for week counts 250,50,200,400 and mean 225 is correct, but describes week 2 as 50 fewer than week 1, rather than 200 fewer.",
+          "report_extracted_response_sha256": "ac988043abd24699f61eb8ef4649afa11d17f228f18762684d3b296520e4a665"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 2277,
+      "original_reference_answer": "11",
+      "question": "Davante has twice as many friends as there are days in the week. 3 of his friends are girls. How many friends does he have that are boys?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 3 correctly finds 14 total friends minus 3 girls = 11 boys; sample 0 first calls all 14 friends boys.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "11",
+          "reasoning_verdict": "BORDERLINE",
+          "reason": "Incorrectly labels 14 total friends as 14 boys, then correctly subtracts three girls for final 11.",
+          "report_extracted_response_sha256": "34cf8e0bd571261f2ca5f665fb08a01cc0fc88e814f1d5cdb32871efbc9a5a74"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 46,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Contradictory statements: 7×4 is not 28-to-36, 36−3 is not 36, and final answer 24 unsupported.",
+          "report_extracted_response_sha256": "7227f2259a17e912fe5b404470e1199f3bd2c66abe77ea974b61566a90a0aa20"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 42,
+          "extracted_answer": "9",
+          "reasoning_verdict": "FLAWED",
+          "reason": "States he has five friends despite computing 7×2=14, then falsely evaluates 14−3=9.",
+          "report_extracted_response_sha256": "c2a3405d7fb70372d2a9dd2349cc3b98580767d9dc98d1b869dec0b2f68b9693"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 38,
+          "extracted_answer": "11",
+          "reasoning_verdict": "SOUND",
+          "reason": "Twice the seven days gives 14 total friends; 14−3=11 boys.",
+          "report_extracted_response_sha256": "1b8d0f563d94f3bd59ede869c36132ea1f664eb164a24061103a6bf456b62d29"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 4,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2477,
+      "original_reference_answer": "52",
+      "question": "Mike has earned a total of $160 in wages this week. He received the wages for his first job, then later received the wages from his second job where he works 12 hours a week. If his second job pays $9 per hour then how much money, in dollars, did Mike receive from his first job?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 0 correctly assigns $108 to the SECOND job and subtracts it from $160. Other answer-correct samples wrongly attribute the $9/hour job to the first job.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 72,
+          "extracted_answer": "52",
+          "reasoning_verdict": "SOUND",
+          "reason": "Second-job pay=12×9=108; first-job pay=160−108=52.",
+          "report_extracted_response_sha256": "8965af927e7b86e94ae512e125280b53753b2aefd5d5e8af14a341be98fd1bb3"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 53,
+          "extracted_answer": "108",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes second-job $108 but then relabels $108 as first-job earnings.",
+          "report_extracted_response_sha256": "2f6801bb0202612356f445bf5bb372ffd13cbbce4ea1326782c17fd3ffc9a916"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "52",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Falsely assigns $9/hour and 12 hours to first job while separately calling its $52 remainder first-job earnings.",
+          "report_extracted_response_sha256": "eae6062975c4a9492fecd57183954eaefc792a9e073273f0d2a877332bca5a69"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 76,
+          "extracted_answer": "52",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Falsely assigns $9/hour and 12 hours to first job while calling the residual $52 first-job pay.",
+          "report_extracted_response_sha256": "eefdea8cd218609924b6109ac60b0e6939d071d5c62f5460fc3786da5cb277ee"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 19,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2491,
+      "original_reference_answer": "212",
+      "question": "A candy store sold 20 pounds of fudge for $2.50/pound, 5 dozen chocolate truffles for $1.50 each and 3 dozen chocolate-covered pretzels at $2.00 each.  How much money did the candy store make?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 3 correctly handles dozens: 20×2.50+5×12×1.50+3×12×2=212.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 102,
+          "extracted_answer": "63.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats five and three DOZEN as five and three items, giving $7.50 and $6 instead of $90 and $72.",
+          "report_extracted_response_sha256": "2762f8f73672067060e0fccd5c87ef7a254e4e5617659861c341103bfdf6424a"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "182",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts truffles as $60, omitting $1.50-per-truffle multiplier.",
+          "report_extracted_response_sha256": "b416d43fe1ed547bf3c19385b4ceb8220831fecceeea6468ebf3dd8ed72bb0be"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 97,
+          "extracted_answer": "63",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats dozen counts as unit counts and also falsely adds 50+7.5+6 as 63.",
+          "report_extracted_response_sha256": "fd2169a9decde1575ca94f5fc0e64e8edb2638ffc271ae612e0d36f81bd3b345"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 86,
+          "extracted_answer": "212",
+          "reasoning_verdict": "SOUND",
+          "reason": "Revenue $50 fudge + $90 truffles + $72 pretzels = $212.",
+          "report_extracted_response_sha256": "3376c88b93b4ad150af5bf1a1d5b3c9f4b059c0d95b9568357de8701c2c94e11"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 7,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2515,
+      "original_reference_answer": "2",
+      "question": "Mrs. Carlton gives out penalty points whenever her students misbehave. They get 5 points for interrupting, 10 points for insulting their classmates, and 25 points for throwing things. If they get 100 points, they have to go to the office. Jerry already interrupted twice and insulted his classmates 4 times. How many times can he throw things before he gets sent to the office?",
+      "recommendation": "HOLD",
+      "rationale": "From 50 existing points, one throw reaches 75 without office referral; second reaches 100 and triggers referral. “How many times can he throw things before he gets sent” could mean one safely before referral or two including the triggering throw.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 88,
+          "extracted_answer": "17",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Ignores event frequencies and incorrectly assigns throwing the five-point penalty.",
+          "report_extracted_response_sha256": "9f48cd8149cff06ff167cab5b19e1ab8cf469d742ef5097876b904fcf85e4c8c"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 122,
+          "extracted_answer": "2",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Correctly gets 50 points remaining and two 25-point throws to REACH threshold; phrasing may ask for throws strictly before referral.",
+          "report_extracted_response_sha256": "aa3e6b92b0da1ef0fa9738d698fe473f999f6fd1173723f06f4857898d9d464b"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 100,
+          "extracted_answer": "2",
+          "reasoning_verdict": "CONDITIONAL",
+          "reason": "Correct arithmetic to reach the threshold in two throws; the question’s “before” may exclude the referral-triggering throw.",
+          "report_extracted_response_sha256": "45adf514c5c8f4a0ede22366889cf6a26566efdd90603f17a006b11fa3b504e3"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 166,
+          "extracted_answer": "5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Confuses interruptions/insults and interprets remaining penalty points as times to throw.",
+          "report_extracted_response_sha256": "a71dbcf99a3709ba839695d456a8b97997eded4e0b5b60b03c8e4f947c5dfd3f"
+        }
+      ],
+      "advisory_pair_proposal": null
+    },
+    {
+      "source_index": 2717,
+      "original_reference_answer": "1591",
+      "question": "There are 322 voters in District 1. District 2 has 19 less voters than District 3. District 3 has twice as many voters as District 1. How many total voters are in Districts 1 - 3?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Samples 2 and 3 both correctly derive district counts 322,625,644 and sum 1591.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 73,
+          "extracted_answer": "1269",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes district 2 and 3 but omits district 1 from total.",
+          "report_extracted_response_sha256": "e68f750298b0bd197488d142f40e66066c7333ad62e70a2d00eb138698534284"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "1691",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correct district values, incorrect addition: 625+322+644 is 1591, not 1691.",
+          "report_extracted_response_sha256": "9dd7b5c07eec8825b28eb9ebc97a6a687bf7f625aa74abdfedefc7b66877261a"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 84,
+          "extracted_answer": "1591",
+          "reasoning_verdict": "SOUND",
+          "reason": "District 3=644, district 2=625; 625+644+322=1591.",
+          "report_extracted_response_sha256": "eb0d0824f4a92f1792ac9ea55f491342b4cf676697d2068f2d0c9a4285c236ba"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "1591",
+          "reasoning_verdict": "SOUND",
+          "reason": "District counts 322,625,644; sum 1591.",
+          "report_extracted_response_sha256": "cbda1261e89e81ec7761a9d7294777e7cf1616930f557cbd2ca45d91e04dc3ff"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 6,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2731,
+      "original_reference_answer": "56",
+      "question": "Jeff’s swimming coach required him to swim 98 laps over the weekend. On Saturday, Jeff swam 27 laps. On Sunday morning, he swam 15 laps, took a break, then resumed practice in the afternoon. How many laps did Jeff have remaining when he took the break?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Both samples 0 and 2 correctly count 27+15=42 laps and 98−42=56 remaining.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 79,
+          "extracted_answer": "56",
+          "reasoning_verdict": "SOUND",
+          "reason": "Counts 42 laps completed at break and subtracts from 98 to get 56.",
+          "report_extracted_response_sha256": "bf135afb3b275a1a5b05889b5e80e25de35e63cba355c053cd9d80fd44c636da"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 66,
+          "extracted_answer": "46",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly gets 56 at break but invents an extra 10 laps after it, yielding 46.",
+          "report_extracted_response_sha256": "48ec201773d35763246ae211a9c1946717c9b520cbf1d5a7322efb3f912a904f"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 44,
+          "extracted_answer": "56",
+          "reasoning_verdict": "SOUND",
+          "reason": "98−(27+15)=56 laps at the break.",
+          "report_extracted_response_sha256": "0c1ac4a55c5c8ebdb6fe0251f5606ca7475015a73fd0d778fc74da8c73d408ad"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 70,
+          "extracted_answer": "68",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Ignores 27 Saturday laps and invents an extra 15 laps after break.",
+          "report_extracted_response_sha256": "0be89d3c36538576ade3fffc2f0bdc642935270ec349a2cca1c9f87ecae3731b"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 9,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2786,
+      "original_reference_answer": "80",
+      "question": "Tom decided to go on a trip. During this trip, he needs to cross a lake, which in one direction takes 4 hours. During this time, Tom needs an assistant to help him with the crossing. Hiring an assistant costs $10 per hour. How much would Tom have to pay for help with crossing the lake back and forth?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 3 correctly applies 4 hours each way and $10/hour for $80 total.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 43,
+          "extracted_answer": "40",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Calculates one-way cost only, omitting return crossing.",
+          "report_extracted_response_sha256": "1d189cb21007a1e2b3080bc103bd56834a405854d99b5dc8b74e1feab1fd7f3e"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 106,
+          "extracted_answer": "120",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly finds $80 for eight hours then double-counts return trip for $120.",
+          "report_extracted_response_sha256": "9a065b69435232ed2330d2ca0b8642274276e6bb745fc3dbb76a6b046c40b11c"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 33,
+          "extracted_answer": "40",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Assumes round trip takes only four hours rather than eight.",
+          "report_extracted_response_sha256": "49b90ddec8bfa092fb9d33e1da487f0d61a994f00a69cedcd710a87a8777b1f3"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 77,
+          "extracted_answer": "80",
+          "reasoning_verdict": "SOUND",
+          "reason": "4×2=8 total hours, 8×$10=$80.",
+          "report_extracted_response_sha256": "31dfb3b1047e7e8213f7dc0aa5929a2193226ff949fa5397affe1fbff3ac9b21"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 29,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 2860,
+      "original_reference_answer": "9",
+      "question": "Mr. Mitchell is buying pizzas for the soccer team. He buys one slice for every goal they scored on the season. A large pizza has 12 slices. If he bought 6 pizzas, and the team had 8 games, how many goals did they score per game on average?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 0 correctly maps 6×12=72 total slices to 72 goals and divides by 8 games, despite a minor wording slip (“scored 8 games”).",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 66,
+          "extracted_answer": "9",
+          "reasoning_verdict": "SOUND",
+          "reason": "Total slices=6×12=72, one slice per goal, average 72/8=9 goals per game; minor “scored 8 games” wording slip.",
+          "report_extracted_response_sha256": "d51ef6d94eab3edb9b510c4acfe906b184fc1f102fa2d83066eaf2bb07b2fccd"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 54,
+          "extracted_answer": "1.5",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides slices by number of pizzas (72/6) rather than mapping slices to goals.",
+          "report_extracted_response_sha256": "560e9dea4f43f1becc6bf0b897a887b6260966f79707eda879a522e98e876a1d"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 53,
+          "extracted_answer": "6",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Divides total slices by slices per pizza instead of by eight games.",
+          "report_extracted_response_sha256": "cae430d13a18cb855b4b2cd91cd3954143d1ce99bd8405685e563c46a5da4553"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 84,
+          "extracted_answer": "0.75",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats six pizzas as six goals rather than 72 slices/goals.",
+          "report_extracted_response_sha256": "26c32b26058ce8dbee991c22ee1b645ee1fa10c35924397e077d4bd700a1fca9"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 12,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3012,
+      "original_reference_answer": "5",
+      "question": "Amber is baking cakes for her party. She has invited 8 friends and each one will want two slices of cake. Each cake makes 6 slices. If she bakes 4 cakes, how many slices will be left over at the end if she eats three herself?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Sample 2 has correct substance: 4×6=24 available, 8×2+3=19 eaten, 5 remain. Minor “need” wording does not alter its calculations.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 83,
+          "extracted_answer": "4",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents 16+4=20 slices, then computes nonsensical fractional leftovers.",
+          "report_extracted_response_sha256": "f05f931a224206b24fc3a311907ae4e8c1a9b36f2ce44757d435db5cacbda317"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 63,
+          "extracted_answer": "93",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Mistakenly multiplies 16 slices for guests by 6 slices/cake, giving 96 rather than 24 available.",
+          "report_extracted_response_sha256": "d8693156f0200bc60151dc8ecab974bbf3c680a4d9b069fde1312a53e98dee61"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 123,
+          "extracted_answer": "5",
+          "reasoning_verdict": "SOUND",
+          "reason": "24 baked slices minus 16 guests’ slices and 3 for Amber =5; calls 24 “needed” once, but correctly uses it as available supply.",
+          "report_extracted_response_sha256": "74e14ca73b826af7ec4466d88f47fc3e4c782b3504d91302a72f840f8ef0b504"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 84,
+          "extracted_answer": "24",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Treats 24 baked slices as demand, adds 3, then misreports available slices as remaining.",
+          "report_extracted_response_sha256": "5616b2a11e24e879fe35cb8499ae5366e01b00b5fc90faef2ee742e29a3a7b01"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "absolute_token_length_gap": 39,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3181,
+      "original_reference_answer": "20",
+      "question": "Mary's sheep can run 12 feet per second, and her sheepdog can run 20 feet per second. A sheep standing 160 feet away from the sheep dog bolts, and the dog runs after it. How many seconds does it take the dog to catch the sheep?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Only samples 2 and 3 correctly explain the dog closes a 160-foot gap at relative speed 20−12=8 ft/s. Sample 0 incorrectly says sheep gains 8 ft/s.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 55,
+          "extracted_answer": "20",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Gets final time 20 but states that the slower sheep gains 8 feet per second on the faster dog; reasoning direction is false.",
+          "report_extracted_response_sha256": "aa159eab8b12ee601547378ca927aab0e17721b0dd842a25d9f8264199df1ace"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 57,
+          "extracted_answer": "2",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Invents dog speed 80 ft/s and a false division 20/2=10 =>80.",
+          "report_extracted_response_sha256": "6e7f4c6ab41a89053f2c3ca8f5b316538991b2db4a7afe5d3911a3630803f86e"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 67,
+          "extracted_answer": "20",
+          "reasoning_verdict": "SOUND",
+          "reason": "Relative approach speed 20−12=8 ft/s; time 160/8=20 s.",
+          "report_extracted_response_sha256": "b98db748393d4b549ba2ce64d3d37dc564fec574e26b6d5cb3ca08c83bfbbad9"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 57,
+          "extracted_answer": "20",
+          "reasoning_verdict": "SOUND",
+          "reason": "Dog runs 8 ft/s faster, so closes 160 feet in 20 seconds.",
+          "report_extracted_response_sha256": "eea6d43bfe884d326e8a583c228cf02a14c99c4cde87e24a7c0ef222891270bd"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "absolute_token_length_gap": 0,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    },
+    {
+      "source_index": 3287,
+      "original_reference_answer": "650",
+      "question": "Jason is hiring two construction workers, one electrician and one plumber. If the construction workers each make $100/day, the electrician makes double what a worker is paid and the plumber makes 250% of a worker's salary, how much are the overall labor costs for one day?",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "rationale": "Samples 0 and 3 correctly sum two workers $200, electrician $200, plumber $250, total $650.",
+      "samples": [
+        {
+          "sample_index": 0,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 145,
+          "extracted_answer": "650",
+          "reasoning_verdict": "SOUND",
+          "reason": "Two laborers $200, electrician $200, plumber $250; sum $650.",
+          "report_extracted_response_sha256": "977c22594c4f898d83f0caba6ccffcc35fd7af9ced38d39808108f4094fa26a1"
+        },
+        {
+          "sample_index": 1,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 68,
+          "extracted_answer": "550",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Counts only one $100/day construction worker, giving $550.",
+          "report_extracted_response_sha256": "fe479113b217290164c53aed9c3ea7c96d668101603f9218f92d034ab0134407"
+        },
+        {
+          "sample_index": 2,
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 153,
+          "extracted_answer": "850",
+          "reasoning_verdict": "FLAWED",
+          "reason": "Correctly computes $200 worker wages and $450 specialist wages, then adds the electrician $200 a second time.",
+          "report_extracted_response_sha256": "2f22446834e15f315860945d99913e8dab7ca6f99874f93d95f6aa3ea6bb0bbd"
+        },
+        {
+          "sample_index": 3,
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "native_eos_stop": true,
+          "generated_tokens": 131,
+          "extracted_answer": "650",
+          "reasoning_verdict": "SOUND",
+          "reason": "Two construction workers $200, electrician $200, plumber $250; total $650.",
+          "report_extracted_response_sha256": "bd3ad715a2bb885b85682a19fc36d5376de0bbfc7dc7391da454ab693da1f384"
+        }
+      ],
+      "advisory_pair_proposal": {
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "absolute_token_length_gap": 8,
+        "selection_rule": "minimize absolute token length gap among eligible SOUND, answer-correct chosen and eligible FLAWED, answer-incorrect rejected; ties by chosen then rejected sample index"
+      }
+    }
+  ]
+}
