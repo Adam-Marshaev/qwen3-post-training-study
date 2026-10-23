@@ -1350,3 +1350,44 @@ No independent reasoning signoff or DPO training has occurred.
 
 Next: implement separately versioned intermediate-scale
 candidate generation, preserving the original 32-question pilot.
+
+---
+
+## 2026-10-23 — E003 DPO Training Completed
+
+The independently audited 109-pair preference dataset was used for
+one authorized LoRA DPO epoch, starting from E002a epoch 2.
+
+Before training, tokenizer, native-EOS, adapter-weight identity,
+frozen-reference routing, and TRL integration preflights passed.
+The initial policy/reference logits difference was zero.
+
+An FP16 precision-rounding issue in the separately loaded reference
+adapter was diagnosed and corrected by restoring the original
+checkpoint weights in memory.
+
+The V100-compatible execution path used eager attention and disabled
+PyTorch native Triton overrides.
+
+The run completed 14 optimizer updates in 16.0518 training seconds.
+Reported mean loss was 0.692963821547372.
+
+A gradient-checkpointing warning appeared, but post-training
+inspection confirmed that all 224 saved LoRA tensors changed and
+all resulting tensors were finite.
+
+Training revision:
+f16e90360690df121132bc6055282f27302a132a
+
+Training artifact:
+data/train_runs/e003_dpo_signed109_f16e903_v1/
+
+The frozen 747-question E003 development-validation evaluation was
+launched using revision:
+44fba97f6decaaf802713056f12ebd89984584d6
+
+Evaluation uses greedy decoding, FP16, eager attention, native EOS
+151643, a 512-token generation limit, and KV cache enabled.
+
+The evaluation result was not yet recorded at this milestone.
+No further SFT training was performed.

@@ -24,17 +24,15 @@ reinforcement learning experiments.
 
 ## Experiment Status
 
-No controlled benchmark or post-training experiment has been
-completed yet.
+Current status as of 2026-10-23:
 
-The initial Qwen3 inference tests were engineering smoke tests,
-not statistical evaluations.
+- E001: Pretrained baseline completed.
+- E002: Original SFT completed; EOS regression documented.
+- E002a: Corrected native-EOS SFT completed and evaluated.
+- E003: Signed-109 DPO training completed; validation result pending.
+- E004: GRPO not started.
 
-The first planned experiment is:
-
-E001 - Pretrained Qwen3 Mathematical Reasoning Baseline
-
-Status: Planned
+The official GSM8K test partition remains untouched.
 
 ---
 
@@ -355,3 +353,74 @@ construction are separately versioned and auditable.
 
 These 18 pairs validate the data pipeline. They are not a
 full-scale DPO training dataset.
+
+---
+
+## E003 — Signed-109 DPO Training
+
+**Training status:** Completed, 2026-10-23.
+**Validation status:** Full frozen 747-question evaluation launched;
+result not yet recorded.
+
+### Reproducibility
+
+- Training code revision:
+  `f16e90360690df121132bc6055282f27302a132a`
+- Starting checkpoint:
+  `data/train_runs/e002a_sft_lora_native_eos_v1/epoch_0002/adapter/`
+- Approved preference pairs: 109.
+- Pair dataset SHA256:
+  `7d088bd70dc1d3d8b05f251a5560b37aca24a064ec7c4c81c91a03b8d84dc8e9`
+- Docker image:
+  `sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e`
+
+### Training configuration
+
+- Method: LoRA DPO, sigmoid loss.
+- Beta: 0.1.
+- Learning rate: 1e-6.
+- Epochs: 1.
+- Effective batch size: 8.
+- Optimizer updates: 14.
+- GPU: Tesla V100-SXM2-32GB.
+- Precision: FP16 base, FP32 LoRA.
+- Attention: eager.
+- PyTorch native Triton overrides: disabled.
+- Reference: frozen E002a epoch-2 adapter.
+- Native completion EOS: 151643.
+- Training KV cache: disabled.
+- Generation/evaluation KV cache: enabled.
+
+### Observed training results
+
+- Training runtime: 16.0518 seconds.
+- Mean training loss: 0.692963821547372.
+- Completed steps: 14/14.
+- Final adapter tensors changed versus E002a: 224/224.
+- Layers containing changed tensors: 28/28.
+- Maximum absolute tensor-weight difference: approximately 7.39e-6.
+- Saved adapter tensors: finite.
+- Gradient-checkpointing warning observed; subsequent tensor audit
+  confirmed updates across all saved LoRA tensors.
+
+### Artifacts
+
+- Training output:
+  `data/train_runs/e003_dpo_signed109_f16e903_v1/`
+- Final adapter:
+  `data/train_runs/e003_dpo_signed109_f16e903_v1/final_policy_adapter/policy/`
+- Final adapter SHA256:
+  `10ae46d412f87e39e95891455fd41e7b6d9bd20bd8e9110a304b38d37a09af4a`
+- Training log:
+  `data/train_runs/e003_dpo_signed109_f16e903_v1.launch.log`
+- Validation evaluator revision:
+  `44fba97f6decaaf802713056f12ebd89984584d6`
+- Validation run:
+  `data/eval_runs/e003_dpo_signed109_cached_val747_v1_retry1/`
+
+### Interpretation
+
+Training completed and produced measurable adapter-weight changes.
+No reasoning-accuracy improvement is claimed before the frozen
+747-question development-validation evaluation is verified.
+The official GSM8K test partition was not used.
