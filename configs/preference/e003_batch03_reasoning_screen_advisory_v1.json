@@ -1,0 +1,1140 @@
+{
+  "batch_master_manifest_sha256": "c463c89e17297320fc890b1923e49763988ff339e6ea0b62c6d999536ae08cd6",
+  "batch_number": 3,
+  "batch_review_report_sha256": "3b7ecb8904c5bfabb11e713ef03cd9f36752bb9e16d462fe843c8784d5821993",
+  "batch_selection_manifest_sha256": "f4d7a86d3e7883079b4807d77271dbed244de4e14f0c3bb0375fcb25ea76b79c",
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "frozen_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "groups": [
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 25,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "8",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Kaylee will be 15 in seven years, hence 8 now. Sample 2 subtracts seven years twice; sample 3 uses Matt’s future age rather than his current age.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "8",
+          "generated_tokens": 42,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "8",
+          "generated_tokens": 42,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1",
+          "generated_tokens": 67,
+          "native_eos_stop": true,
+          "reasoning_note": "Kaylee will be 15 in seven years, hence 8 now. Sample 2 subtracts seven years twice; sample 3 uses Matt’s future age rather than his current age.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "29",
+          "generated_tokens": 89,
+          "native_eos_stop": true,
+          "reasoning_note": "Kaylee will be 15 in seven years, hence 8 now. Sample 2 subtracts seven years twice; sample 3 uses Matt’s future age rather than his current age.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4775
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 3,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "482",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "36 monthly fees total $432 plus one $50 down payment. Sample 2 charges the down payment annually; sample 3 omits the down payment.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "482",
+          "generated_tokens": 90,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "482",
+          "generated_tokens": 98,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "582",
+          "generated_tokens": 93,
+          "native_eos_stop": true,
+          "reasoning_note": "36 monthly fees total $432 plus one $50 down payment. Sample 2 charges the down payment annually; sample 3 omits the down payment.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "432",
+          "generated_tokens": 68,
+          "native_eos_stop": true,
+          "reasoning_note": "36 monthly fees total $432 plus one $50 down payment. Sample 2 charges the down payment annually; sample 3 omits the down payment.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4821
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 11,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "100",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Total must include 10 minutes troubleshooting, 60 waiting, and 30 yelling. Sample 0 omits the initial 10 minutes.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "90",
+          "generated_tokens": 61,
+          "native_eos_stop": true,
+          "reasoning_note": "Total must include 10 minutes troubleshooting, 60 waiting, and 30 yelling. Sample 0 omits the initial 10 minutes.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "100",
+          "generated_tokens": 72,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "100",
+          "generated_tokens": 81,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "100",
+          "generated_tokens": 88,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4830
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 6,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "3",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Ten people need 12 pounds total costing 300 cents. Sample 0 confusingly says EACH person gets 12 pounds, though it then calculates the correct total; sample 3 divides by price rather than multiplying correctly.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "3",
+          "generated_tokens": 85,
+          "native_eos_stop": true,
+          "reasoning_note": "Claims each of 10 guests gets 12 pounds, then correctly prices 12 pounds total; material quantity-label inconsistency.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "3",
+          "generated_tokens": 63,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "3",
+          "generated_tokens": 69,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "12",
+          "generated_tokens": 75,
+          "native_eos_stop": true,
+          "reasoning_note": "Ten people need 12 pounds total costing 300 cents. Sample 0 confusingly says EACH person gets 12 pounds, though it then calculates the correct total; sample 3 divides by price rather than multiplying correctly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4847
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "450",
+      "recommendation": "HOLD",
+      "review_note": "The reference 450 is the markup profit (€3 per pot × 150), whereas samples 0–2 report €2250 gross revenue. Wording “give back to the association” never specifies whether the charity receives gross proceeds or profit; hold reference interpretation.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "2250",
+          "generated_tokens": 101,
+          "native_eos_stop": true,
+          "reasoning_note": "The reference 450 is the markup profit (€3 per pot × 150), whereas samples 0–2 report €2250 gross revenue. Wording “give back to the association” never specifies whether the charity receives gross proceeds or profit; hold reference interpretation.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "2250",
+          "generated_tokens": 67,
+          "native_eos_stop": true,
+          "reasoning_note": "The reference 450 is the markup profit (€3 per pot × 150), whereas samples 0–2 report €2250 gross revenue. Wording “give back to the association” never specifies whether the charity receives gross proceeds or profit; hold reference interpretation.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "2250",
+          "generated_tokens": 68,
+          "native_eos_stop": true,
+          "reasoning_note": "The reference 450 is the markup profit (€3 per pot × 150), whereas samples 0–2 report €2250 gross revenue. Wording “give back to the association” never specifies whether the charity receives gross proceeds or profit; hold reference interpretation.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "450",
+          "generated_tokens": 112,
+          "native_eos_stop": true,
+          "reasoning_note": "Correct as net sales profit, but payment to association is not explicitly limited to profit.",
+          "reasoning_verdict": "CONDITIONAL",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4949
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 12,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "20",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "2005 attendance is 30 and 2006 attendance is 20. Sample 3 halves the 2004 value twice and then divides by three.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "20",
+          "generated_tokens": 57,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "20",
+          "generated_tokens": 89,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "20",
+          "generated_tokens": 87,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "5",
+          "generated_tokens": 75,
+          "native_eos_stop": true,
+          "reasoning_note": "2005 attendance is 30 and 2006 attendance is 20. Sample 3 halves the 2004 value twice and then divides by three.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 4997
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 2,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "56",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "There are 16 red, 8 blue, and 32 green gumballs. Sample 1 counts only eight red gumballs instead of sixteen.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "56",
+          "generated_tokens": 99,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "48",
+          "generated_tokens": 70,
+          "native_eos_stop": true,
+          "reasoning_note": "There are 16 red, 8 blue, and 32 green gumballs. Sample 1 counts only eight red gumballs instead of sixteen.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "56",
+          "generated_tokens": 66,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "56",
+          "generated_tokens": 72,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5008
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "2100",
+      "recommendation": "HOLD",
+      "review_note": "Correct total is 400×$3 + 600×$1.50 = $2100. Sample 1 calls 400 “the total number of green and red tiles” despite 1000 overall; sample 3 writes the mathematically false chained equality 40/100 = .40×1000 = 400. Both correct-label derivations have material contradictions.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1300",
+          "generated_tokens": 128,
+          "native_eos_stop": true,
+          "reasoning_note": "Correct total is 400×$3 + 600×$1.50 = $2100. Sample 1 calls 400 “the total number of green and red tiles” despite 1000 overall; sample 3 writes the mathematically false chained equality 40/100 = .40×1000 = 400. Both correct-label derivations have material contradictions.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "2100",
+          "generated_tokens": 130,
+          "native_eos_stop": true,
+          "reasoning_note": "States 400 is combined count of red and green tiles; correct counts are 400 green and 600 red.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "47",
+          "generated_tokens": 189,
+          "native_eos_stop": true,
+          "reasoning_note": "Correct total is 400×$3 + 600×$1.50 = $2100. Sample 1 calls 400 “the total number of green and red tiles” despite 1000 overall; sample 3 writes the mathematically false chained equality 40/100 = .40×1000 = 400. Both correct-label derivations have material contradictions.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "2100",
+          "generated_tokens": 214,
+          "native_eos_stop": true,
+          "reasoning_note": "Writes a false chained equality 40/100=.40*1000=400, although subsequent costs are correct.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5064
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 6,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "250",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Five shirts cost $500; four pants cost $1000, or $250 each. Sample 0 fails to divide by four pairs; sample 1 double-counts the $1500 total.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1000",
+          "generated_tokens": 118,
+          "native_eos_stop": true,
+          "reasoning_note": "Five shirts cost $500; four pants cost $1000, or $250 each. Sample 0 fails to divide by four pairs; sample 1 double-counts the $1500 total.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "500",
+          "generated_tokens": 82,
+          "native_eos_stop": true,
+          "reasoning_note": "Five shirts cost $500; four pants cost $1000, or $250 each. Sample 0 fails to divide by four pairs; sample 1 double-counts the $1500 total.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "250",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "250",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5200
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 2,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "10",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Mike is 73 inches tall and Mark is 63 inches tall. Sample 3 miscalculates Mark’s conversion as 69 inches.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "10",
+          "generated_tokens": 72,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "10",
+          "generated_tokens": 62,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "10",
+          "generated_tokens": 96,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "4",
+          "generated_tokens": 94,
+          "native_eos_stop": true,
+          "reasoning_note": "Mike is 73 inches tall and Mark is 63 inches tall. Sample 3 miscalculates Mark’s conversion as 69 inches.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5341
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 8,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "36",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Yellow = 14, green = 12, purple = 10. Sample 2 takes two fewer green candies than purple, not yellow.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "36",
+          "generated_tokens": 59,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "36",
+          "generated_tokens": 93,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "32",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "Yellow = 14, green = 12, purple = 10. Sample 2 takes two fewer green candies than purple, not yellow.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "36",
+          "generated_tokens": 68,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5509
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "184",
+      "recommendation": "HOLD",
+      "review_note": "Problem defines “walks” twice, first as 3/5 of running and then as five times jogging, but supplies no jogging distance. Sample 2 assumes the 24-mile walking distance also equals jogging distance; this is not stated. Hold the source rather than invent a correction.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "68.8",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "Problem defines “walks” twice, first as 3/5 of running and then as five times jogging, but supplies no jogging distance. Sample 2 assumes the 24-mile walking distance also equals jogging distance; this is not stated. Hold the source rather than invent a correction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "264",
+          "generated_tokens": 82,
+          "native_eos_stop": true,
+          "reasoning_note": "Problem defines “walks” twice, first as 3/5 of running and then as five times jogging, but supplies no jogging distance. Sample 2 assumes the 24-mile walking distance also equals jogging distance; this is not stated. Hold the source rather than invent a correction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "184",
+          "generated_tokens": 104,
+          "native_eos_stop": true,
+          "reasoning_note": "Assumes the missing jogging distance is 24 miles; wording does not establish this.",
+          "reasoning_verdict": "CONDITIONAL",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "248",
+          "generated_tokens": 94,
+          "native_eos_stop": true,
+          "reasoning_note": "Problem defines “walks” twice, first as 3/5 of running and then as five times jogging, but supplies no jogging distance. Sample 2 assumes the 24-mile walking distance also equals jogging distance; this is not stated. Hold the source rather than invent a correction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5599
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 2,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "58",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "3×4 + 6×6 + 2×5 = 58. Sample 2 double-counts an extra six people.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "58",
+          "generated_tokens": 94,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "58",
+          "generated_tokens": 128,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "64",
+          "generated_tokens": 96,
+          "native_eos_stop": true,
+          "reasoning_note": "3×4 + 6×6 + 2×5 = 58. Sample 2 double-counts an extra six people.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "58",
+          "generated_tokens": 117,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5611
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 1,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "30",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "40% off $5 means $3/kg, $30 for 10 kg. Sample 2 erroneously evaluates 5−(5×40%) as $2.50.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "30",
+          "generated_tokens": 47,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "30",
+          "generated_tokens": 64,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "25",
+          "generated_tokens": 63,
+          "native_eos_stop": true,
+          "reasoning_note": "40% off $5 means $3/kg, $30 for 10 kg. Sample 2 erroneously evaluates 5−(5×40%) as $2.50.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "30",
+          "generated_tokens": 100,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5625
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "1330",
+      "recommendation": "HOLD",
+      "review_note": "31 March days ×30 bookmarks +400 =1330 only if the current 400 bookmarks are counted before March begins. The question gives no “now” date, so the number of future bookmarking days is unspecified.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "1330",
+          "generated_tokens": 89,
+          "native_eos_stop": true,
+          "reasoning_note": "Assumes 400 existing bookmarks counted before the beginning of March, though the current date is unspecified.",
+          "reasoning_verdict": "CONDITIONAL",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "19300",
+          "generated_tokens": 189,
+          "native_eos_stop": true,
+          "reasoning_note": "31 March days ×30 bookmarks +400 =1330 only if the current 400 bookmarks are counted before March begins. The question gives no “now” date, so the number of future bookmarking days is unspecified.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1660",
+          "generated_tokens": 231,
+          "native_eos_stop": true,
+          "reasoning_note": "31 March days ×30 bookmarks +400 =1330 only if the current 400 bookmarks are counted before March begins. The question gives no “now” date, so the number of future bookmarking days is unspecified.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1240",
+          "generated_tokens": 87,
+          "native_eos_stop": true,
+          "reasoning_note": "31 March days ×30 bookmarks +400 =1330 only if the current 400 bookmarks are counted before March begins. The question gives no “now” date, so the number of future bookmarking days is unspecified.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5656
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 2,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "2",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Both children consume three cheeses per day, five days/week, four weeks =60 cheeses, or two packs. Sample 0 divides weekly total by five again and then misapplies the four-week multiplier.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "0.4",
+          "generated_tokens": 147,
+          "native_eos_stop": true,
+          "reasoning_note": "Both children consume three cheeses per day, five days/week, four weeks =60 cheeses, or two packs. Sample 0 divides weekly total by five again and then misapplies the four-week multiplier.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "2",
+          "generated_tokens": 149,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "2",
+          "generated_tokens": 84,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "2",
+          "generated_tokens": 78,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5679
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 17,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "7",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Four added candies yield 14, shared two per friend, hence seven friends. Sample 0 says seven “pieces of candy each” rather than seven friends, but sample 2 is unambiguous. Samples 1 and 3 invent additional candy.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "7",
+          "generated_tokens": 54,
+          "native_eos_stop": true,
+          "reasoning_note": "Correct quotient seven but says each friend receives seven pieces of candy instead of two.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "9",
+          "generated_tokens": 54,
+          "native_eos_stop": true,
+          "reasoning_note": "Four added candies yield 14, shared two per friend, hence seven friends. Sample 0 says seven “pieces of candy each” rather than seven friends, but sample 2 is unambiguous. Samples 1 and 3 invent additional candy.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "7",
+          "generated_tokens": 37,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "12",
+          "generated_tokens": 70,
+          "native_eos_stop": true,
+          "reasoning_note": "Four added candies yield 14, shared two per friend, hence seven friends. Sample 0 says seven “pieces of candy each” rather than seven friends, but sample 2 is unambiguous. Samples 1 and 3 invent additional candy.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5721
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 29,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "273",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "White 6; pink 54; red 213; total 273. Sample 2 reverses the pink/red labels despite the same numerical total. Sample 1 substitutes division by three for the red count.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "273",
+          "generated_tokens": 86,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "78",
+          "generated_tokens": 57,
+          "native_eos_stop": true,
+          "reasoning_note": "White 6; pink 54; red 213; total 273. Sample 2 reverses the pink/red labels despite the same numerical total. Sample 1 substitutes division by three for the red count.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "273",
+          "generated_tokens": 138,
+          "native_eos_stop": true,
+          "reasoning_note": "Reverses pink and red counts while accidentally preserving the combined sum.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "273",
+          "generated_tokens": 105,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5727
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 29,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "96",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Base services $80 plus tips $10 and $6 give $96. Sample 0 adds the tips twice; sample 2 calculates the tip multiple times.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "112",
+          "generated_tokens": 155,
+          "native_eos_stop": true,
+          "reasoning_note": "Base services $80 plus tips $10 and $6 give $96. Sample 0 adds the tips twice; sample 2 calculates the tip multiple times.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "96",
+          "generated_tokens": 115,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "144",
+          "generated_tokens": 144,
+          "native_eos_stop": true,
+          "reasoning_note": "Base services $80 plus tips $10 and $6 give $96. Sample 0 adds the tips twice; sample 2 calculates the tip multiple times.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "96",
+          "generated_tokens": 68,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5741
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "24",
+      "recommendation": "HOLD",
+      "review_note": "The intended arithmetic treats 30 as the TOTAL lot capacity and three caravans as consuming six spaces. However “There are 30 spaces for each vehicle in a parking lot” is poorly specified, not explicitly 30 total spaces. Retain on HOLD for prompt clarification.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 53,
+          "native_eos_stop": true,
+          "reasoning_note": "Interprets the ambiguous “30 spaces for each vehicle” as exactly 30 parking spaces in total.",
+          "reasoning_verdict": "CONDITIONAL",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 73,
+          "native_eos_stop": true,
+          "reasoning_note": "Assumes the lot has 30 spaces in total though wording says “for each vehicle”.",
+          "reasoning_verdict": "CONDITIONAL",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "60",
+          "generated_tokens": 52,
+          "native_eos_stop": true,
+          "reasoning_note": "The intended arithmetic treats 30 as the TOTAL lot capacity and three caravans as consuming six spaces. However “There are 30 spaces for each vehicle in a parking lot” is poorly specified, not explicitly 30 total spaces. Retain on HOLD for prompt clarification.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "22",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "The intended arithmetic treats 30 as the TOTAL lot capacity and three caravans as consuming six spaces. However “There are 30 spaces for each vehicle in a parking lot” is poorly specified, not explicitly 30 total spaces. Retain on HOLD for prompt clarification.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5775
+    }
+  ],
+  "independent_human_signoff": false,
+  "official_test_used": false,
+  "original_candidates_modified": false,
+  "schema": "e003_remaining_review122_batch03_reasoning_screen_advisory_v1",
+  "source_index_order": [
+    4775,
+    4821,
+    4830,
+    4847,
+    4949,
+    4997,
+    5008,
+    5064,
+    5200,
+    5341,
+    5509,
+    5599,
+    5611,
+    5625,
+    5656,
+    5679,
+    5721,
+    5727,
+    5741,
+    5775
+  ],
+  "summary": {
+    "batch_number": 3,
+    "candidate_count": 80,
+    "hold_indices": [
+      4949,
+      5064,
+      5599,
+      5656,
+      5775
+    ],
+    "largest_token_gap_flags": [],
+    "maximum_absolute_token_length_gap": 29,
+    "median_absolute_token_length_gap": 6,
+    "proposed_pair_count": 15,
+    "reasoning_verdict_counts": {
+      "BORDERLINE": 4,
+      "CONDITIONAL": 5,
+      "FLAWED": 34,
+      "SOUND": 37
+    },
+    "recommendation_counts": {
+      "HOLD": 5,
+      "PROVISIONAL_APPROVE": 15
+    },
+    "total_groups": 20
+  },
+  "training_approved": false,
+  "training_performed": false,
+  "uploaded_archive_sha256": "aa28ddc894615d2b611007ea16cf2fde8d13254225278aa09fdb3ad99eb1def0"
+}

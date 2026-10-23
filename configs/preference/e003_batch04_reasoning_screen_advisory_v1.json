@@ -1,0 +1,1160 @@
+{
+  "batch_master_manifest_sha256": "c463c89e17297320fc890b1923e49763988ff339e6ea0b62c6d999536ae08cd6",
+  "batch_number": 4,
+  "batch_review_report_sha256": "409fd7f8e51e29b874b2a75f056eeb489ca5455a180c321738ca239c595239f8",
+  "batch_selection_manifest_sha256": "815b976c8e92acdd155f7aaffa26fa9d73f229656f3c5d29712caf4a863734c6",
+  "classification": "advisory_only_not_frozen_training_dataset",
+  "frozen_candidate_dataset_sha256": "3366d277c6ada2dd9a8469b3e3f870b020955e2464c60974e9db14ef57cb9bd4",
+  "groups": [
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 4,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "25",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Crops require 30 gallons, pigs 40, ducks 5; 75 gallons ÷ 3 per minute =25 minutes. Sample 2 confuses water volume and time and multiplies crop use by the pumping rate.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "25",
+          "generated_tokens": 201,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "25",
+          "generated_tokens": 134,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "135",
+          "generated_tokens": 116,
+          "native_eos_stop": true,
+          "reasoning_note": "Crops require 30 gallons, pigs 40, ducks 5; 75 gallons ÷ 3 per minute =25 minutes. Sample 2 confuses water volume and time and multiplies crop use by the pumping rate.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "25",
+          "generated_tokens": 120,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5819
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 47,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "94",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "The four test scores add to 376, average 94. Sample 2 creates 16 alleged scores and nonsensical arithmetic.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "94",
+          "generated_tokens": 58,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "94",
+          "generated_tokens": 48,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "294.0625",
+          "generated_tokens": 105,
+          "native_eos_stop": true,
+          "reasoning_note": "The four test scores add to 376, average 94. Sample 2 creates 16 alleged scores and nonsensical arithmetic.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "94",
+          "generated_tokens": 51,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5828
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "72",
+      "recommendation": "HOLD",
+      "review_note": "Twelve weeks at 4 crickets and three weeks at 8 yield 72. Sample 1 arrives at 72 by weighted-average arithmetic but calls 4×0.8=3.2 “weeks” and multiplies by 15 as “crickets per week”; the unit and derivation are contradictory. Only answer-correct sample is unsound.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "168",
+          "generated_tokens": 187,
+          "native_eos_stop": true,
+          "reasoning_note": "Twelve weeks at 4 crickets and three weeks at 8 yield 72. Sample 1 arrives at 72 by weighted-average arithmetic but calls 4×0.8=3.2 “weeks” and multiplies by 15 as “crickets per week”; the unit and derivation are contradictory. Only answer-correct sample is unsound.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "72",
+          "generated_tokens": 199,
+          "native_eos_stop": true,
+          "reasoning_note": "Treats weighted average crickets per week as “weeks” and then as per-week counts; correct result is not reliably derived.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "135",
+          "generated_tokens": 147,
+          "native_eos_stop": true,
+          "reasoning_note": "Twelve weeks at 4 crickets and three weeks at 8 yield 72. Sample 1 arrives at 72 by weighted-average arithmetic but calls 4×0.8=3.2 “weeks” and multiplies by 15 as “crickets per week”; the unit and derivation are contradictory. Only answer-correct sample is unsound.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "144",
+          "generated_tokens": 177,
+          "native_eos_stop": true,
+          "reasoning_note": "Twelve weeks at 4 crickets and three weeks at 8 yield 72. Sample 1 arrives at 72 by weighted-average arithmetic but calls 4×0.8=3.2 “weeks” and multiplies by 15 as “crickets per week”; the unit and derivation are contradictory. Only answer-correct sample is unsound.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5851
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "420",
+      "recommendation": "HOLD",
+      "review_note": "Six orange harvests yield $300 and four apple harvests yield $120. Correct-label sample 0 repeatedly labels apple harvests as oranges; sample 1 states “6 oranges” and “4 apples” rather than six and four harvests. Retain on HOLD under strict reasoning-quality standards.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "420",
+          "generated_tokens": 230,
+          "native_eos_stop": true,
+          "reasoning_note": "Labels apple-harvest frequency and income repeatedly as oranges, contradicting the question.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "420",
+          "generated_tokens": 107,
+          "native_eos_stop": true,
+          "reasoning_note": "Calls six and four harvest events “oranges” and “apples”; inaccurate units of count.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "960",
+          "generated_tokens": 93,
+          "native_eos_stop": true,
+          "reasoning_note": "Six orange harvests yield $300 and four apple harvests yield $120. Correct-label sample 0 repeatedly labels apple harvests as oranges; sample 1 states “6 oranges” and “4 apples” rather than six and four harvests. Retain on HOLD under strict reasoning-quality standards.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "960",
+          "generated_tokens": 99,
+          "native_eos_stop": true,
+          "reasoning_note": "Six orange harvests yield $300 and four apple harvests yield $120. Correct-label sample 0 repeatedly labels apple harvests as oranges; sample 1 states “6 oranges” and “4 apples” rather than six and four harvests. Retain on HOLD under strict reasoning-quality standards.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5870
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 57,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "15",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Sixty minutes per hour yields 5 shirts then 10 shirts, total 15. Sample 0 mislabels produced-shirt counts as hours; samples 1 and 2 are sound. Sample 3 multiplies rather than divides time by production interval.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "15",
+          "generated_tokens": 92,
+          "native_eos_stop": true,
+          "reasoning_note": "Calls 5 and 10 shirts “hours of work”; wrong dimensional description despite correct total.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "15",
+          "generated_tokens": 65,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "15",
+          "generated_tokens": 61,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1080",
+          "generated_tokens": 122,
+          "native_eos_stop": true,
+          "reasoning_note": "Sixty minutes per hour yields 5 shirts then 10 shirts, total 15. Sample 0 mislabels produced-shirt counts as hours; samples 1 and 2 are sound. Sample 3 multiplies rather than divides time by production interval.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5885
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 7,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "32",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Four times six teas plus eight extra lattes gives 32. Sample 1 evaluates 4×6+8 incorrectly as 28.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "32",
+          "generated_tokens": 25,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "28",
+          "generated_tokens": 54,
+          "native_eos_stop": true,
+          "reasoning_note": "Four times six teas plus eight extra lattes gives 32. Sample 1 evaluates 4×6+8 incorrectly as 28.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "32",
+          "generated_tokens": 47,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "32",
+          "generated_tokens": 47,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5903
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 15,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "120",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Three dogs produce twelve puppies, each needs two $5 shots, total $120. Sample 3 wrongly says each dog produced twelve puppies; sample 2 doubles shots required per puppy.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "120",
+          "generated_tokens": 51,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "120",
+          "generated_tokens": 62,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "240",
+          "generated_tokens": 77,
+          "native_eos_stop": true,
+          "reasoning_note": "Three dogs produce twelve puppies, each needs two $5 shots, total $120. Sample 3 wrongly says each dog produced twelve puppies; sample 2 doubles shots required per puppy.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "120",
+          "generated_tokens": 55,
+          "native_eos_stop": true,
+          "reasoning_note": "Claims each mother dog has 4×3=12 puppies; twelve is the count across all three dogs.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5980
+    },
+    {
+      "advisory_pair_proposal": null,
+      "independent_pair_signoff": false,
+      "original_reference_answer": "24",
+      "recommendation": "HOLD",
+      "review_note": "If Spaatz has one and is two fewer than half of Frankie, then 1 = F/2−2 and F=6, Binkie=24. Sole correct sample 1 instead derives F using unsupported 2×2+2, ignoring the given one gemstone; no valid derivation is supplied.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "16",
+          "generated_tokens": 78,
+          "native_eos_stop": true,
+          "reasoning_note": "If Spaatz has one and is two fewer than half of Frankie, then 1 = F/2−2 and F=6, Binkie=24. Sole correct sample 1 instead derives F using unsupported 2×2+2, ignoring the given one gemstone; no valid derivation is supplied.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 84,
+          "native_eos_stop": true,
+          "reasoning_note": "Equation 2×2+2=6 ignores the supplied one gemstone and is not derived from 1=F/2−2.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "12",
+          "generated_tokens": 75,
+          "native_eos_stop": true,
+          "reasoning_note": "If Spaatz has one and is two fewer than half of Frankie, then 1 = F/2−2 and F=6, Binkie=24. Sole correct sample 1 instead derives F using unsupported 2×2+2, ignoring the given one gemstone; no valid derivation is supplied.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "4",
+          "generated_tokens": 100,
+          "native_eos_stop": true,
+          "reasoning_note": "If Spaatz has one and is two fewer than half of Frankie, then 1 = F/2−2 and F=6, Binkie=24. Sole correct sample 1 instead derives F using unsupported 2×2+2, ignoring the given one gemstone; no valid derivation is supplied.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 5994
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 3,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 0,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "4",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Cottage requires 3×8=24 builder-days; six builders require four days. Incorrect samples invert the worker-time relationship.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "16",
+          "generated_tokens": 72,
+          "native_eos_stop": true,
+          "reasoning_note": "Cottage requires 3×8=24 builder-days; six builders require four days. Incorrect samples invert the worker-time relationship.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "4",
+          "generated_tokens": 60,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "4",
+          "generated_tokens": 69,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 37,
+          "native_eos_stop": true,
+          "reasoning_note": "Cottage requires 3×8=24 builder-days; six builders require four days. Incorrect samples invert the worker-time relationship.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6000
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 7,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "90",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "After successive closures 300, then 180, then 90 tabs remain. Sample 1 says “closed 180/2=90 tabs remaining open,” a contradictory operation/result, whereas sample 3 is unambiguous. Sample 2 forgets to remove the 120 tabs closed at step two.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "280",
+          "generated_tokens": 129,
+          "native_eos_stop": true,
+          "reasoning_note": "After successive closures 300, then 180, then 90 tabs remain. Sample 1 says “closed 180/2=90 tabs remaining open,” a contradictory operation/result, whereas sample 3 is unambiguous. Sample 2 forgets to remove the 120 tabs closed at step two.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "90",
+          "generated_tokens": 94,
+          "native_eos_stop": true,
+          "reasoning_note": "Says it “closed 180/2=90 tabs remaining open”; contradicts the meaning of closed versus remaining.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "210",
+          "generated_tokens": 135,
+          "native_eos_stop": true,
+          "reasoning_note": "After successive closures 300, then 180, then 90 tabs remain. Sample 1 says “closed 180/2=90 tabs remaining open,” a contradictory operation/result, whereas sample 3 is unambiguous. Sample 2 forgets to remove the 120 tabs closed at step two.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "90",
+          "generated_tokens": 142,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6006
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 1,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "65",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "James is 30 now, 35 in five years; Matt will then be 70 and is currently 65. Wrong samples confuse the ages and multiply/divide in the wrong direction.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "12.5",
+          "generated_tokens": 108,
+          "native_eos_stop": true,
+          "reasoning_note": "James is 30 now, 35 in five years; Matt will then be 70 and is currently 65. Wrong samples confuse the ages and multiply/divide in the wrong direction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "5",
+          "generated_tokens": 65,
+          "native_eos_stop": true,
+          "reasoning_note": "James is 30 now, 35 in five years; Matt will then be 70 and is currently 65. Wrong samples confuse the ages and multiply/divide in the wrong direction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "4",
+          "generated_tokens": 51,
+          "native_eos_stop": true,
+          "reasoning_note": "James is 30 now, 35 in five years; Matt will then be 70 and is currently 65. Wrong samples confuse the ages and multiply/divide in the wrong direction.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "65",
+          "generated_tokens": 66,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6015
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 1,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "135",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Speed 180/4 =45 mph, next three hours give 135 miles. Sample 1 states 180/4=480.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "135",
+          "generated_tokens": 59,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "1440",
+          "generated_tokens": 58,
+          "native_eos_stop": true,
+          "reasoning_note": "Speed 180/4 =45 mph, next three hours give 135 miles. Sample 1 states 180/4=480.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "135",
+          "generated_tokens": 57,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "135",
+          "generated_tokens": 54,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6030
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 33,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "99",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Sell 57 cookies and 28 brownies: $57+$42=$99. All incorrect samples omit consumed items or subtract counts incorrectly.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "99",
+          "generated_tokens": 135,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "103",
+          "generated_tokens": 94,
+          "native_eos_stop": true,
+          "reasoning_note": "Sell 57 cookies and 28 brownies: $57+$42=$99. All incorrect samples omit consumed items or subtract counts incorrectly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "103",
+          "generated_tokens": 168,
+          "native_eos_stop": true,
+          "reasoning_note": "Sell 57 cookies and 28 brownies: $57+$42=$99. All incorrect samples omit consumed items or subtract counts incorrectly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "87.5",
+          "generated_tokens": 217,
+          "native_eos_stop": true,
+          "reasoning_note": "Sell 57 cookies and 28 brownies: $57+$42=$99. All incorrect samples omit consumed items or subtract counts incorrectly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6047
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 8,
+        "chosen_sample_index": 3,
+        "rejected_sample_index": 0,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "24",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "After losing six cans Tim has sixteen; he purchases eight and ends with 24. Samples 1–2 misattribute removal to Tim rather than Jeff, while sample 3 correctly describes it. Sample 0 subtracts purchased soda.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "8",
+          "generated_tokens": 90,
+          "native_eos_stop": true,
+          "reasoning_note": "After losing six cans Tim has sixteen; he purchases eight and ends with 24. Samples 1–2 misattribute removal to Tim rather than Jeff, while sample 3 correctly describes it. Sample 0 subtracts purchased soda.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 90,
+          "native_eos_stop": true,
+          "reasoning_note": "Says Tim took the six cans to Jeff, while Jeff actually took them from Tim.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 76,
+          "native_eos_stop": true,
+          "reasoning_note": "Says Tim takes the six cans, whereas Jeff is the actor.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "24",
+          "generated_tokens": 82,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6103
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 2,
+        "chosen_sample_index": 2,
+        "rejected_sample_index": 1,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "210",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Revenue $80+$50+$80=$210. Incorrect samples carry out the item multiplications but add them incorrectly.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "110",
+          "generated_tokens": 111,
+          "native_eos_stop": true,
+          "reasoning_note": "Revenue $80+$50+$80=$210. Incorrect samples carry out the item multiplications but add them incorrectly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "150",
+          "generated_tokens": 105,
+          "native_eos_stop": true,
+          "reasoning_note": "Revenue $80+$50+$80=$210. Incorrect samples carry out the item multiplications but add them incorrectly.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "210",
+          "generated_tokens": 107,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "210",
+          "generated_tokens": 90,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6159
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 54,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 2,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "62",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "January and December each have 31 days; sleeping 2 additional hours per night gives 62 more monthly hours. Samples 1–2 only report the difference per night, not the requested January total.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "62",
+          "generated_tokens": 82,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "2",
+          "generated_tokens": 24,
+          "native_eos_stop": true,
+          "reasoning_note": "January and December each have 31 days; sleeping 2 additional hours per night gives 62 more monthly hours. Samples 1–2 only report the difference per night, not the requested January total.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "2",
+          "generated_tokens": 28,
+          "native_eos_stop": true,
+          "reasoning_note": "January and December each have 31 days; sleeping 2 additional hours per night gives 62 more monthly hours. Samples 1–2 only report the difference per night, not the requested January total.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "62",
+          "generated_tokens": 109,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6190
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 16,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "67",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Three episodes/week over 201 episodes gives 67 weeks. Incorrect samples misread the schedule or use the wrong divisor.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "67",
+          "generated_tokens": 84,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "402",
+          "generated_tokens": 63,
+          "native_eos_stop": true,
+          "reasoning_note": "Three episodes/week over 201 episodes gives 67 weeks. Incorrect samples misread the schedule or use the wrong divisor.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "94.5",
+          "generated_tokens": 126,
+          "native_eos_stop": true,
+          "reasoning_note": "Three episodes/week over 201 episodes gives 67 weeks. Incorrect samples misread the schedule or use the wrong divisor.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "50",
+          "generated_tokens": 100,
+          "native_eos_stop": true,
+          "reasoning_note": "Three episodes/week over 201 episodes gives 67 weeks. Incorrect samples misread the schedule or use the wrong divisor.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6194
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 0,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "38",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Six ties and twelve losses leave 38 wins out of 56. Sample 0 calls the 18 nonwins “losses” rather than losses plus ties. Sample 1 is sound; incorrect samples miscount ties/wins.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "38",
+          "generated_tokens": 50,
+          "native_eos_stop": true,
+          "reasoning_note": "Calls twelve losses plus six ties “losses”, rather than non-wins.",
+          "reasoning_verdict": "BORDERLINE",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "38",
+          "generated_tokens": 71,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "34",
+          "generated_tokens": 48,
+          "native_eos_stop": true,
+          "reasoning_note": "Six ties and twelve losses leave 38 wins out of 56. Sample 0 calls the 18 nonwins “losses” rather than losses plus ties. Sample 1 is sound; incorrect samples miscount ties/wins.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "50",
+          "generated_tokens": 71,
+          "native_eos_stop": true,
+          "reasoning_note": "Six ties and twelve losses leave 38 wins out of 56. Sample 0 calls the 18 nonwins “losses” rather than losses plus ties. Sample 1 is sound; incorrect samples miscount ties/wins.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6204
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 1,
+        "chosen_sample_index": 0,
+        "rejected_sample_index": 3,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "44",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Eight cookie batches each need 4+1.5=5.5 cups total, hence 44. Sample 3 invents a factor of three.",
+      "samples": [
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "44",
+          "generated_tokens": 56,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "44",
+          "generated_tokens": 88,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "44",
+          "generated_tokens": 101,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "96",
+          "generated_tokens": 55,
+          "native_eos_stop": true,
+          "reasoning_note": "Eight cookie batches each need 4+1.5=5.5 cups total, hence 44. Sample 3 invents a factor of three.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6208
+    },
+    {
+      "advisory_pair_proposal": {
+        "absolute_token_length_gap": 20,
+        "chosen_sample_index": 1,
+        "rejected_sample_index": 0,
+        "selection_rule": "min_absolute_token_gap_then_chosen_index_then_rejected_index"
+      },
+      "independent_pair_signoff": false,
+      "original_reference_answer": "41",
+      "recommendation": "PROVISIONAL_APPROVE",
+      "review_note": "Vlad is 75 inches, sister 34 inches, difference 41. Sample 0 ignores the extra inches. Sample 2 is truncated and ineligible; do not pair with it.",
+      "samples": [
+        {
+          "answer_matches_original_reference": false,
+          "eligible": true,
+          "extracted_answer": "48",
+          "generated_tokens": 63,
+          "native_eos_stop": true,
+          "reasoning_note": "Vlad is 75 inches, sister 34 inches, difference 41. Sample 0 ignores the extra inches. Sample 2 is truncated and ineligible; do not pair with it.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 0
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "41",
+          "generated_tokens": 83,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 1
+        },
+        {
+          "answer_matches_original_reference": false,
+          "eligible": false,
+          "extracted_answer": "None",
+          "generated_tokens": 256,
+          "native_eos_stop": false,
+          "reasoning_note": "Vlad is 75 inches, sister 34 inches, difference 41. Sample 0 ignores the extra inches. Sample 2 is truncated and ineligible; do not pair with it.",
+          "reasoning_verdict": "FLAWED",
+          "sample_index": 2
+        },
+        {
+          "answer_matches_original_reference": true,
+          "eligible": true,
+          "extracted_answer": "41",
+          "generated_tokens": 87,
+          "native_eos_stop": true,
+          "reasoning_note": "Mathematical steps substantiate the stated answer and source reference.",
+          "reasoning_verdict": "SOUND",
+          "sample_index": 3
+        }
+      ],
+      "source_index": 6239
+    }
+  ],
+  "independent_human_signoff": false,
+  "official_test_used": false,
+  "original_candidates_modified": false,
+  "schema": "e003_remaining_review122_batch04_reasoning_screen_advisory_v1",
+  "source_index_order": [
+    5819,
+    5828,
+    5851,
+    5870,
+    5885,
+    5903,
+    5980,
+    5994,
+    6000,
+    6006,
+    6015,
+    6030,
+    6047,
+    6103,
+    6159,
+    6190,
+    6194,
+    6204,
+    6208,
+    6239
+  ],
+  "summary": {
+    "batch_number": 4,
+    "candidate_count": 80,
+    "hold_indices": [
+      5851,
+      5870,
+      5994
+    ],
+    "largest_token_gap_flags": [
+      {
+        "gap": 47,
+        "source_index": 5828
+      },
+      {
+        "gap": 57,
+        "source_index": 5885
+      },
+      {
+        "gap": 54,
+        "source_index": 6190
+      }
+    ],
+    "maximum_absolute_token_length_gap": 57,
+    "median_absolute_token_length_gap": 7,
+    "proposed_pair_count": 17,
+    "reasoning_verdict_counts": {
+      "BORDERLINE": 7,
+      "FLAWED": 40,
+      "SOUND": 33
+    },
+    "recommendation_counts": {
+      "HOLD": 3,
+      "PROVISIONAL_APPROVE": 17
+    },
+    "total_groups": 20
+  },
+  "training_approved": false,
+  "training_performed": false,
+  "uploaded_archive_sha256": "aa28ddc894615d2b611007ea16cf2fde8d13254225278aa09fdb3ad99eb1def0"
+}
