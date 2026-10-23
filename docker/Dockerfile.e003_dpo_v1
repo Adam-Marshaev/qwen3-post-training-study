@@ -1,0 +1,9 @@
+FROM llm-post-training-lab:lora
+
+RUN /usr/bin/python3 -m pip install \
+    --no-cache-dir \
+    --disable-pip-version-check \
+    "trl==0.26.2" \
+    "datasets==4.0.0"
+
+RUN /usr/bin/python3 -m pip check
