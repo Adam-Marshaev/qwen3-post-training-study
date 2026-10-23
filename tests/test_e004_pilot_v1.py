@@ -118,6 +118,8 @@ class TestE004Pilot(unittest.TestCase):
                     "native_eos_stop": True, "reached_token_cap": False,
                     "extraction_status": "valid", "eligible": True,
                     "correct": j == 0,
+                    "unwanted_continuation": False,
+                    "response": "The answer is 1." if j == 0 else "The answer is 2.",
                     "generated_tokens": 42, "generation_seconds": 1.0,
                 })
         result = output_summary(rows, examples, "0"*64, "0"*40, 100)
