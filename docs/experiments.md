@@ -637,3 +637,117 @@ dataset size alone caused the lack of improvement.
 Preserve the original E003 and E003b checkpoints and evaluation
 artifacts. Any expanded preference dataset must be separately
 versioned, reviewed and authorized.
+
+<!-- e004_p3_handoff_2026_10_24_v1 -->
+
+---
+
+## E003: DPO Results and E004 Experiment Handoff (2026-10-24)
+
+**Status:** E003 completed; E004 preference-data generation in progress;
+no E004 DPO or GRPO training authorized or performed.
+
+### E003 DPO results (frozen 747-question development validation)
+
+E002a native-EOS SFT reference: **433/747 (57.97%)**. E003 began
+from the frozen E002a epoch-2 LoRA adapter (SHA256
+`f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`).
+
+| Run | Preference data | Settings | Validation result |
+|---|---|---|---|
+| E003 | 109 signed unique-source pairs | beta=0.1; LR=1e-6; 1 epoch; 14 steps | 433/747 (57.97%) |
+| E003b | Same 109 pairs | LR=5e-6 | 433/747 (57.97%) |
+
+E003 changed six validation responses from correct to wrong and six
+from wrong to correct relative to E002a. E003b had 11 gains and 11
+losses relative to E002a. Neither improved overall validation accuracy.
+A correct numeric answer did not always imply sound intermediate reasoning.
+Do not use the official GSM8K test set for selection or tuning.
+
+### E004: Arithmetic-first DPO preference-data scaling
+
+**Goal:** approximately 500–1,000 useful source-unique preference
+pairs, subject to quality auditing; target is not a hard acceptance quota.
+**E004 is DPO data-scale work; E005 GRPO is only a possible later path.**
+Historical notes describing E004 as GRPO are superseded by this entry.
+
+Frozen GSM8K development split: 6,726 training questions and 747
+validation questions. E004 sampled *training* questions only, disjoint
+from previously sampled preference pools. Generation used frozen E002a,
+four responses per source, temperature 0.8, top-p 0.95, maximum 256
+new tokens, native EOS 151643, and no weight updates.
+
+| Measure | P1 | P2 | Combined |
+|---|---:|---:|---:|
+| Distinct source questions | 250 | 250 | 500 |
+| Generated responses | 1,000 | 1,000 | 2,000 |
+| Eligible responses | 987 | 991 | 1,978 |
+| Eligible correct responses | 525 | 539 | 1,064 |
+| Mixed eligible correct/incorrect groups | 135 | 137 | 272 |
+| Groups passing mechanical screen | 91 | 87 | 178 |
+| Arithmetic-first provisional pairs | 83 | 80 | **163** |
+| Provisional yield per source question | 33.2% | 32.0% | 32.6% |
+
+The arithmetic-first policy permits minor wording and unit-label
+imperfections but holds material arithmetic/quantity-relation errors,
+coincidental correct answers, and material question ambiguity. Original
+answers are not rewritten or repaired. P1/P2 source-specific assistant
+holds are historical advisory decisions, **not a general-purpose
+automatic semantic verifier**. QC worksheets contain 30 provisional
+accepts and 10 rejects per pilot; assistant review is not independent
+quality certification. **Approved E004 training pairs: 0.**
+
+#### Immutable provenance
+
+- P1 generator commit: `fc6d48475f018c1a26d98d81694c8b6fbc31b815`.
+- P1 candidates SHA256: `314626f08e0ac24c84efe9c6c2a1aae1a60018f74856613942bf84eb92eda628`.
+- P1 review freeze commit: `fde14abdf6791a0796799087f85154982e1628dd`.
+- P1 advisory decision SHA256: `b7114a4f91f22dd30fd0e66b5818e2f3c8cc9f05023ff308c508416f89ee945c`.
+- P2 generator commit: `f543aa41ff917d96b8f26b38df9c6c00f91b1619`.
+- P2 candidates SHA256: `568b15094c755f73f240a0fcd91deb601ba48c1914d4e9fb2d7647573ce6bf79`.
+- P2 selection SHA256: `3bd3ebf184b551394f7137ec6cf0096c312139ea68d94a61e051b5f9a4c40d72`.
+- P2 review decision SHA256: `8e5adf5663b753ff14b9db1ee5a845643e7dfb1c07ca69f8b948bf29919e0cdb`.
+- P2 review freeze commit: `331499df3175737bb9464a3d9a53a365fc494431`.
+- Docker image ID: `sha256:e6248de1867ccb6aae297a49228532721014f16888b126b8532705e0d9e8ee0e` (do not use mutable tag).
+- P1 run: `data/preference_runs/e004_p1_250_k4_fc6d484_v1/`.
+- P2 run: `data/preference_runs/e004_p2_250_k4_f543aa4_v1/`.
+- Reviews: `protocols/e004_p1_arithmetic_first_v1/` and
+  `protocols/e004_p2_arithmetic_first_v1/`.
+
+#### E004-P1 deterministic baseline coverage (TRAIN partition diagnostic)
+
+E002a greedy inference on all 250 P1 training sources: 145 correct,
+105 wrong (58.00% accuracy). Of 135 mixed-response questions, 84 were
+correct and 51 wrong (37.78% error); among 115 other questions, 61
+correct and 54 wrong (46.96% error). Of the 83 provisional P1 pairs,
+27 corresponded to greedy baseline errors and 56 to successes.
+This is **in-sample training-partition coverage**, not held-out
+validation or evidence that DPO improves generalization.
+
+- Predictions SHA256: `f549c524edb4720a6bdabb372ab75892faae0d35b6e3f72ad149fed0c471150c`.
+- Coverage SHA256: `1e8aab76fd3bb271c40c79393fb678ba335b9a9a77d18594dbd1a5bdb49a7c52`.
+- Note: original final files named `.jsonl` contain concatenated pretty
+  JSON records, not newline-delimited JSON objects; preserve originals.
+
+#### E004-P3 selected, generation NOT started
+
+- Starting revision for planning: `331499df3175737bb9464a3d9a53a365fc494431`.
+- Excluded prior source questions: 788 = 32 E003 pilot + 256 E003
+  scale + 250 P1 + 250 P2; 5,938 previously unused training sources.
+- P3 selection seed: `42006`; exactly **1,200** new questions.
+- Frozen selection SHA256: `bfeb83304623bfdb2c8c952cba46d48ac36e251414b79d4763fb24f21b6ffed9`.
+- First 10 source indices: `[12, 30, 31, 46, 48, 50, 52, 54, 56, 63]`.
+- Previous-pool and development-validation source overlap: zero.
+- Planned generation: 4,800 responses (four per question).
+- **Not yet done:** P3 generator/config commit, GPU smoke test,
+  full P3 run, P3 filtering/QC, E004 training.
+- P3 generator/config files are now installed as five untracked local
+  repository files (config, protocol, builder, generator, tests), but
+  have NOT been committed or used for GPU inference.
+
+Continue by forking the pinned P2 generator with **separate historical
+250-question selection counts** and new P3 1,200-question count; keep
+historical E003/P1/P2 selections immutable. Verify code, config,
+selection SHA, 788-source exclusions, preflight, and two-group smoke
+before resuming generation. Do not use validation for question selection.
+No E004 DPO/GRPO training without separate explicit authorization.

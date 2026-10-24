@@ -1465,3 +1465,85 @@ Next: Audit coverage and quality of the 109 preference pairs
 before designing any separately authorized dataset expansion.
 
 The official GSM8K test partition remains untouched.
+
+<!-- project_log_e004_p3_handoff_2026_10_24_v1 -->
+
+---
+
+## 2026-10-24 — E003/E004 Handoff and P3 Selection Freeze
+
+### Completed since the earlier project-log entry
+
+- E003 and E003b DPO trained on 109 signed source-unique preference
+  pairs; both evaluated at **433/747 (57.97%)**, matching E002a.
+  No measured development-validation accuracy gain.
+- E004-P1: generated and integrity-audited 1,000 E002a responses from
+  250 disjoint TRAIN questions; 135 mixed groups; 83 provisional pairs.
+- E004-P1 frozen greedy-baseline TRAIN diagnostic: 145/250 correct;
+  51/135 mixed groups were greedy failures; 27/83 provisional P1 pairs
+  cover such failures. This is **not** held-out validation.
+- E004-P1 arithmetic-first review frozen at Git commit
+  `fde14abdf6791a0796799087f85154982e1628dd`.
+- E004-P2: generated and integrity-audited 1,000 responses from a new
+  250-question TRAIN pool, excluded from 538 prior preference sources.
+  P2 had 137 mixed groups, 87 mechanical passes, 7 advisory holds,
+  and 80 provisional pairs.
+- E004-P2 review frozen at `331499df3175737bb9464a3d9a53a365fc494431`;
+  10/10 review structural tests passed. Git worktree clean after commit.
+- Combined E004 P1/P2: 500 source questions, 2,000 completions,
+  272 mixed groups, **163 provisional preference pairs (32.6%)**.
+  **Approved-for-training pairs: zero.**
+- Relaxed arithmetic-first selection policy: tolerate harmless wording;
+  reject substantive arithmetic/quantity errors and ambiguity. P1/P2
+  source-specific reviews are **advisory**, not portable auto-verifiers.
+
+### P3 planning preflight — PASS, no generation
+
+- Git revision: `331499df3175737bb9464a3d9a53a365fc494431`.
+- Training partition: 6,726; development-validation: 747.
+- Prior source exclusions: 788 (32 + 256 + 250 + 250), all disjoint.
+- Remaining unused training sources before P3: 5,938.
+- P3 selection seed: `42006`; **1,200 new questions**, four samples
+  each, **4,800 planned responses**.
+- Selected source SHA256:
+  `bfeb83304623bfdb2c8c952cba46d48ac36e251414b79d4763fb24f21b6ffed9`.
+- First indices: `[12, 30, 31, 46, 48, 50, 52, 54, 56, 63]`.
+- Overlap with 788 prior sources: 0; with validation: 0.
+- Preflight exit status: 0; GPU inference: 0; training: 0.
+- P3 generator/config package is installed locally as five untracked
+  files; there is NO P3 generator/config commit or P3 generation run yet.
+
+### Next session — exact resume checklist
+
+1. Start from the documentation-update commit (parent must be
+   `331499df3175737bb9464a3d9a53a365fc494431`); confirm exactly
+   five expected untracked P3 files and pinned immutable Docker image ID
+   `sha256:e6248de1867ccb6aae297a49228532721014f16888b126b8532705e0d9e8ee0e`.
+2. Verify/test and commit the installed P3 generator/config fork.
+   Historical P1/P2 selection routines must still select 250 each;
+   only new P3 selection uses 1,200 and seed 42006. Exclude all 788.
+3. Recheck source-selection SHA and P1/P2 candidate SHA256s;
+   run CPU tests and inference-free preflight before any GPU work.
+4. Commit the generator/config, run two-group GPU smoke test,
+   checkpoint integrity audit, then resume the other 1,198 groups.
+5. Apply portable mechanical arithmetic checks, then relaxed advisory
+   reasoning review. QC 30 provisional accepts + 10 rejects without
+   repairing candidates. Track mathematical defects separately from
+   tolerated wording defects; report certified count as zero absent
+   independent signoff.
+6. Target at least 500 provisional source-unique pairs only if yield
+   and quality justify it. Seek separate explicit authorization before
+   any E004 DPO or E005 GRPO training. Official GSM8K test stays unused.
+
+### Experiment integrity
+
+- P1 candidates SHA256:
+  `314626f08e0ac24c84efe9c6c2a1aae1a60018f74856613942bf84eb92eda628`.
+- P2 candidates SHA256:
+  `568b15094c755f73f240a0fcd91deb601ba48c1914d4e9fb2d7647573ce6bf79`.
+- P1 and P2 review records are committed under
+  `protocols/e004_p1_arithmetic_first_v1/` and
+  `protocols/e004_p2_arithmetic_first_v1/`.
+- No E004 optimization has been performed or authorized.
+- Correct historical classification: E004 is DPO data-scaling;
+  E005 GRPO remains hypothetical (supersedes older note).
