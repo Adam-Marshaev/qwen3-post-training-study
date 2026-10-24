@@ -1,0 +1,18 @@
+{
+  "files": {
+    "README.md": "e7582f2cae00a21c8fa1404fa09cc8f18e8532eb6d36e2a7e8019c66794a7f7c",
+    "inputs/decisions_advisory.jsonl": "42952af0b07b90eb2a591d7651e97880d33b56b7414218babfa3a8925fc99707",
+    "inputs/mixed135.jsonl": "fe0ce3a7bb4cd20fedf4ee25e15e171e0047ff786ae39f16c2db4118934dcff0",
+    "outputs/decisions_relaxed.jsonl": "b7114a4f91f22dd30fd0e66b5818e2f3c8cc9f05023ff308c508416f89ee945c",
+    "outputs/qc_accepted30_unreviewed.md": "421ac36fc28fee68665053359d827e6260072489d2a245ef5407c71d65a3eee6",
+    "outputs/qc_rejected10_unreviewed.md": "adcdd82aa96ebf1e9dbd1ecc250d064aa04c243ca6e53d69665f47e876ace081",
+    "outputs/reclassification_report.md": "af00b1cf43de034bf7ba248afdb4e509c1f16aaf1ac72b424de1a85d20082c08",
+    "outputs/summary.json": "b9e5d93b17ddcbc3ff33b5792bf201bbece3b374d581407a4b784b1b64304d6e",
+    "scripts/reclassify_arithmetic_first_v1.py": "213855c27322610ad4912a23936a0998a289912b9294761b07e02613cd4d3b88",
+    "scripts/strict_equation_screen_reference_v1.py": "dbf7ba5a335748c799998975f812b2a33bf1d11709607207c5f9f825232b7df5",
+    "tests/test_relaxed_reclassification_v1.py": "47758fc753456c204db4a2f246c9036c9dad026b48c07562e207e62176b298bf"
+  },
+  "frozen_original_candidates_sha256": "314626f08e0ac24c84efe9c6c2a1aae1a60018f74856613942bf84eb92eda628",
+  "schema": "e004_p1_arithmetic_first_package_manifest_v1",
+  "training_performed": false
+}
