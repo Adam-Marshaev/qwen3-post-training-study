@@ -1,0 +1,17 @@
+{
+  "files": {
+    "README.md": "b7efb48ec6faa3da0ecef707381e8c362e821532ae9afe2abcc779519eef0a19",
+    "inputs/mixed137.jsonl": "fe4c4f034417b73be7862975889e102882be6d9f67352d62b9a568eaeb66faf9",
+    "outputs/review/decisions_advisory.jsonl": "8e5adf5663b753ff14b9db1ee5a845643e7dfb1c07ca69f8b948bf29919e0cdb",
+    "outputs/review/mechanical_decisions.jsonl": "0e9cbfdeb64ab1c98694d579a263f1dd4e7af8df0905143079543f737eb4b3ef",
+    "outputs/review/qc_accepted30_unreviewed.md": "7842e96148bf8efa9d300493774820d7c08e0b7ddf70c3b3ec0781ad7ee74ad0",
+    "outputs/review/qc_rejected10_unreviewed.md": "b10a55a103a7b108afd499d031b3743ad60db7b1fb75bdda0c73f7fccd81633c",
+    "outputs/review/report.md": "25a29df7af2e5fe7bf2bd91bbf007593e43c370fd8aced3ac363d583b80679a0",
+    "outputs/review/summary.json": "c2c0f42d13842ff11cbfe16b2b2ac0f9ff974a79a5f68ee2791169b41f2b4802",
+    "references/strict_equation_screen_reference_v1.py": "dbf7ba5a335748c799998975f812b2a33bf1d11709607207c5f9f825232b7df5",
+    "scripts/p2_screen_v1.py": "d42011b8e9f89d28f4ab556429dd3041f5a96fca76f102167600281e10107a0e",
+    "scripts/review_p2_arithmetic_first_v1.py": "0a2096e94926b4effa39dfa75f940591a61e0d146388440828a833295f39daee",
+    "tests/test_e004_p2_arithmetic_first_v1.py": "6d34ea76fc78645c5f1ea71b5e8d837f4d9542384e5b7bddbb3f84198580c17c"
+  },
+  "schema": "e004_p2_arithmetic_first_package_v1"
+}
