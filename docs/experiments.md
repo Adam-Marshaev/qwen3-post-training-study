@@ -829,3 +829,69 @@ The larger automatically screened E004 dataset yielded the first positive **aggr
 - Research-result freeze commit: `e7d5a4296e9978b97a24bbd8534aec810f99fc29`.
 - This record contains SHA256 hashes of the historical baseline and E004 **evaluation summary/prediction artifacts** and 12 source-index-specific audit annotations; avoid substituting estimated hashes in documentation.
 - Next possible investigation: controlled preference-data quality/curation study (or separately designed GRPO), without assuming that more pairs, steps, or learning rate will improve generalization. **No E005 training initiated or authorized.**
+
+
+---
+
+<!-- e005_grpo_completed_validation_freeze_2026_10_25_v1 -->
+
+## E005 — GRPO Training, Development Validation, and Paired Audit (2026-10-25)
+
+**Status:** Training completed, evaluated, paired-audited, and reproducibly frozen. This later entry supersedes earlier *planning/status* notes that E005 was hypothetical or unauthorized; those earlier entries are retained as historical observations. **E004 is DPO; E005 is GRPO.** The official GSM8K test partition remains unused.
+
+### Research question and design
+
+Does bounded final-answer-reward GRPO starting from the validated E002a native-EOS SFT checkpoint improve mathematical reasoning on the frozen GSM8K development partition? E005 is a **separate branch from E002a**, not a continuation of E004 DPO. It uses exact final-answer correctness, not explicit intermediate-reasoning verification.
+
+### Frozen training identity
+
+- Model: `Qwen/Qwen3-0.6B-Base`; revision `57ca99e94acb83175495aa2c6b6b0cc498170924`.
+- Starting E002a adapter SHA256: `f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`.
+- Frozen split: `configs/data/gsm8k_split_v1.json`; SHA256 `31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719`; **6,726 training / 747 development** questions.
+- Frozen GRPO training input: `data/train_runs/e005_grpo_from_e002a_v1/inputs/grpo_train6726_v1.jsonl`; SHA256 `93cc63e8e57cab769cc27b136707b63943b47be02de5a82d889bd0196e6ee866`.
+- Training plan: `protocols/e005_grpo_preparation_v1/e005_grpo_training_plan_v1.json`; SHA256 `249c4d51f323b03ed92b3071e0da558adcbcb6b89e773c04bc1619dbd5b63102`.
+- Reward implementation: `src/llm_post_training/training/grpo_reward.py`; SHA256 `152d7cac32736fb8f797644642ea2351427b8c6e2b911531c1b88acbfc4b7acb`.
+- Authorized training-source commit: `ab42f55475fcc104261e380ef52dd143c50b66ca`; code: `protocols/e005_grpo_preparation_v1/train_e005_grpo_v1.py`.
+
+### Completed training
+
+- Method: LoRA GRPO; **256/256 optimizer updates**, learning rate `1e-6`, four sampled completions per group, maximum completion length 512; FP16 base and eager attention on a Tesla V100-SXM2-32GB.
+- Sampled training trace: **1,024 completions**, of which **367** had correct final answers; **150/256** groups had mixed rewards. These are on-policy *training rollout statistics*, not held-out accuracy.
+- Reported training runtime: approximately **963.7 seconds**; mean reported training loss: **0.02954345**. These measurements are training diagnostics, not evidence of generalization.
+- Final adapter: `data/train_runs/e005_grpo_from_e002a_v1/run/final_policy_adapter/policy/adapter_model.safetensors`; SHA256 `4246d1c0a2381be6fe50066d21c35390d69086f2975b4ef9e76b3bc658a1ae59`.
+- Reward rollout trace SHA256: `56c35638b477840ee6232dc267ee1b0d6593afa7d69972b0368ac6d3c1148dfb`.
+
+### Frozen development evaluation
+
+- Evaluation-source commit: `6dea3a6e60892ca76934c767e5dafb361d590564`; evaluator: `scripts/evaluate_e005_grpo_gsm8k_v1.py`; evaluator SHA256: `bb079bcd0436e7d73a6fd0ff13ebbe2583c48bd3eecd3b50ed3b236cef7baa98`.
+- Formal inference protocol: `gsm8k_val512_greedy_eager_cached_v1`; 747 frozen development questions, `gsm8k_qa_v1`, `explicit_numeric_v2`, FP16/eager, greedy generation, EOS/PAD 151643, KV cache **on**, maximum 512 new tokens.
+- E005: **440/747 (58.90%)**; answer extraction **98.8%**, mean generated tokens **96.10**, token-cap responses **9/747**.
+- Predictions: `data/eval_runs/e005_grpo_val747_v1/full_validation/predictions.jsonl`; SHA256 `36bd0fce55f400127dd31e961259dde658f58cb45524c3e035bb013c833248d0`.
+- Summary: `data/eval_runs/e005_grpo_val747_v1/full_validation/summary.json`. The evaluation matched the historical 747 source indices, prompts, answers, and frozen protocol.
+
+| Protocol-matched checkpoint | Correct / 747 | Accuracy |
+|---|---:|---:|
+| E001 cached pretrained | 419 | 56.09% |
+| E002a native-EOS SFT | 433 | 57.97% |
+| E003 / E003b DPO | 433 / 433 | 57.97% / 57.97% |
+| E004 DPO | 439 | 58.77% |
+| **E005 GRPO** | **440** | **58.90%** |
+
+The historical uncached **E002 original SFT** score of 318/747 belongs to a *different inference protocol* and is not part of this protocol-matched table.
+
+### Paired significance and error analysis
+
+| GRPO comparison | Both correct | GRPO wins | GRPO losses | Both wrong | Exact two-sided McNemar p |
+|---|---:|---:|---:|---:|---:|
+| vs. E002a SFT | 423 | 17 | 10 | 297 | 0.24778856 |
+| vs. E004 DPO | 429 | 11 | 10 | 297 | 1.00000000 |
+
+Neither difference is statistically significant at alpha 0.05. Across SFT/DPO/GRPO, **423** questions were correct for all three, **294** were incorrect for all three, and **11** were uniquely correct for GRPO. The inspected 11 GRPO-only successes involved percentage arithmetic, units, tracking quantities, and groupings; two correct final answers had incomplete or inconsistent intermediate explanations. The 10 regressions relative to DPO included arithmetic errors, omitted quantities, answering for the wrong variable, and one repetition/token-cap failure. Those selected examples are qualitative diagnostics, not causal proof of skill-level changes.
+
+### Interpretation and reproducibility
+
+E005 has the highest observed development accuracy of this set of experiments, **but not a statistically established advantage over SFT or DPO**. The common development split was used repeatedly to guide experiments, so these findings are exploratory. Final-answer reward alone does not establish process-level reasoning correctness. No official GSM8K test evaluation was performed.
+
+- Frozen research report (complete hashes and comparisons): `protocols/e005_grpo_preparation_v1/e005_grpo_dev747_results_v1.md`.
+- Result-report freeze commit: `bd99b01a9f48a8e4587958a90f70f407fc9af164`.
+- **Decision:** Close E005 as the completed phase-1 GRPO experiment. Any future process-aware reward/E006 study would be a separately designed experiment; none is claimed here.

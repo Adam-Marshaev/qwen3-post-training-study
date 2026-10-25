@@ -1594,3 +1594,43 @@ The evaluation report retained the legacy **`e003_training`** provenance *key*, 
 - The JSON records the original baseline/E004 evaluation-artifact hashes, 12-case annotations and paired statistical test. See `docs/experiments.md` for the complete artifact and experimental description.
 
 **Decision:** Close E004 as a reproducible, positive **but statistically inconclusive** development-validation result. The comparison does not isolate data volume from curation quality. Consider a separately designed E005 quality-controlled preference experiment; **do not initiate E005/GRPO training without new explicit authorization**. Official GSM8K test remains untouched.
+
+
+---
+
+<!-- project_log_e005_completion_2026_10_25_v1 -->
+
+## 2026-10-25 — E005 GRPO Trained, Evaluated, Paired-Audited, and Frozen
+
+### Experiment transition and training
+
+The E004 DPO experiment was closed before starting E005. Following separate authorization, E005 GRPO began from the **E002a native-EOS SFT adapter**; it was **not** initialized from E004 DPO. The 6,726-example GSM8K development-training partition, 747-example development-validation partition, and original official-test separation were preserved.
+
+- Authorized E005 training-source commit: `ab42f55475fcc104261e380ef52dd143c50b66ca`.
+- Frozen training plan SHA256: `249c4d51f323b03ed92b3071e0da558adcbcb6b89e773c04bc1619dbd5b63102`.
+- Training procedure: LoRA GRPO, 256 optimizer updates, four completions per group, learning rate `1e-6`, maximum sampled completion length 512, final-answer correctness reward.
+- Completed **256/256 steps** and sampled **1,024 training completions**; **150/256** reward groups were mixed. Training runtime was approximately **963.7 seconds**.
+- Saved E005 adapter SHA256: `4246d1c0a2381be6fe50066d21c35390d69086f2975b4ef9e76b3bc658a1ae59`.
+
+### Evaluator freeze and development inference
+
+Derived an E005-specific checkpoint/provenance verifier while retaining the original frozen inference and scoring functions. The earlier preparation attempt failed before creating its output because of an over-specific assertion; the corrected E005-P6C V2 preflight passed and committed the evaluator.
+
+- Evaluator freeze commit: `6dea3a6e60892ca76934c767e5dafb361d590564`.
+- Evaluator SHA256: `bb079bcd0436e7d73a6fd0ff13ebbe2583c48bd3eecd3b50ed3b236cef7baa98`.
+- Same `gsm8k_val512_greedy_eager_cached_v1` protocol as earlier cached model comparisons: 747 held-out development questions, 512 maximum new tokens, greedy/eager/FP16, native EOS/PAD 151643, KV cache on.
+- E005 scored **440/747 (58.90%)**; valid extraction approximately **98.8%**, 9 token-cap responses, mean 96.10 generated tokens.
+- Evaluation predictions SHA256: `36bd0fce55f400127dd31e961259dde658f58cb45524c3e035bb013c833248d0`.
+
+### Paired analysis and qualitative findings
+
+Identical GSM8K source indices, questions, prompts, references, and protocol fields were verified before analysis. E005 corrected **17** SFT errors but regressed on **10** SFT successes (net +7; exact two-sided McNemar p **0.24778856**). Versus E004 DPO, E005 corrected **11** errors and regressed on **10** successes (net +1; p **1.0**). Neither comparison was statistically significant.
+
+Reviewed all **11** GRPO-only successes (SFT and DPO both incorrect) and all **10** regressions relative to DPO. Corrections and regressions overlapped in arithmetic execution, units, tracking quantities, and completion of requested answers. Some numerically correct solutions had unreliable intermediate reasoning, underscoring limits of answer-only rewards; selected development cases do not prove a mechanism.
+
+### Research freeze and portfolio handoff
+
+- E005 result record: `protocols/e005_grpo_preparation_v1/e005_grpo_dev747_results_v1.md`.
+- Result-record freeze commit: `bd99b01a9f48a8e4587958a90f70f407fc9af164`.
+- Historical experimental notes, training checkpoints, original evaluator, and prior predictions were preserved. Official GSM8K test set was **not accessed**.
+- **Decision:** Stop at E005 for the phase-1 portfolio deliverable. Document the controlled comparison and limitations rather than claim GRPO significantly beats DPO or SFT; new training or a process-aware reward experiment requires separate planning and authorization.
