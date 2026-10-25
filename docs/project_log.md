@@ -1547,3 +1547,50 @@ The official GSM8K test partition remains untouched.
 - No E004 optimization has been performed or authorized.
 - Correct historical classification: E004 is DPO data-scaling;
   E005 GRPO remains hypothetical (supersedes older note).
+
+---
+
+<!-- project_log_e004_completion_2026_10_25_v1 -->
+
+## 2026-10-25 — E004 DPO Trained, Evaluated, Audited, and Frozen
+
+### Dataset construction and qualification
+
+Completed arithmetic-first E004 preference-data scaling across disjoint training-question pools: P1 **83**, P2 **80**, and P3 **423** provisional source-unique pairs, totaling **586**. P3 generated **4,800** completions from 1,200 questions; 641 mixed-correctness groups; 425 preliminary mechanical accepts, of which two (original indices 3115 and 4201) were held for material reasoning defects. The 216 mechanically rejected groups were retained separately. The screening was advisory/mechanical, **not independent reasoning certification**.
+
+Frozen E004 staged pair SHA256: `cf0d3f4998306cbb9ce237d0c8dda2eba96163e6e2ddc95b7bbba330b1c47c86`. E002a starting adapter SHA256: `f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`. The 6,726/747 development split remained source-disjoint and the official GSM8K test split was unused.
+
+### No-training safety and integration preflights
+
+Reused historical E003 Docker runtime (`sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e`; TRL 0.26.2). Verified native EOS/PAD 151643, tokenized and collated **586/586** pairs, and checked padding masks for **1,534** padded sequences. GPU initialization verified **224/224** matching FP32 policy/reference LoRA tensors, policy-only trainability, frozen reference/base, zero initial policy/reference log-probability gaps, initial DPO loss **0.693359**, and no optimizer/training step. Recorded preflight peak allocation **1,296.1 MiB** (not full training peak).
+
+Preparation-only configuration commit: `8c4a3eba28475925190614b18764dbedb9230c6e`; integration-preflight commit: `cf8cd7e91a1d09d6adda6cd79fe9c38a6615a566`. Separate **explicit user authorization** was obtained before the E004 training run, superseding the earlier no-training authorization status without modifying the earlier preparation-only record.
+
+### Authorized DPO training and saved adapter
+
+The E003 training script was forked using its actual `--execute-approved-training` and `--output-dir` interface after two launch attempts failed **before starting training** due to incorrect assumed output-path and CLI anchors. The corrected launch used a new `/train-output/run` mount, leaving historical artifacts untouched.
+
+- Training-source commit: `c9e5141c8ba254dc509092eff929b8489002234e`.
+- Settings: beta **0.1**, learning rate **1e-6**, one epoch, batch 1, gradient accumulation 8, seed 42, FP16/eager, training KV cache off; frozen reference adapter and native EOS 151643.
+- Completed **74/74 optimizer steps**; epoch 1.0; reported training loss **0.6923210258419449**.
+- Saved adapter SHA256: `e63dd7bdbfc5b1b5444b9e83f400a98b00c792770f8e4d70ee26ab29cc62b6fa` at `data/train_runs/e004_dpo_autoscreened586_v1/run/final_policy_adapter/policy/adapter_model.safetensors`.
+- All **224/224** adapter tensors were finite FP32 and changed relative to E002a; maximum absolute element change `2.782023511826992e-05`. Dataset and starting checkpoint checksums unchanged; Git clean.
+
+### Frozen development-validation and paired error review
+
+E004 inference used `gsm8k_val512_greedy_eager_cached_v1` (FP16/eager, greedy, 512 new tokens, EOS 151643, **KV cache on**) on the same frozen 747 GSM8K development-validation questions. Evaluation-source commit: `a198befdfcf8509326dbfe99d253fe99bd840e3f`.
+
+E004 scored **439/747 (58.77%)** versus E002a/E003/E003b **433/747 (57.97%)**: **+6 answers, +0.80 percentage points**. Extraction rate 98.5%; mean generated tokens 97.2; 11 token-cap responses. Compared by original source index: both correct 430, both wrong 305, **nine** corrections, **three** regressions; exact two-sided McNemar **p=0.14599609375** (not significant at 0.05).
+
+Twelve changed responses were inspected. Seven were coherent reasoning corrections; source 1034 escaped a repetition/token-cap failure; source 4502 produced a correct answer with an inconsistent sign step. Regressions involved sign/direction (494), rectangle perimeter (2061), and ratio computation (6596). Baseline index 494 also had a flawed written subtraction despite its correct numeric answer. This illustrates why answer accuracy and trace validity must be kept separate.
+
+The evaluation report retained the legacy **`e003_training`** provenance *key*, but its internal experiment identity, training-source commit, 74 optimizer steps and final adapter hash verify E004. Original evaluation outputs were preserved. No inference/training was done during paired analysis or final freeze.
+
+### Reproducibility freeze and decision
+
+- Research JSON: `protocols/e004_dpo_preparation_v1/e004_research_result_v1.json`.
+- Record SHA256: `683b6d7ed950ce01a17802cc670c6d5dff85bd1f3c5485cca37b9fae51dfd4ed`.
+- Record-freeze commit: `e7d5a4296e9978b97a24bbd8534aec810f99fc29`; Git worktree clean.
+- The JSON records the original baseline/E004 evaluation-artifact hashes, 12-case annotations and paired statistical test. See `docs/experiments.md` for the complete artifact and experimental description.
+
+**Decision:** Close E004 as a reproducible, positive **but statistically inconclusive** development-validation result. The comparison does not isolate data volume from curation quality. Consider a separately designed E005 quality-controlled preference experiment; **do not initiate E005/GRPO training without new explicit authorization**. Official GSM8K test remains untouched.

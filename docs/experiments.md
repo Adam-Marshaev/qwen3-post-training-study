@@ -751,3 +751,81 @@ historical E003/P1/P2 selections immutable. Verify code, config,
 selection SHA, 788-source exclusions, preflight, and two-group smoke
 before resuming generation. Do not use validation for question selection.
 No E004 DPO/GRPO training without separate explicit authorization.
+
+---
+
+<!-- e004_dpo_completed_validation_freeze_2026_10_25_v1 -->
+
+## E004 — Arithmetic-First Preference Scaling, DPO Training, and Validation (2026-10-25)
+
+**Status:** Completed, evaluated, paired-audited, and reproducibly frozen. This section supersedes the *status*, but not the historical observations, in the October 24 E004-P3 handoff above. **E004 is DPO, not GRPO.** No E005/GRPO training is authorized.
+
+### Research question and design limitations
+
+Does DPO on a larger set of automatically screened GSM8K preference pairs improve the frozen E002a SFT policy where E003/E003b did not? E004 changes **both pair count and curation method** relative to E003's independently approved 109 pairs; it is not a controlled size-only ablation. The 586 E004 pairs were automatically screened and remain **provisional, not independently reasoning-certified**. Any statement about preference quality must retain that distinction.
+
+### Frozen training data and provenance
+
+- Model: `Qwen/Qwen3-0.6B-Base`, revision `57ca99e94acb83175495aa2c6b6b0cc498170924`.
+- Starting E002a epoch-2 adapter: `data/train_runs/e002a_sft_lora_native_eos_v1/epoch_0002/adapter/adapter_model.safetensors`; SHA256 `f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625`.
+- Frozen split: `configs/data/gsm8k_split_v1.json`, SHA256 `31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719`; original GSM8K training indices: 6,726; validation: 747; overlap: zero. No official GSM8K test access.
+- P1: 250 training questions / 1,000 candidates / 83 provisional pairs.
+- P2: 250 training questions / 1,000 candidates / 80 provisional pairs.
+- P3: 1,200 additional training questions / 4,800 candidates / 641 mixed-correctness groups. Initial mechanical screening yielded 425 candidate accepts; two material reasoning defects (source indices 3115 and 4201) were held after QC, leaving **423 provisional pairs**. The **216 mechanical rejects were preserved**, not discarded. A mechanical screen is not independent reasoning review.
+- Total frozen preference dataset: **586 source-unique pairs** = 83 + 80 + 423; all drawn from the GSM8K development-training partition, with zero development-validation overlap.
+- P3 candidates SHA256: `7825edfec54b26427fa48876c087dc75ab53d38a6bd85cee54d8b6b207b10ed1`; triage manifest SHA256: `f67c32d754ff33a4418e9a92cbfa5fe0424cb684d9f1d5efa0984f8c310764fa`.
+- Combined provisional pairs: `data/preference_runs/e004_combined_provisional_v1/outputs/provisional_pairs_586.jsonl`; SHA256 `2990b9da6294a125b8c92d755a226a50f32f4c1f6c8d1bbaa608d609be99e06e`.
+- DPO-staged pairs: `data/preference_runs/e004_dpo_staging_preflight_v1/outputs/pairs_staged_586.jsonl`; SHA256 `cf0d3f4998306cbb9ce237d0c8dda2eba96163e6e2ddc95b7bbba330b1c47c86`; staging manifest SHA256 `daf30944f46030734e714eb30418877d0bf8b7d189f8e5fd460fcaed4dc1238a`.
+- Combined dataset builder freeze commit: `83b08e3eb40de12e155e4e5dbb6514e94cde13dc`.
+
+### Training configuration and integrity
+
+- Historical E003 training image: `sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e`; Transformers 4.57.6, TRL 0.26.2, datasets 4.0.0, PEFT 0.18.1; Tesla V100-SXM2-32GB, FP16 base/eager attention, FP32 LoRA.
+- DPO: `beta=0.1`, sigmoid loss, `learning_rate=1e-6`, 1 epoch, batch size 1, gradient accumulation 8, effective batch 8, seed 42, linear schedule, AdamW, native EOS/PAD ID `151643`, training KV cache **off**. Policy and reference begin as identical E002a LoRA weights; policy trainable, reference and base frozen.
+- CPU preflights: historical TRL tokenization **586/586** (max prompt/chosen/rejected/joint tokens **144/237/250/387**); collator **586/586** with **1,534** verified padding checks. GPU no-training DPOTrainer preflight: **224/224** exact FP32 policy/reference tensors, matching chosen/rejected log-probabilities, initial sigmoid loss **0.693359**, optimizer absent, zero steps. Preflight peak allocated **1,296.1 MiB**, **not** peak training memory.
+- Preparation-only configuration: `protocols/e004_dpo_preparation_v1/config_draft_v1.json`, SHA256 `a559c2b191f15d84cc6e502bad05b3186afc7b3b94f6b744e032a7bedcfdc5ff`; configuration freeze commit `8c4a3eba28475925190614b18764dbedb9230c6e`. Its `training_authorized=false` field records its earlier **preparation-only** state; separate explicit authorization preceded the later E004 run.
+- No-training integration preflight: `protocols/e004_dpo_preparation_v1/preflight_e004_dpo_trainer_v1.py`, SHA256 `35c016b1124c40be7bb0a3b9c6344a6e706ee5250cd55cc0bd76cd2cbf24cb82`, commit `cf8cd7e91a1d09d6adda6cd79fe9c38a6615a566`.
+- Authorized training-source commit: `c9e5141c8ba254dc509092eff929b8489002234e`; script `protocols/e004_dpo_preparation_v1/train_e004_dpo_autoscreened586_v1.py`.
+- Training output: `data/train_runs/e004_dpo_autoscreened586_v1/run/`; **74/74 optimizer steps**, epoch 1.0, reported mean loss **0.6923210258419449**. Final adapter: `run/final_policy_adapter/policy/adapter_model.safetensors`; SHA256 `e63dd7bdbfc5b1b5444b9e83f400a98b00c792770f8e4d70ee26ab29cc62b6fa`. All **224/224** FP32 LoRA tensors finite and changed from E002a; maximum absolute tensor-element change `2.782023511826992e-05`. Original dataset and starting adapter unchanged.
+
+### GSM8K development-validation evaluation
+
+Protocol: `gsm8k_val512_greedy_eager_cached_v1`; frozen 747 validation examples, `gsm8k_qa_v1` prompt, `explicit_numeric_v2` extraction, FP16, eager attention, greedy generation, maximum 512 new tokens, native EOS/PAD `151643`, generation KV cache **on**. Neither the official test split nor additional training was used during evaluation.
+
+| Checkpoint | Source preferences | Correct / 747 | Accuracy |
+|---|---:|---:|---:|
+| E002a native-EOS SFT | N/A | 433 | 57.97% |
+| E003 DPO | 109 independently approved | 433 | 57.97% |
+| E003b DPO (higher learning rate) | Same 109 | 433 | 57.97% |
+| **E004 DPO** | **586 provisional** | **439** | **58.77%** |
+
+E004 versus E002a: **+6/747 correct**, or **+0.803 percentage points**. E004 answer extraction rate **98.5%**, mean generated tokens **97.2**, and **11** responses at the 512-token cap. This is a point-estimate improvement, **not a statistically established superiority claim**.
+
+- Evaluation source: `scripts/evaluate_e004_dpo_gsm8k_v1.py`, committed at `a198befdfcf8509326dbfe99d253fe99bd840e3f`.
+- E004 output: `data/train_runs/e004_dpo_autoscreened586_v1/eval_gsm8k_val747_v1/full_validation/summary.json` and `predictions.jsonl`.
+- Baseline comparison: `data/eval_runs/e002a_epoch2_cached_val747_v1/summary.json` and `predictions.jsonl`.
+- Evaluation summary's adapter provenance uses the **legacy key `e003_training`**, but its embedded experiment identity, training source commit, 74 steps and checkpoint SHA256 all verify **E004**. Preserve the original output; this is a metadata-key defect, not use of the E003 checkpoint.
+
+### Paired statistical and qualitative analysis
+
+| Paired correctness | Count |
+|---|---:|
+| Both correct | 430 |
+| Both incorrect | 305 |
+| E004 corrected E002a | **9** |
+| E004 regressed from E002a | **3** |
+
+- Exact two-sided McNemar **p = 0.14599609375**, not significant at alpha 0.05.
+- Corrected original GSM8K source indices: `182, 276, 768, 1034, 4502, 4542, 5065, 7033, 7415`.
+- Regressed original source indices: `494, 2061, 6596`.
+- Seven corrections had coherent arithmetic, relation, completeness, or question-target reasoning; index **1034** escaped a baseline repetitive 512-token generation loop; index **4502** yielded the correct final answer despite an inconsistent intermediate sign calculation.
+- Regressions: index **494** sign/direction error (the baseline's correct final answer also followed a flawed subtraction statement); **2061** omitted rectangle width when finding perimeter; **6596** used one-half instead of the required `5/9` ratio.
+
+### Research conclusion and frozen record
+
+The larger automatically screened E004 dataset yielded the first positive **aggregate** DPO validation change in this series, but its +0.80-point advantage is small and **not statistically significant** under the paired exact McNemar test. Because data quality/curation and volume changed together, causal attribution to pair count alone is unsupported. Correct numerical answers do not guarantee valid intermediate reasoning.
+
+- Reproducibly frozen research record: `protocols/e004_dpo_preparation_v1/e004_research_result_v1.json`; SHA256 `683b6d7ed950ce01a17802cc670c6d5dff85bd1f3c5485cca37b9fae51dfd4ed`.
+- Research-result freeze commit: `e7d5a4296e9978b97a24bbd8534aec810f99fc29`.
+- This record contains SHA256 hashes of the historical baseline and E004 **evaluation summary/prediction artifacts** and 12 source-index-specific audit annotations; avoid substituting estimated hashes in documentation.
+- Next possible investigation: controlled preference-data quality/curation study (or separately designed GRPO), without assuming that more pairs, steps, or learning rate will improve generalization. **No E005 training initiated or authorized.**
