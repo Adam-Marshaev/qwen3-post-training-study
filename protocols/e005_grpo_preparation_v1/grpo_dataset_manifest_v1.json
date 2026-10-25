@@ -1,0 +1,60 @@
+{
+  "base_model": {
+    "id": "Qwen/Qwen3-0.6B-Base",
+    "native_eos_pad_id": 151643,
+    "revision": "57ca99e94acb83175495aa2c6b6b0cc498170924"
+  },
+  "builder": {
+    "path": "protocols/e005_grpo_preparation_v1/build_grpo_dataset_v1.py",
+    "sha256": "d6cee57c91172fa1d030616c98568375d5830c9a47dc0441c9be47f94f2e7251"
+  },
+  "docker_image_digest": "sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e",
+  "experiment": "E005",
+  "official_test_accessed": false,
+  "output": {
+    "bytes": 3963999,
+    "columns": [
+      "answer",
+      "prompt",
+      "source_index"
+    ],
+    "path": "data/train_runs/e005_grpo_from_e002a_v1/inputs/grpo_train6726_v1.jsonl",
+    "row_order": "frozen training_indices order",
+    "rows": 6726,
+    "serialization": "UTF-8 JSONL; sort_keys=True; ensure_ascii=False; separators=(',', ':'); one LF per row",
+    "sha256": "93cc63e8e57cab769cc27b136707b63943b47be02de5a82d889bd0196e6ee866"
+  },
+  "prompt": {
+    "formatter": "format_baseline_prompt",
+    "formatter_source_sha256": "673c7289f03c1f17172010529064230e8e9ea302b40e6c85058b8b9c9c5b3668",
+    "max_allowed_tokens": 256,
+    "max_observed_tokens": 215,
+    "mean_observed_tokens": 63.26,
+    "truncation_allowed": false,
+    "version": "gsm8k_qa_v1"
+  },
+  "purpose": "GRPO training input",
+  "reward": {
+    "source_sha256": "152d7cac32736fb8f797644642ea2351427b8c6e2b911531c1b88acbfc4b7acb",
+    "version": "gsm8k_exact_numeric_v1"
+  },
+  "schema_version": "e005_grpo_dataset_manifest_v1",
+  "source_dataset": {
+    "path": "data/raw/gsm8k/train.jsonl",
+    "sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "total_rows": 7473
+  },
+  "source_git_revision": "714d35edd3bddeaf57f656f65f4216f9262e6cea",
+  "split": {
+    "index_overlap": 0,
+    "path": "configs/data/gsm8k_split_v1.json",
+    "sha256": "31030317d85b015263d05383bf69bb02daec5bc67874f5ad0e0b33fa5294c719",
+    "training_rows": 6726,
+    "validation_rows": 747
+  },
+  "starting_adapter": {
+    "experiment": "E002a",
+    "sha256": "f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625"
+  },
+  "training_performed": false
+}
