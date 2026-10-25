@@ -1,0 +1,196 @@
+{
+  "accuracy_difference_percentage_points": 0.8032128514056225,
+  "additional_training_performed_during_analysis": false,
+  "artifact_sha256": {
+    "baseline_predictions": "b14a887d3942dcd0dec56abac1f4ea9ec748573d4a2d703dac1457e52df31b9c",
+    "baseline_summary": "f65b18e8f6dbfe4584af59db3d5791db478eec4e343705ec5ac7fbd2b6b64229",
+    "e004_predictions": "1ba7ad571cc662ffcfba621abc4791838a434e64c3e0c219b21a26b721452c97",
+    "e004_summary": "b331b4386fc35c0b2b913b652efc5214d5da4745c7ba6e68fc63a093d005d427"
+  },
+  "baseline_accuracy": 0.5796519410977242,
+  "baseline_correct": 433,
+  "e004_accuracy": 0.5876840696117804,
+  "e004_correct": 439,
+  "experiment": "E004",
+  "limitations": [
+    "Paired improvement is not significant at alpha=0.05.",
+    "E004 differs from E003 in both preference volume and curation.",
+    "Preference pairs are provisional, not reasoning-certified.",
+    "Correct final answers do not always imply valid reasoning traces.",
+    "E004 evaluation metadata retains the legacy e003_training field name.",
+    "Findings concern the frozen development-validation split only."
+  ],
+  "official_gsm8k_test_accessed": false,
+  "paired": {
+    "both_correct": 430,
+    "both_wrong": 305,
+    "correction_source_indices": [
+      182,
+      276,
+      768,
+      1034,
+      4502,
+      4542,
+      5065,
+      7033,
+      7415
+    ],
+    "corrections": 9,
+    "exact_two_sided_mcnemar_p": 0.14599609375,
+    "regression_source_indices": [
+      494,
+      2061,
+      6596
+    ],
+    "regressions": 3
+  },
+  "preference_pairs": 586,
+  "preference_quality": "AUTOMATICALLY_SCREENED_PROVISIONAL",
+  "qualitative_review": {
+    "cases": [
+      {
+        "baseline_extracted_answer": "180",
+        "baseline_reached_token_cap": false,
+        "category": "arithmetic",
+        "e004_extracted_answer": "230",
+        "e004_reached_token_cap": false,
+        "observation": "Corrected coat cost: 2*40=80.",
+        "outcome": "correction",
+        "reference_answer": "230",
+        "source_index": 182
+      },
+      {
+        "baseline_extracted_answer": "2800",
+        "baseline_reached_token_cap": false,
+        "category": "interpretation",
+        "e004_extracted_answer": "1000",
+        "e004_reached_token_cap": false,
+        "observation": "Computed 1000 unread pages.",
+        "outcome": "correction",
+        "reference_answer": "1000",
+        "source_index": 276
+      },
+      {
+        "baseline_extracted_answer": "3500",
+        "baseline_reached_token_cap": false,
+        "category": "sign_direction",
+        "e004_extracted_answer": "-3500",
+        "e004_reached_token_cap": false,
+        "observation": "Baseline had incorrect subtraction in its explanation but correct final answer.",
+        "outcome": "regression",
+        "reference_answer": "3500",
+        "source_index": 494
+      },
+      {
+        "baseline_extracted_answer": "58",
+        "baseline_reached_token_cap": false,
+        "category": "relation",
+        "e004_extracted_answer": "40",
+        "e004_reached_token_cap": false,
+        "observation": "Hawkins gave 12/2=6 addresses.",
+        "outcome": "correction",
+        "reference_answer": "40",
+        "source_index": 768
+      },
+      {
+        "baseline_extracted_answer": null,
+        "baseline_reached_token_cap": true,
+        "category": "generation_recovery",
+        "e004_extracted_answer": "8",
+        "e004_reached_token_cap": false,
+        "observation": "Baseline hit token cap in repetitive reasoning; E004 completed.",
+        "outcome": "correction",
+        "reference_answer": "8",
+        "source_index": 1034
+      },
+      {
+        "baseline_extracted_answer": "1800",
+        "baseline_reached_token_cap": false,
+        "category": "geometry",
+        "e004_extracted_answer": "1200",
+        "e004_reached_token_cap": false,
+        "observation": "Omitted the rectangle's width.",
+        "outcome": "regression",
+        "reference_answer": "1800",
+        "source_index": 2061
+      },
+      {
+        "baseline_extracted_answer": "28",
+        "baseline_reached_token_cap": false,
+        "category": "trace_inconsistency",
+        "e004_extracted_answer": "4",
+        "e004_reached_token_cap": false,
+        "observation": "Correct final answer 4, but an intermediate subtraction has wrong sign.",
+        "outcome": "correction",
+        "reference_answer": "4",
+        "source_index": 4502
+      },
+      {
+        "baseline_extracted_answer": "80",
+        "baseline_reached_token_cap": false,
+        "category": "omitted_quantity",
+        "e004_extracted_answer": "100",
+        "e004_reached_token_cap": false,
+        "observation": "Included the first fish tank.",
+        "outcome": "correction",
+        "reference_answer": "100",
+        "source_index": 4542
+      },
+      {
+        "baseline_extracted_answer": "11",
+        "baseline_reached_token_cap": false,
+        "category": "omitted_quantity",
+        "e004_extracted_answer": "9",
+        "e004_reached_token_cap": false,
+        "observation": "Included Martha's two problems.",
+        "outcome": "correction",
+        "reference_answer": "9",
+        "source_index": 5065
+      },
+      {
+        "baseline_extracted_answer": "100",
+        "baseline_reached_token_cap": false,
+        "category": "ratio",
+        "e004_extracted_answer": "90",
+        "e004_reached_token_cap": false,
+        "observation": "Used 0.5 instead of 5/9.",
+        "outcome": "regression",
+        "reference_answer": "100",
+        "source_index": 6596
+      },
+      {
+        "baseline_extracted_answer": "3",
+        "baseline_reached_token_cap": false,
+        "category": "omitted_quantity",
+        "e004_extracted_answer": "2",
+        "e004_reached_token_cap": false,
+        "observation": "Included the last guard's shift.",
+        "outcome": "correction",
+        "reference_answer": "2",
+        "source_index": 7033
+      },
+      {
+        "baseline_extracted_answer": "11",
+        "baseline_reached_token_cap": false,
+        "category": "question_target",
+        "e004_extracted_answer": "27",
+        "e004_reached_token_cap": false,
+        "observation": "Returned upstairs time, not downstairs.",
+        "outcome": "correction",
+        "reference_answer": "27",
+        "source_index": 7415
+      }
+    ],
+    "clear_reasoning_corrections": 7,
+    "correct_answer_with_trace_inconsistency": 1,
+    "generation_recoveries": 1,
+    "method": "Inspection of recorded response endings for 12 changed cases",
+    "regressions": 3
+  },
+  "schema": "e004_research_result_v1",
+  "source_commit": "a198befdfcf8509326dbfe99d253fe99bd840e3f",
+  "status": "TRAINED_AND_VALIDATED",
+  "training_optimizer_steps": 74,
+  "training_source_commit": "c9e5141c8ba254dc509092eff929b8489002234e",
+  "validation_size": 747
+}
