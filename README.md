@@ -39,6 +39,30 @@ Built and evaluated LoRA post-training workflows for **Qwen3-0.6B-Base**, using 
 
 **Experimental lineage:** E003, E003b, E004, and E005 were separately initialized from the verified **E002a SFT checkpoint**; the E005 GRPO policy was **not** initialized from E004 DPO.
 
+## Experiment lineage
+
+The following diagram shows the experimental branches. DPO and GRPO
+were each initialized from the corrected E002a SFT checkpoint;
+they were **not** trained sequentially on one another.
+
+```mermaid
+flowchart TD
+    B["E001: Qwen3-0.6B-Base<br/>419/747 · 56.09%"]
+
+    B --> S0["E002: Initial SFT<br/>318/747 · Historical uncached"]
+    B --> S["E002a: Native-EOS SFT<br/>433/747 · 57.97%"]
+
+    S --> D1["E003: DPO, 109 pairs<br/>433/747 · 57.97%"]
+    S --> D1B["E003b: DPO LR ablation<br/>433/747 · 57.97%"]
+    S --> D2["E004: DPO, 586 provisional pairs<br/>439/747 · 58.77%"]
+    S --> G["E005: GRPO, 256 steps<br/>440/747 · 58.90%"]
+```
+
+All percentages refer to the frozen 747-question GSM8K development
+partition. E002's historical uncached evaluation is not fully
+protocol-matched to the other results. The observed gains between
+the final models were not statistically significant.
+
 ## Experiment sequence
 
 ### E001: Pretrained baseline

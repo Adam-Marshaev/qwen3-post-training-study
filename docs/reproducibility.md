@@ -145,6 +145,90 @@ A public clone does not automatically contain:
 
 The data/ directory is ignored by Git.
 
+<!-- verified_cpu_tests_2026_10_25_v1 -->
+
+## Verified CPU Test Run — 2026-10-25
+
+The existing automated test suite was executed successfully against
+the E001-E005 repository using the historical Docker environment.
+
+### Result
+
+- **257 passed**
+- **5 skipped**
+- **0 failed**
+- Test execution time: **3.38 seconds**
+- pytest version: **8.4.2**
+- Python version: **3.10.12**
+
+The five skipped tests were not investigated individually during
+this validation. The result therefore establishes that all
+non-skipped tests passed, not that every possible test ran.
+
+### Environment
+
+Historical Docker image:
+
+`sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e`
+
+Verified packages:
+
+| Package | Version |
+|---|---|
+| PyTorch | 2.14.0+cu126 |
+| Transformers | 4.57.6 |
+| PEFT | 0.18.1 |
+| TRL | 0.26.2 |
+| datasets | 4.0.0 |
+| accelerate | 1.12.0 |
+| safetensors | 0.8.0 |
+
+The historical image did not contain pytest.
+
+For validation, pytest 8.4.2 and its dependencies were downloaded
+to a temporary wheel directory using a separate network-enabled
+container without the project repository mounted.
+
+The wheels were then installed into `/tmp/pytestdeps` inside a
+disposable test container using an offline pip installation.
+
+The test execution container used:
+
+- Repository bind mount: read-only
+- Network access: disabled
+- GPU access: disabled
+- Historical Docker image: unchanged
+- Temporary pytest dependencies: not committed or added to the image
+- Python import path: `/tmp/pytestdeps:/workspace/src:/workspace`
+- Python bytecode writing: disabled
+- pytest cache provider: disabled
+
+The test command executed inside that environment was:
+
+```bash
+/usr/bin/python3 -m pytest -q -p no:cacheprovider tests/
+```
+
+### Installation and Reproduction Scope
+
+`pyproject.toml` declares the project package and Python requirement,
+but does not currently declare the full ML runtime dependency set.
+
+The historically used versions are installed through the
+versioned Docker environment definitions.
+
+Consequently, `pip install -e .` alone is **not** a verified way
+to reproduce the full experimental environment.
+
+Reusing the exact historical Docker image requires that the image
+already be available locally or be obtained from an appropriate
+trusted source. A fresh Docker build has not been established to
+produce an identical historical binary environment.
+
+This validation checked the CPU-compatible test suite. It did
+**not** rerun GPU training, regenerate model predictions, or verify
+checkpoint reproduction from a fresh clone.
+
 ## Reproduction Levels
 
 1. Source review: inspect code, configurations, and the recorded
