@@ -1,0 +1,66 @@
+{
+  "schema_version": "e005_grpo_training_plan_v1",
+  "experiment": "E005",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "training_approved": false,
+  "input_freeze_commit": "09e62a1ead14ede13bf7a39d14894dc0c85be502",
+  "docker_image_digest": "sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e",
+  "base_model": "Qwen/Qwen3-0.6B-Base",
+  "base_revision": "57ca99e94acb83175495aa2c6b6b0cc498170924",
+  "initial_adapter": {
+    "path": "data/train_runs/e002a_sft_lora_native_eos_v1/epoch_0002/adapter",
+    "sha256": "f56bb5b7129de7ef4ba0b76cc3c6890136fe34270e410224493a051bb192c625"
+  },
+  "dataset": {
+    "path": "data/train_runs/e005_grpo_from_e002a_v1/inputs/grpo_train6726_v1.jsonl",
+    "sha256": "93cc63e8e57cab769cc27b136707b63943b47be02de5a82d889bd0196e6ee866",
+    "manifest_path": "protocols/e005_grpo_preparation_v1/grpo_dataset_manifest_v1.json",
+    "manifest_sha256": "3df8da3c32b5a6d06995346c2e166e60442c17c2fdffcaf9727ab6b60ade5c19",
+    "rows": 6726,
+    "maximum_prompt_tokens": 256,
+    "truncate_prompts": false
+  },
+  "reward": {
+    "version": "gsm8k_exact_numeric_v1",
+    "path": "src/llm_post_training/training/grpo_reward.py",
+    "sha256": "152d7cac32736fb8f797644642ea2351427b8c6e2b911531c1b88acbfc4b7acb"
+  },
+  "output_dir": "data/train_runs/e005_grpo_from_e002a_v1/run",
+  "hyperparameters": {
+    "max_steps": 256,
+    "learning_rate": 1e-6,
+    "num_generations": 4,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "generation_batch_size": 4,
+    "max_completion_length": 512,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "beta": 0.0,
+    "loss_type": "dapo",
+    "scale_rewards": "group",
+    "num_iterations": 1,
+    "mask_truncated_completions": false,
+    "optimizer": "adamw_torch",
+    "lr_scheduler_type": "constant",
+    "warmup_steps": 0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "save_steps": 64,
+    "save_total_limit": 4,
+    "logging_steps": 1,
+    "seed": 42
+  },
+  "execution": {
+    "precision": "fp16",
+    "attention": "eager",
+    "native_eos_pad_id": 151643,
+    "disable_native_triton_overrides": true,
+    "training_use_cache": false,
+    "generation_use_cache": true,
+    "use_vllm": false,
+    "gradient_checkpointing": true,
+    "gradient_checkpointing_use_reentrant": false,
+    "official_test_access": false
+  }
+}
