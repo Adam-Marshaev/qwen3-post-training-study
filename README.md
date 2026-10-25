@@ -1,5 +1,7 @@
 # Small Language Model Post-Training
 
+**Author:** [Adam-Marshaev](https://github.com/Adam-Marshaev)
+
 **A controlled comparison of supervised fine-tuning (SFT), Direct Preference Optimization (DPO), and Group Relative Policy Optimization (GRPO) for mathematical reasoning.**
 
 Built and evaluated LoRA post-training workflows for **Qwen3-0.6B-Base**, using a pinned Docker/PyTorch environment on an NVIDIA Tesla V100 (32 GB). The project emphasizes end-to-end implementation, frozen evaluation settings, checkpoint provenance, paired statistics, and failure analysis—not benchmark optimization alone.
