@@ -87,6 +87,8 @@ Question-by-question inspection identified genuine GRPO corrections to percentag
 
 ## Reproducibility and scope
 
+For the recorded environment, artifact requirements, and reproduction scope, see the [reproducibility guide](docs/reproducibility.md). Third-party model and dataset credits are listed in [third-party notices](THIRD_PARTY_NOTICES.md).
+
 Key experiments record exact model and dataset revisions, source commits, Docker image identities, training configurations, adapter and prediction SHA256 hashes, and the frozen evaluation protocol. See the experiment-specific protocols for execution instructions and prerequisites. Large model checkpoints and raw datasets are maintained as local artifacts and are **not guaranteed to be included in a public repository clone**.
 
 ### Limitations
@@ -98,3 +100,12 @@ Key experiments record exact model and dataset revisions, source commits, Docker
 - The results describe one model, dataset, and compute budget and do not establish a general ordering of SFT, DPO, and GRPO.
 
 **Potential next phase:** Evaluate carefully checked arithmetic/process-consistency rewards using GSM8K's worked solutions, while preserving a separate untouched final assessment. No E006 experiment is reported as completed.
+
+## License
+
+Original project code and documentation are available under the
+[MIT License](LICENSE).
+
+Third-party model weights, datasets, and other resources remain subject
+to their respective licenses. See
+[Third-Party Notices](THIRD_PARTY_NOTICES.md).
