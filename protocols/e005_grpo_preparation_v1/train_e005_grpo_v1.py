@@ -11,7 +11,8 @@ import argparse
 import hashlib
 import importlib.metadata
 import json
-import subprocess
+import os
+import re
 from pathlib import Path
 
 
@@ -43,10 +44,21 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def git(*args):
-    return subprocess.check_output(
-        ["git", *args], text=True
-    ).strip()
+def verified_host_revision():
+    """Read host-verified Git provenance without invoking Git in Docker."""
+    revision = os.environ.get("E005_HOST_SOURCE_COMMIT", "")
+
+    require(
+        re.fullmatch(r"[0-9a-f]{40}", revision) is not None,
+        "Missing or malformed E005_HOST_SOURCE_COMMIT",
+    )
+
+    require(
+        os.environ.get("E005_HOST_GIT_CLEAN") == "1",
+        "Missing host clean-worktree attestation",
+    )
+
+    return revision
 
 
 def validate_plan():
@@ -566,8 +578,9 @@ def run_training(plan, rows, tokenizer):
     # Capture source and approved-plan identities before optimization.
     provenance = {
         "experiment": "E005",
-        "source_git_commit": git("rev-parse", "HEAD"),
+        "source_git_commit": verified_host_revision(),
         "training_plan_sha256": digest(PLAN_PATH),
+        "training_script_sha256": digest(Path(__file__)),
         "dataset_sha256": plan["dataset"]["sha256"],
         "initial_adapter_sha256": plan["initial_adapter"]["sha256"],
         "reward_sha256": plan["reward"]["sha256"],
@@ -655,10 +668,10 @@ def main():
         "the E005 plan requires a separately approved revision",
     )
 
-    require(
-        not git("status", "--porcelain", "--untracked-files=all"),
-        "Git worktree must be clean before training",
-    )
+    # The pinned image has no Git executable.
+    # Host-side launch validation must verify Git cleanliness,
+    # then provide these provenance variables to Docker.
+    verified_host_revision()
 
     run_training(plan, rows, tokenizer)
 
