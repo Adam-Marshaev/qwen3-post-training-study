@@ -1,8 +1,8 @@
 {
   "schema_version": "e005_grpo_training_plan_v1",
   "experiment": "E005",
-  "status": "PROPOSED_NOT_AUTHORIZED",
-  "training_approved": false,
+  "status": "AUTHORIZED",
+  "training_approved": true,
   "input_freeze_commit": "09e62a1ead14ede13bf7a39d14894dc0c85be502",
   "docker_image_digest": "sha256:07c6ab54329a0e930842c184979de941bba850c2e03daea8656a65848a7ee80e",
   "base_model": "Qwen/Qwen3-0.6B-Base",
